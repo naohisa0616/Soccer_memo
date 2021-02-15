@@ -29,6 +29,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    //画面タップでキーボードを下げる
+    @IBAction func tapView(_ sender: UITapGestureRecognizer) {
+        //編集終了でキーボードを下げる
+        view.endEditing(true)
+    }
     //メモした内容を保持しておくString配列memoList
     //var 配列名:[値の型]
     var memoList: [String] = []
@@ -63,7 +68,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if indexPath.row >= memoList.count {
             return cell
         }
-        
         cell.textLabel?.text = memoList[indexPath.row]
         return cell
     }
