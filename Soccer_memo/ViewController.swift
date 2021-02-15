@@ -11,37 +11,40 @@ private let unselectedRow = -1
 
 //クラス定義に UITextFieldDelegate プロトコルを追加。（子クラス名: 親クラス名）
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-
     
-
-    
-
-    
-    // Button部品をプロパティ名Confirm_Buttonで接続
+    // Button部品をプロパティ名confirm_Buttonで接続
     //確定ボタンがタップされたイベントでは、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
-    @IBAction func Confirm_Button(_ sender: Any) {
+    @IBAction func confirmButton(_ sender: Any) {
         applyMemo()
     }
-    // TextField部品をプロパティ名TextFieldで接続
-    @IBOutlet weak var TextField: UITextField!
+    // TextField部品をプロパティ名textFieldで接続
+    @IBOutlet weak var textField: UITextField!
     // Label部品をプロパティ名player_nameで接続
     @IBOutlet weak var player_name: UILabel!
     // TableView部品をプロパティ名memoListViewで接続
-    @IBOutlet weak var memoListView: UITableView!
+    @IBOutlet private var memoListView: UITableView! {
+        didSet {
+            //            memoListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+            //            textField.text = ""
+        }
+    }
     
-    //メモした内容を保持しておくString 配列 memoList
+    //メモした内容を保持しておくString配列memoList
     //var 配列名:[値の型]
     var memoList: [String] = []
     //編集中の行番号を保持する editRow をメンバ変数として定義
     var editRow: Int = unselectedRow
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //テーブルビューのデリゲートを設定する。
+        self.memoListView.delegate = self
+        //テーブルビューのデータソースを設定する。
+        self.memoListView.dataSource = self
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         memoListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        TextField.text = ""
+        textField.text = ""
     }
     
     //実行中のアプリがiPhoneのメモリを使いすぎた際に呼び出される。
@@ -49,11 +52,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
     }
     
+    //セクションごとの行数を返す。
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return memoList.count
-        }
-
-    //メモ一覧が表示する内容を返すメソッドでは30行目で宣言した memoList が保持している行番号に対応したメモを返すように実装。一応保持しているメモの数を超えていないことをチェック。
+        return memoList.count
+    }
+    
+    //メモ一覧が表示する内容を返すメソッドでは宣言したmemoListが保持している行番号に対応したメモを返すように実装。保持しているメモの数を超えていないことをチェック。
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
         if indexPath.row >= memoList.count {
@@ -61,48 +65,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         cell.textLabel?.text = memoList[indexPath.row]
-                return cell
+        return cell
     }
     
-    //メモ一覧のセルが選択されたイベントでは、選択されたメモを TextField に設定し、選択された行番号を32行目で宣言した editRow に保持。
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //メモ一覧のセルが選択されたイベントでは、選択されたメモを TextFieldに設定し、選択された行番号で宣言したeditRowに保持。
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row >= memoList.count {
-                    return
-                }
-                editRow = indexPath.row
-                TextField.text = memoList[editRow]
+            return
+        }
+        editRow = indexPath.row
+        textField.text = memoList[editRow]
     }
     
-    //TextFieldで return(改行) されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    //TextFieldでreturn(改行)されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         applyMemo()
         return true
     }
     
-    //メモの入力を確定するメソッドでは、追加モードか編集モードかを判定し、30行目で宣言した memoList に対して入力テキストの追加、または上書きを行い、 編集モードから追加モードへの変更、メモ一覧の更新を行うように実装。
+    //メモの入力を確定するメソッドでは、追加モードか編集モードかを判定し、memoListに対して入力テキストの追加、または上書きを行い、 編集モードから追加モードへの変更、メモ一覧の更新を行うように実装。
     func applyMemo() {
-        if TextField.text == nil {
-                    return
-                }
-                
-                if editRow == unselectedRow {
-                    memoList.append(TextField.text!)
-                } else {
-                    memoList[editRow] = TextField.text!
-                }
-                //TextField の内容のクリア
-                TextField.text = ""
-                editRow = unselectedRow
-                //メモリリストビューの行とセクションを再読み込み
-                memoListView.reloadData()
+        if textField.text == nil {
+            return
+        }
+        
+        if editRow == unselectedRow {
+            memoList.append(textField.text!)
+        } else {
+            memoList[editRow] = textField.text!
+        }
+        //TextField の内容のクリア
+        textField.text = ""
+        editRow = unselectedRow
+        //メモリリストビューの行とセクションを再読み込み
+        memoListView.reloadData()
     }
     
-
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-
     
-
 }
 
