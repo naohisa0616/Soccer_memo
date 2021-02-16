@@ -105,6 +105,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         memoListView.reloadData()
     }
     
+    //TableViewCellの削除
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // データソースから行を削除する。
+            self.memoList.remove(at: indexPath.row)
+            // TableViewを削除する操作
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
     
 }
 
