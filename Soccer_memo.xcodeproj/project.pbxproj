@@ -16,6 +16,7 @@
 		2C789E8225A00114003554AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C789E8025A00114003554AE /* LaunchScreen.storyboard */; };
 		2C789E8D25A00114003554AE /* Soccer_memoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E8C25A00114003554AE /* Soccer_memoTests.swift */; };
 		2C789E9825A00114003554AE /* Soccer_memoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E9725A00114003554AE /* Soccer_memoUITests.swift */; };
+		2CD7470225DFF0F9008C9231 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7470125DFF0F9008C9231 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		2C789E9325A00114003554AE /* Soccer_memoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Soccer_memoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C789E9725A00114003554AE /* Soccer_memoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soccer_memoUITests.swift; sourceTree = "<group>"; };
 		2C789E9925A00114003554AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CD7470125DFF0F9008C9231 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				2C789E7425A00111003554AE /* SceneDelegate.swift */,
 				2C789E7625A00111003554AE /* ViewController.swift */,
 				2C789E7825A00111003554AE /* Main.storyboard */,
+				2CD7470125DFF0F9008C9231 /* DetailViewController.swift */,
 				2C789E7E25A00114003554AE /* Assets.xcassets */,
 				2C789E8025A00114003554AE /* LaunchScreen.storyboard */,
 				2C789E8325A00114003554AE /* Info.plist */,
@@ -263,6 +266,7 @@
 			files = (
 				2C789E7D25A00111003554AE /* Soccer_memo.xcdatamodeld in Sources */,
 				2C789E7725A00111003554AE /* ViewController.swift in Sources */,
+				2CD7470225DFF0F9008C9231 /* DetailViewController.swift in Sources */,
 				2C789E7325A00111003554AE /* AppDelegate.swift in Sources */,
 				2C789E7525A00111003554AE /* SceneDelegate.swift in Sources */,
 			);
