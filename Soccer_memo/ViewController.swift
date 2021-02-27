@@ -73,13 +73,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    //メモ一覧のセルが選択されたイベントでは、選択されたメモを TextFieldに設定し、選択された行番号で宣言したeditRowに保持。
+    //メモ一覧のセルが選択されたイベント
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row >= memoList.count {
             return
         }
-        editRow = indexPath.row
-        textField.text = memoList[editRow]
+        //遷移先ViewControllerのインスタンス取得
+        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "playerData") as! DetailViewController
+        //TableViewの値を遷移先に値渡し
+        detailViewController.data = memoList[indexPath.row]
+        //画面遷移
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     //TextFieldでreturn(改行)されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
@@ -107,16 +111,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //メモリリストビューの行とセクションを再読み込み
         memoListView.reloadData()
     }
-    
-    //TableViewCellの削除
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // データソースから行を削除する。
-            self.memoList.remove(at: indexPath.row)
-            // TableViewを削除する操作
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
 }
 
