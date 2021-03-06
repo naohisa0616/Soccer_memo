@@ -147,7 +147,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyTableViewCell" textLabel="jpO-Tv-9tu" style="IBUITableViewCellStyleDefault" id="vNb-fO-mFJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell" textLabel="jpO-Tv-9tu" style="IBUITableViewCellStyleDefault" id="vNb-fO-mFJ">
                                         <rect key="frame" x="0.0" y="28" width="401" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vNb-fO-mFJ" id="6Ls-BE-gJl">
@@ -203,10 +203,15 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="EGa-bR-Bk7">
-                        <barButtonItem key="rightBarButtonItem" title="追加" id="buA-bh-gZM"/>
+                        <barButtonItem key="rightBarButtonItem" title="追加" id="buA-bh-gZM">
+                            <connections>
+                                <action selector="addMatchInfo:" destination="oq8-Tc-Riu" id="mYb-xR-cyS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="detailListView" destination="ThH-A9-FLB" id="SiC-7H-r6i"/>
                         <outlet property="imageView" destination="KNw-AU-El7" id="9Ye-rT-mkx"/>
                         <outlet property="playerName" destination="ikE-D6-pwD" id="G8Z-P1-SWi"/>
                     </connections>
