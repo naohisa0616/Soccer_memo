@@ -10,11 +10,13 @@ import UIKit
 class DetailViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // アイテムの型
-    class Item {
+    struct Item {
+        //ストアドプロパティ
         var title : String
         var done: Bool = false
         
         init(title: String) {
+            //メンバ変数の名前とイニシャライザの引数の名前を区別
             self.title = title
         }
     }
@@ -23,6 +25,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     var data: String?
     // この配列に作ったアイテムを追加していく
     var itemArray: [Item] = []
+    //メモした内容を保持しておくString配列matchList
+    var matchList: [String] = []
     
     //TableViewの紐付け
     @IBOutlet weak var detailListView: UITableView!
@@ -37,7 +41,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                 }
                 
                 alert.addTextField { (alertTextField) in
-                    alertTextField.placeholder = "NEWアイテム"
+                    //プレースホルダーの設定
+                    alertTextField.placeholder = "例：バルサ vs マンU 2-1"
+                    //テキストフィールドに設定
                     textField = alertTextField
                 }
                 
@@ -77,12 +83,16 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
+        //タイトル名設定
+        navigationItem.title = "試合管理"
         //テーブルビューのデリゲートを設定する。
         self.detailListView.delegate = self
         //テーブルビューのデータソースを設定する。
         self.detailListView.dataSource = self
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         detailListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        //self.dataがnilでなければdataに代入する
         if let data = self.data {
             //ラベルに選手名を表示
             self.playerName.text = data
@@ -105,6 +115,21 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         //チェックマークを表示する処理ーitemのdoneがtrueだったら表示falseだったら非表示
         cell.accessoryType = item.done ? .checkmark : .none
         return cell
+    }
+    
+    //メモ一覧のセルが選択されたイベント
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //メモした内容を保持しておくString配列matchList
+//        var matchList = [itemArray as String]
+        if indexPath.row >= itemArray.count {
+            return
+        }
+        //遷移先ViewControllerのインスタンス取得
+        let scoringViewController = self.storyboard?.instantiateViewController(withIdentifier: "scoring_data_view") as! ScoringViewController
+        //TableViewの値を遷移先に値渡し
+        scoringViewController.dataInfo = itemArray[indexPath.row].title
+        //画面遷移
+        self.navigationController?.pushViewController(scoringViewController, animated: true)
     }
     
     // アラート表示

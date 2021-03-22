@@ -30,7 +30,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.endEditing(true)
     }
     //メモした内容を保持しておくString配列memoList
-    //var 配列名:[値の型]（空の配列）
     var memoList: [String] = []
     //編集中の行番号を保持する editRow をメンバ変数として定義
     var editRow: Int = unselectedRow
@@ -38,6 +37,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
+        //タイトル名設定
+        navigationItem.title = "Player Scoring"
         //テーブルビューのデリゲートを設定する。
         self.memoListView.delegate = self
         //テーブルビューのデータソースを設定する。
@@ -86,6 +88,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
+    //セルの削除ボタンが押された時の処理
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            //セルの削除
+            memoList.remove(at: indexPath.row)
+            memoListView.reloadData()
+        }
+    }
     //TextFieldでreturn(改行)されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         applyMemo()

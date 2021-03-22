@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C35ED3126072F34000CD837 /* PlayerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35ED3026072F34000CD837 /* PlayerListViewController.swift */; };
+		2C3F90E825F61185004984D4 /* ScoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3F90E725F61185004984D4 /* ScoringViewController.swift */; };
 		2C789E7325A00111003554AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E7225A00111003554AE /* AppDelegate.swift */; };
 		2C789E7525A00111003554AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E7425A00111003554AE /* SceneDelegate.swift */; };
 		2C789E7725A00111003554AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E7625A00111003554AE /* ViewController.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C35ED3026072F34000CD837 /* PlayerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListViewController.swift; sourceTree = "<group>"; };
+		2C3F90E725F61185004984D4 /* ScoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringViewController.swift; sourceTree = "<group>"; };
 		2C789E6F25A00111003554AE /* Soccer_memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soccer_memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C789E7225A00111003554AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C789E7425A00111003554AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +111,9 @@
 				2C789E7425A00111003554AE /* SceneDelegate.swift */,
 				2C789E7625A00111003554AE /* ViewController.swift */,
 				2C789E7825A00111003554AE /* Main.storyboard */,
+				2C3F90E725F61185004984D4 /* ScoringViewController.swift */,
 				2CD7470125DFF0F9008C9231 /* DetailViewController.swift */,
+				2C35ED3026072F34000CD837 /* PlayerListViewController.swift */,
 				2C789E7E25A00114003554AE /* Assets.xcassets */,
 				2C789E8025A00114003554AE /* LaunchScreen.storyboard */,
 				2C789E8325A00114003554AE /* Info.plist */,
@@ -267,6 +273,8 @@
 				2C789E7D25A00111003554AE /* Soccer_memo.xcdatamodeld in Sources */,
 				2C789E7725A00111003554AE /* ViewController.swift in Sources */,
 				2CD7470225DFF0F9008C9231 /* DetailViewController.swift in Sources */,
+				2C35ED3126072F34000CD837 /* PlayerListViewController.swift in Sources */,
+				2C3F90E825F61185004984D4 /* ScoringViewController.swift in Sources */,
 				2C789E7325A00111003554AE /* AppDelegate.swift in Sources */,
 				2C789E7525A00111003554AE /* SceneDelegate.swift in Sources */,
 			);
