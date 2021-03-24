@@ -21,16 +21,15 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
+        //タイトル名設定
+        navigationItem.title = "選手採点"
         //ピッカービューのデリゲートになる。
         scoringPickerView.delegate = self
         //ピッカービューのデータソースになる。
         scoringPickerView.dataSource = self
         //選手名を取得
         self.playerInfo.text = dataInfo
-        
-//        // サイズを指定する.
-//        // set picker size
-//        scoringPickerView.frame = CGRect(x: 150, y: 200, width: 150, height: 50)
 
     }
     

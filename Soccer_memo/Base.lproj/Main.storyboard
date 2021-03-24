@@ -214,6 +214,7 @@
                         <outlet property="detailListView" destination="ThH-A9-FLB" id="SiC-7H-r6i"/>
                         <outlet property="imageView" destination="KNw-AU-El7" id="9Ye-rT-mkx"/>
                         <outlet property="playerName" destination="ikE-D6-pwD" id="G8Z-P1-SWi"/>
+                        <segue destination="BZt-jK-sOe" kind="show" identifier="showPlayerSegue" id="dUf-yG-11c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Lh-3X-r4N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -243,7 +244,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-80-ovA">
-                                <rect key="frame" x="20" y="296" width="374" height="128"/>
+                                <rect key="frame" x="20" y="293" width="374" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -251,21 +252,21 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="前半" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTU-mk-SvU">
-                                <rect key="frame" x="20" y="267" width="35" height="21"/>
+                                <rect key="frame" x="20" y="263" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="後半" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idy-c6-0EL">
-                                <rect key="frame" x="20" y="465" width="35" height="21"/>
+                                <rect key="frame" x="20" y="460" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AQo-4p-cWk">
-                                <rect key="frame" x="20" y="494" width="374" height="128"/>
+                                <rect key="frame" x="20" y="490" width="374" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -273,14 +274,14 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="総評" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trS-dJ-ivT">
-                                <rect key="frame" x="20" y="659" width="35" height="21"/>
+                                <rect key="frame" x="20" y="654" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-TQ-hGK">
-                                <rect key="frame" x="20" y="688" width="374" height="128"/>
+                                <rect key="frame" x="20" y="684" width="374" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -288,7 +289,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T0G-Id-oBx">
-                                <rect key="frame" x="0.0" y="112" width="414" height="162"/>
+                                <rect key="frame" x="0.0" y="97" width="414" height="162"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="MTD-oU-ggj" id="laI-CH-wrC"/>
@@ -307,12 +308,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lR6-QK-RTQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3400.0000000000005" y="69.642857142857139"/>
+            <point key="canvasLocation" x="4178" y="70"/>
         </scene>
         <!--Player List View Controller-->
         <scene sceneID="z1C-7E-22J">
             <objects>
-                <viewController id="BZt-jK-sOe" customClass="PlayerListViewController" customModule="Soccer_memo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="player_list_view" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BZt-jK-sOe" customClass="PlayerListViewController" customModule="Soccer_memo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ee8-7a-f68">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -322,7 +323,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell" textLabel="x11-bz-p5a" style="IBUITableViewCellStyleDefault" id="8vR-nX-YAS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" textLabel="x11-bz-p5a" style="IBUITableViewCellStyleDefault" id="8vR-nX-YAS">
                                         <rect key="frame" x="0.0" y="28" width="401" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8vR-nX-YAS" id="Sq6-Sz-EHG">
@@ -356,14 +357,22 @@
                         <viewLayoutGuide key="safeArea" id="XSS-lP-fu6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="BGh-rp-W5Y">
+                        <barButtonItem key="rightBarButtonItem" title="追加" id="M1T-kL-CYv">
+                            <connections>
+                                <action selector="playerAdd:" destination="BZt-jK-sOe" id="QEe-vT-Dqg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="playerListView" destination="y02-7S-YY6" id="7Zh-r0-INL"/>
                         <outlet property="playerName" destination="sED-YV-Oi5" id="bib-FK-nYw"/>
+                        <segue destination="MTD-oU-ggj" kind="show" id="f02-p0-PL6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BiI-Ev-akj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3400.0000000000005" y="761.38392857142856"/>
+            <point key="canvasLocation" x="3403" y="70"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FS1-dZ-1o3">

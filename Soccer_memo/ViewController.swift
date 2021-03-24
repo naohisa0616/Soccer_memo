@@ -49,6 +49,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         textField.text = ""
         buttonEnabled.isEnabled = false
         textField.addTarget(self, action:#selector(textFieldDidChange),for: UIControl.Event.editingChanged)
+        //placeholderを装飾する
+        let attributes: [NSAttributedString.Key : Any] = [
+          .foregroundColor : UIColor.lightGray // カラー
+        ]
+        //placeholderを設定
+        textField.attributedPlaceholder = NSAttributedString(string: "チーム名を入力", attributes: attributes)
     }
     
     //実行中のアプリがiPhoneのメモリを使いすぎた際に呼び出される。
@@ -88,7 +94,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
-    //セルの削除ボタンが押された時の処理
+    //セルの削除処理
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             //セルの削除

@@ -25,8 +25,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     var data: String?
     // この配列に作ったアイテムを追加していく
     var itemArray: [Item] = []
-    //メモした内容を保持しておくString配列matchList
-    var matchList: [String] = []
     
     //TableViewの紐付け
     @IBOutlet weak var detailListView: UITableView!
@@ -119,17 +117,24 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     //メモ一覧のセルが選択されたイベント
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //メモした内容を保持しておくString配列matchList
-//        var matchList = [itemArray as String]
         if indexPath.row >= itemArray.count {
             return
         }
         //遷移先ViewControllerのインスタンス取得
-        let scoringViewController = self.storyboard?.instantiateViewController(withIdentifier: "scoring_data_view") as! ScoringViewController
+        let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
         //TableViewの値を遷移先に値渡し
-        scoringViewController.dataInfo = itemArray[indexPath.row].title
+        playerViewController.datalist = itemArray[indexPath.row].title
         //画面遷移
-        self.navigationController?.pushViewController(scoringViewController, animated: true)
+        self.navigationController?.pushViewController(playerViewController, animated: true)
+    }
+    
+    //セルの削除処理
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            //セルの削除
+            itemArray.remove(at: indexPath.row)
+            detailListView.reloadData()
+        }
     }
     
     // アラート表示
