@@ -7,19 +7,7 @@
 
 import UIKit
 
-class PlayerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    // アイテムの型
-    struct Item {
-        //ストアドプロパティ
-        var title : String
-        var done: Bool = false
-        
-        init(title: String) {
-            //メンバ変数の名前とイニシャライザの引数の名前を区別
-            self.title = title
-        }
-    }
+class PlayerListViewController: UIViewController {
     
     //遷移元から名前を取得用の変数を定義
     var datalist: String?
@@ -28,25 +16,7 @@ class PlayerListViewController: UIViewController, UITableViewDelegate, UITableVi
     //メモした内容を保持しておくString配列playerList
     var playerList: [String] = []
     
-    @IBAction func playerAdd(_ sender: Any) {
-        var textField = UITextField()
-                let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
-                let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
-                    let newItem: Item = Item(title: textField.text!)
-                    self.itemArray.append(newItem)
-                    self.playerListView.reloadData()
-                }
-
-                alert.addTextField { (alertTextField) in
-                    //プレースホルダーの設定
-                    alertTextField.placeholder = "例：G.ドンナルンマ"
-                    //テキストフィールドに設定
-                    textField = alertTextField
-                }
-
-                alert.addAction(action)
-                present(alert, animated: true, completion: nil)
-    }
+   
     //選手名の表示ラベル
     @IBOutlet weak var playerName: UILabel!
     
@@ -69,6 +39,31 @@ class PlayerListViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    // MARK: - Action
+    @IBAction func playerAdd(_ sender: Any) {
+        var textField = UITextField()
+                let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
+                let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
+                    let newItem: Item = Item(title: textField.text!)
+                    self.itemArray.append(newItem)
+                    self.playerListView.reloadData()
+                }
+
+                alert.addTextField { (alertTextField) in
+                    //プレースホルダーの設定
+                    alertTextField.placeholder = "例：G.ドンナルンマ"
+                    //テキストフィールドに設定
+                    textField = alertTextField
+                }
+
+                alert.addAction(action)
+                present(alert, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - Tableview Delegate
+extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  {
     // セルの数を指定ーitemArrayの配列の数だけCellを表示します
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
