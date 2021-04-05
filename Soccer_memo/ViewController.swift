@@ -6,23 +6,20 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let unselectedRow = -1
 
 //クラス定義に UITextFieldDelegate プロトコルを追加。（子クラス名: 親クラス名）
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
-    // Button部品をプロパティ名confirm_Buttonで接続
     //確定ボタンがタップされたイベントでは、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     @IBAction func confirmButton(_ sender: Any) {
         applyMemo()
     }
     @IBOutlet weak var buttonEnabled: UIButton!
-    // TextField部品をプロパティ名textFieldで接続
     @IBOutlet weak var textField: UITextField!
-    // Label部品をプロパティ名player_nameで接続
     @IBOutlet weak var player_name: UILabel!
-    // TableView部品をプロパティ名memoListViewで接続
     @IBOutlet weak var memoListView: UITableView!
     //画面タップでキーボードを下げる
     @IBAction func tapView(_ sender: UITapGestureRecognizer) {
@@ -33,16 +30,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var memoList: [String] = []
     //編集中の行番号を保持する editRow をメンバ変数として定義
     var editRow: Int = unselectedRow
-    
+    // モデルクラスを使用し、取得データを格納する変数を作成
+    var tableCells: Results<MemoModel>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        // Realmインスタンス取得
+        let realm = try! Realm()
+        // データ全権取得
+        self.tableCells = realm.objects(MemoModel.self)
+        memoListView.reloadData()
         //タイトル名設定
         navigationItem.title = "Player Scoring"
-        //テーブルビューのデリゲートを設定する。
         self.memoListView.delegate = self
-        //テーブルビューのデータソースを設定する。
         self.memoListView.dataSource = self
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         memoListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -71,7 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return memoList.count
     }
     
-    //メモ一覧が表示する内容を返すメソッドでは宣言したmemoListが保持している行番号に対応したメモを返すように実装。保持しているメモの数を超えていないことをチェック。
+    //メモ一覧が表示する内容を返すメソッドでは宣言したmemoListが保持している行番号に対応したメモを返すように実装。
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
         if indexPath.row >= memoList.count {
@@ -97,6 +98,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //セルの削除処理
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
+            // Realmインスタンス取得
+            let realm = try! Realm()
+            // データを削除
+            try! realm.write {
+                realm.delete(tableCells[indexPath.row])
+            }
             //セルの削除
             memoList.remove(at: indexPath.row)
             memoListView.reloadData()
@@ -120,10 +127,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             memoList[editRow] = textField.text!
         }
-        //TextField の内容のクリア
-        textField.text = ""
         buttonEnabled.isEnabled = false
         editRow = unselectedRow
+        // モデルクラスをインスタンス化
+        let tableCell:MemoModel = MemoModel()
+        // Realmインスタンス取得
+        let realm = try! Realm()
+        // テキストフィールドの名前を入れる
+        tableCell.memo = self.textField.text
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        // テキストフィールドの情報をデータベースに追加
+        try! realm.write {
+            realm.add(tableCell)
+        }
+        //TextField の内容のクリア
+        textField.text = ""
         //メモリリストビューの行とセクションを再読み込み
         memoListView.reloadData()
     }

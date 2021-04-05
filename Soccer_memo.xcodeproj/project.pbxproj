@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		09F03AF82613665200687C0B /* item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F03AF72613665200687C0B /* item.swift */; };
 		2C35ED3126072F34000CD837 /* PlayerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35ED3026072F34000CD837 /* PlayerListViewController.swift */; };
 		2C3F90E825F61185004984D4 /* ScoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3F90E725F61185004984D4 /* ScoringViewController.swift */; };
+		2C59922F260EBF0900F4478A /* MemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59922E260EBF0900F4478A /* MemoModel.swift */; };
+		2C63D980260ECBE600A6BB44 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2C63D97F260ECBE600A6BB44 /* RealmSwift */; };
 		2C789E7325A00111003554AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E7225A00111003554AE /* AppDelegate.swift */; };
 		2C789E7525A00111003554AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E7425A00111003554AE /* SceneDelegate.swift */; };
 		2C789E7725A00111003554AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E7625A00111003554AE /* ViewController.swift */; };
@@ -43,6 +45,7 @@
 		09F03AF72613665200687C0B /* item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = item.swift; sourceTree = "<group>"; };
 		2C35ED3026072F34000CD837 /* PlayerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListViewController.swift; sourceTree = "<group>"; };
 		2C3F90E725F61185004984D4 /* ScoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringViewController.swift; sourceTree = "<group>"; };
+		2C59922E260EBF0900F4478A /* MemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoModel.swift; sourceTree = "<group>"; };
 		2C789E6F25A00111003554AE /* Soccer_memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soccer_memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C789E7225A00111003554AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C789E7425A00111003554AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C63D980260ECBE600A6BB44 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +137,10 @@
 				2C789E7425A00111003554AE /* SceneDelegate.swift */,
 				2C789E7625A00111003554AE /* ViewController.swift */,
 				2C789E7825A00111003554AE /* Main.storyboard */,
+				2C3F90E725F61185004984D4 /* ScoringViewController.swift */,
+				2C59922E260EBF0900F4478A /* MemoModel.swift */,
+				2CD7470125DFF0F9008C9231 /* DetailViewController.swift */,
+				2C35ED3026072F34000CD837 /* PlayerListViewController.swift */,
 				2C789E7E25A00114003554AE /* Assets.xcassets */,
 				2C789E8025A00114003554AE /* LaunchScreen.storyboard */,
 				2C789E8325A00114003554AE /* Info.plist */,
@@ -175,6 +183,9 @@
 			dependencies = (
 			);
 			name = Soccer_memo;
+			packageProductDependencies = (
+				2C63D97F260ECBE600A6BB44 /* RealmSwift */,
+			);
 			productName = Soccer_memo;
 			productReference = 2C789E6F25A00111003554AE /* Soccer_memo.app */;
 			productType = "com.apple.product-type.application";
@@ -246,6 +257,9 @@
 				Base,
 			);
 			mainGroup = 2C789E6625A00111003554AE;
+			packageReferences = (
+				2C63D97E260ECBE600A6BB44 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+			);
 			productRefGroup = 2C789E7025A00111003554AE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -290,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C789E7D25A00111003554AE /* Soccer_memo.xcdatamodeld in Sources */,
+				2C59922F260EBF0900F4478A /* MemoModel.swift in Sources */,
 				2C789E7725A00111003554AE /* ViewController.swift in Sources */,
 				2CD7470225DFF0F9008C9231 /* DetailViewController.swift in Sources */,
 				2C35ED3126072F34000CD837 /* PlayerListViewController.swift in Sources */,
@@ -629,6 +644,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2C63D97E260ECBE600A6BB44 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.7.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C63D97F260ECBE600A6BB44 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C63D97E260ECBE600A6BB44 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2C789E7B25A00111003554AE /* Soccer_memo.xcdatamodeld */ = {

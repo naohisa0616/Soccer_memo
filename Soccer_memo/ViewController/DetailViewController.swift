@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DetailViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -35,6 +36,17 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                 let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
                     let newItem: Item = Item(title: textField.text!)
                     self.itemArray.append(newItem)
+                    // モデルクラスをインスタンス化
+                    let tableCell:MemoModel = MemoModel()
+                    // Realmインスタンス取得
+                    let realm = try! Realm()
+                    // テキストフィールドの名前を入れる
+                    tableCell.memo = newItem.title
+                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                    // テキストフィールドの情報をデータベースに追加
+                    try! realm.write {
+                        realm.add(tableCell)
+                    }
                     self.detailListView.reloadData()
                 }
                 
