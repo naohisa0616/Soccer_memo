@@ -26,20 +26,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //編集終了でキーボードを下げる
         view.endEditing(true)
     }
-    //メモした内容を保持しておくString配列memoList
-    var memoList: [String] = []
     //編集中の行番号を保持する editRow をメンバ変数として定義
     var editRow: Int = unselectedRow
     // モデルクラスを使用し、取得データを格納する変数を作成
-    var tableCells: Results<MemoModel>!
+    var memoList: Results<MemoModel>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        // Realmインスタンス取得
+        // 永続化されているデータを取りだす
         let realm = try! Realm()
-        // データ全権取得
-        self.tableCells = realm.objects(MemoModel.self)
+        // データ全件取得
+        self.memoList = realm.objects(MemoModel.self)
         memoListView.reloadData()
         //タイトル名設定
         navigationItem.title = "Player Scoring"
@@ -58,6 +56,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         textField.attributedPlaceholder = NSAttributedString(string: "チーム名を入力", attributes: attributes)
     }
     
+    // 追加 画面が表示される際などにtableViewのデータを再読み込みする
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        memoListView.reloadData()
+    }
+    
     //実行中のアプリがiPhoneのメモリを使いすぎた際に呼び出される。
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,7 +73,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //セクションごとの行数を返す。
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memoList.count
+        let realm = try! Realm()
+        self.memoList = realm.objects(MemoModel.self)
+        return self.memoList.count
     }
     
     //メモ一覧が表示する内容を返すメソッドでは宣言したmemoListが保持している行番号に対応したメモを返すように実装。
@@ -78,7 +84,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if indexPath.row >= memoList.count {
             return cell
         }
-        cell.textLabel?.text = memoList[indexPath.row]
+        cell.textLabel?.text = memoList[indexPath.row].memo
         return cell
     }
     
@@ -90,7 +96,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //遷移先ViewControllerのインスタンス取得
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "playerData") as! DetailViewController
         //TableViewの値を遷移先に値渡し
-        detailViewController.data = memoList[indexPath.row]
+        detailViewController.data = memoList[indexPath.row].memo
         //画面遷移
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
@@ -102,14 +108,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let realm = try! Realm()
             // データを削除
             try! realm.write {
-                realm.delete(tableCells[indexPath.row])
+                realm.delete(memoList[indexPath.row])
             }
-            //セルの削除
-            memoList.remove(at: indexPath.row)
             memoListView.reloadData()
         }
     }
-    //TextFieldでreturn(改行)されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
+    //改行されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         applyMemo()
         return true
@@ -119,13 +123,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func applyMemo() {
         if textField.text == nil {
             return
-        }
-        
-        if editRow == unselectedRow {
-            //メモにテキストに入力された値を追加する
-            memoList.append(textField.text!)
-        } else {
-            memoList[editRow] = textField.text!
         }
         buttonEnabled.isEnabled = false
         editRow = unselectedRow
