@@ -24,8 +24,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     //遷移元から名前を取得用の変数を定義
     var data: String?
-    // この配列に作ったアイテムを追加していく
-    var itemArray: [Item] = []
+    // モデルクラスを使用し、取得データを格納する変数を作成
+    var memoList: Results<MemoModel>!
     
     //TableViewの紐付け
     @IBOutlet weak var detailListView: UITableView!
@@ -35,7 +35,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                 let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
                 let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
                     let newItem: Item = Item(title: textField.text!)
-                    self.itemArray.append(newItem)
                     // モデルクラスをインスタンス化
                     let tableCell:MemoModel = MemoModel()
                     // Realmインスタンス取得
@@ -52,7 +51,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                 
                 alert.addTextField { (alertTextField) in
                     //プレースホルダーの設定
-                    alertTextField.placeholder = "例：バルサ vs マンU 2-1"
+                    alertTextField.placeholder = "例：ACミラン vs マンU 2-1"
                     //テキストフィールドに設定
                     textField = alertTextField
                 }
@@ -100,6 +99,11 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         self.detailListView.delegate = self
         //テーブルビューのデータソースを設定する。
         self.detailListView.dataSource = self
+        // 永続化されているデータを取りだす
+        let realm = try! Realm()
+        // データ全件取得
+        self.memoList = realm.objects(MemoModel.self)
+        detailListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         detailListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         //self.dataがnilでなければdataに代入する
@@ -111,7 +115,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     // セルの数を指定ーitemArrayの配列の数だけCellを表示します
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
+        return memoList.count
     }
     
     // Cellの内容を決める
@@ -119,23 +123,21 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         //「DetailCell」を引っ張ってくる
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
         //Cell番号のitemArrayを変数Itemに代入
-        let item = itemArray[indexPath.row]
-        //ToDoCellにCell番号のItemArrayの中身を表示させるようにしている
-        cell.textLabel?.text = item.title
-        //チェックマークを表示する処理ーitemのdoneがtrueだったら表示falseだったら非表示
-        cell.accessoryType = item.done ? .checkmark : .none
+        let item = memoList[indexPath.row].memo
+        //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
+        cell.textLabel?.text = item
         return cell
     }
     
     //メモ一覧のセルが選択されたイベント
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row >= itemArray.count {
+        if indexPath.row >= memoList.count {
             return
         }
         //遷移先ViewControllerのインスタンス取得
         let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
         //TableViewの値を遷移先に値渡し
-        playerViewController.datalist = itemArray[indexPath.row].title
+        playerViewController.datalist = memoList[indexPath.row].memo
         //画面遷移
         self.navigationController?.pushViewController(playerViewController, animated: true)
     }
@@ -144,7 +146,11 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             //セルの削除
-            itemArray.remove(at: indexPath.row)
+            let realm = try! Realm()
+            // データを削除
+            try! realm.write {
+                realm.delete(memoList[indexPath.row])
+            }
             detailListView.reloadData()
         }
     }

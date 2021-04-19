@@ -22,6 +22,8 @@
 		2C789E8225A00114003554AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C789E8025A00114003554AE /* LaunchScreen.storyboard */; };
 		2C789E8D25A00114003554AE /* Soccer_memoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E8C25A00114003554AE /* Soccer_memoTests.swift */; };
 		2C789E9825A00114003554AE /* Soccer_memoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E9725A00114003554AE /* Soccer_memoUITests.swift */; };
+		2CB4BE0326295B7B00BDDC1B /* MemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */; };
+		2CB4BE0426295B7B00BDDC1B /* MemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		2C789E9325A00114003554AE /* Soccer_memoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Soccer_memoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C789E9725A00114003554AE /* Soccer_memoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soccer_memoUITests.swift; sourceTree = "<group>"; };
 		2C789E9925A00114003554AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTableViewCell.swift; sourceTree = "<group>"; };
+		2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 				2C789E7225A00111003554AE /* AppDelegate.swift */,
 				2C789E7425A00111003554AE /* SceneDelegate.swift */,
 				2C789E7625A00111003554AE /* ViewController.swift */,
+				2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */,
+				2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */,
 				2C789E7825A00111003554AE /* Main.storyboard */,
 				2C59922E260EBF0900F4478A /* MemoModel.swift */,
 				2C789E7E25A00114003554AE /* Assets.xcassets */,
@@ -276,6 +282,7 @@
 				2C789E8225A00114003554AE /* LaunchScreen.storyboard in Resources */,
 				2C789E7F25A00114003554AE /* Assets.xcassets in Resources */,
 				2C789E7A25A00111003554AE /* Main.storyboard in Resources */,
+				2CB4BE0426295B7B00BDDC1B /* MemoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +312,7 @@
 				2C59922F260EBF0900F4478A /* MemoModel.swift in Sources */,
 				2C226648261C87710087A7C8 /* ScoringViewController.swift in Sources */,
 				2C789E7725A00111003554AE /* ViewController.swift in Sources */,
+				2CB4BE0326295B7B00BDDC1B /* MemoTableViewCell.swift in Sources */,
 				2C226647261C87710087A7C8 /* PlayerListViewController.swift in Sources */,
 				09F03AF82613665200687C0B /* item.swift in Sources */,
 				2C789E7325A00111003554AE /* AppDelegate.swift in Sources */,

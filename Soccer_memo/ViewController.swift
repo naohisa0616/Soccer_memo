@@ -10,7 +10,6 @@ import RealmSwift
 
 private let unselectedRow = -1
 
-//クラス定義に UITextFieldDelegate プロトコルを追加。（子クラス名: 親クラス名）
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     //確定ボタンがタップされたイベントでは、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
@@ -44,7 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.memoListView.delegate = self
         self.memoListView.dataSource = self
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
-        memoListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        memoListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         textField.text = ""
         buttonEnabled.isEnabled = false
         textField.addTarget(self, action:#selector(textFieldDidChange),for: UIControl.Event.editingChanged)
@@ -78,9 +77,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return self.memoList.count
     }
     
-    //メモ一覧が表示する内容を返すメソッドでは宣言したmemoListが保持している行番号に対応したメモを返すように実装。
+    //メモ一覧が表示する内容を返すメソッド
+    // 宣言したmemoListが保持している行番号に対応したメモを返すように実装。
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath)
         if indexPath.row >= memoList.count {
             return cell
         }

@@ -24,20 +24,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
-        
-        //Configurationを設定
-        let config = Realm.Configuration(
-        schemaVersion: 1,
+
+        // マイグレーション処理
+        migration()
+        let realm = try! Realm()
+        return true
+      }
+    // Realmマイグレーション処理
+    func migration() {
+      // 次のバージョン
+      let nextSchemaVersion = 2
+
+      // マイグレーション設定
+      let config = Realm.Configuration(
+        schemaVersion: UInt64(nextSchemaVersion),
         migrationBlock: { migration, oldSchemaVersion in
-            if (oldSchemaVersion < 1) {
-            }
+          if (oldSchemaVersion < nextSchemaVersion) {
+          }
         })
         Realm.Configuration.defaultConfiguration = config
-
-        // Realmのインスタンスを取得
-        let realm = try! Realm()
-        
-        return true
     }
 
     // MARK: UISceneSession Lifecycle
