@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         textField.addTarget(self, action:#selector(textFieldDidChange),for: UIControl.Event.editingChanged)
         //placeholderを装飾する
         let attributes: [NSAttributedString.Key : Any] = [
-          .foregroundColor : UIColor.lightGray // カラー
+            .foregroundColor : UIColor.lightGray // カラー
         ]
         //placeholderを設定
         textField.attributedPlaceholder = NSAttributedString(string: "チーム名を入力", attributes: attributes)
@@ -80,12 +80,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //メモ一覧が表示する内容を返すメソッド
     // 宣言したmemoListが保持している行番号に対応したメモを返すように実装。
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
         if indexPath.row >= memoList.count {
             return cell
         }
-        cell.textLabel?.text = memoList[indexPath.row].memo
+        cell.teamName.text = memoList[indexPath.row].memo
         return cell
+        }
+        return UITableViewCell()
     }
     
     //メモ一覧のセルが選択されたイベント
@@ -132,6 +134,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let realm = try! Realm()
         // テキストフィールドの名前を入れる
         tableCell.memo = self.textField.text
+        tableCell.teamId = memoList.count
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         // テキストフィールドの情報をデータベースに追加
         try! realm.write {
@@ -142,5 +145,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //メモリリストビューの行とセクションを再読み込み
         memoListView.reloadData()
     }
+    
+//    // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
+//    func showAlertController(_ indexPath: IndexPath){
+//        let alertController: UIAlertController = UIAlertController(title: "\(String(indexPath.row))番目の ToDo を編集", message: memoList[indexPath.row].memo, preferredStyle: .alert)
+//        // アラートコントローラにテキストフィールドを表示 テキストフィールドには入力された情報を表示させておく処理
+//        alertController.addTextField(configurationHandler: {(textField: UITextField!) in
+//                                        textField.text = self.memoList[indexPath.row].memo})
+//        // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
+//        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+//            (action) -> Void in self.updateAlertControllerText(alertController,indexPath)
+//        }))
+//        // アラートコントローラに"Cancel"ボタンを表示
+//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        self.present(alertController, animated: true, completion: nil)
+//    }
+//
+//    // "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新
+//    func updateAlertControllerText(_ alertcontroller:UIAlertController, _ indexPath: IndexPath) {
+//        // guard を利用して、nil チェック
+//        guard let textFields = alertcontroller.textFields else {return}
+//        guard let text = textFields[0].text else {return}
+//
+//        // UIAlertController に入力された文字をコンソールに出力
+//        print(text)
+//
+//        // Realm に保存したデータを UIAlertController に入力されたデータで更新
+//        let realmInstance = try! Realm()
+//        try! realmInstance.write{
+//            memoList[indexPath.row].memo = text
+//        }
+//        self.memoListView.reloadData()
+//    }
 }
 

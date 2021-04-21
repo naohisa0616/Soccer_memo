@@ -12,6 +12,9 @@ class MemoTableViewCell: UITableViewCell {
     @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var teamImg: UIImageView!
     
+    @IBAction func tapDeleteAction(_ sender: Any) {
+        print("ボタン")
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -19,9 +22,6 @@ class MemoTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        UIImage(systemName: "pencil")
-        UIImage(systemName: "trash")
     }
     
 }

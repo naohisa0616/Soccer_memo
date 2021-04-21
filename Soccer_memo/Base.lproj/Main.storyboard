@@ -243,9 +243,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-80-ovA">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-80-ovA">
                                 <rect key="frame" x="20" y="293" width="374" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -259,30 +258,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="後半" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idy-c6-0EL">
-                                <rect key="frame" x="20" y="460" width="35" height="21"/>
+                                <rect key="frame" x="20" y="437" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AQo-4p-cWk">
-                                <rect key="frame" x="20" y="490" width="374" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AQo-4p-cWk">
+                                <rect key="frame" x="20" y="468" width="374" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="総評" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trS-dJ-ivT">
-                                <rect key="frame" x="20" y="654" width="35" height="21"/>
+                                <rect key="frame" x="20" y="613" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-TQ-hGK">
-                                <rect key="frame" x="20" y="684" width="374" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-TQ-hGK">
+                                <rect key="frame" x="20" y="644" width="374" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -299,9 +296,20 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HyD-qo-08o"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HyD-qo-08o" firstAttribute="trailing" secondItem="aPq-80-ovA" secondAttribute="trailing" constant="20" id="A8g-Mh-FPL"/>
+                            <constraint firstItem="HyD-qo-08o" firstAttribute="trailing" secondItem="AQo-4p-cWk" secondAttribute="trailing" constant="20" id="BLM-fF-78Q"/>
+                            <constraint firstItem="HyD-qo-08o" firstAttribute="trailing" secondItem="lYt-TQ-hGK" secondAttribute="trailing" constant="20" id="CFy-xF-cCQ"/>
+                            <constraint firstItem="aPq-80-ovA" firstAttribute="leading" secondItem="HyD-qo-08o" secondAttribute="leading" constant="20" id="Rlj-n2-VgB"/>
+                            <constraint firstItem="AQo-4p-cWk" firstAttribute="leading" secondItem="HyD-qo-08o" secondAttribute="leading" constant="20" id="cfV-cd-D1k"/>
+                            <constraint firstItem="lYt-TQ-hGK" firstAttribute="leading" secondItem="HyD-qo-08o" secondAttribute="leading" constant="20" id="wIh-Cn-l15"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GSA-wH-vu5"/>
                     <connections>
+                        <outlet property="LatterText" destination="AQo-4p-cWk" id="qmL-9g-Few"/>
+                        <outlet property="commeText" destination="lYt-TQ-hGK" id="SSN-9K-2GC"/>
+                        <outlet property="firstText" destination="aPq-80-ovA" id="k7k-AQ-uWR"/>
                         <outlet property="playerInfo" destination="JXM-vB-Bz5" id="6UT-iH-awN"/>
                         <outlet property="scoringPickerView" destination="T0G-Id-oBx" id="20X-h5-Xso"/>
                     </connections>

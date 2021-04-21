@@ -16,18 +16,56 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="She-Qy-RKy">
-                        <rect key="frame" x="7" y="5" width="37" height="35"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="She-Qy-RKy">
+                        <rect key="frame" x="7" y="5" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="6QJ-ne-QOc"/>
+                            <constraint firstAttribute="width" constant="35" id="89J-P0-awZ"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3V-QV-aM4">
-                        <rect key="frame" x="66" y="12" width="58" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3V-QV-aM4">
+                        <rect key="frame" x="50" y="11.5" width="178" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="f8K-3k-naE"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWe-sD-aSr">
+                        <rect key="frame" x="282" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="8CR-wM-zJ8"/>
+                            <constraint firstAttribute="height" constant="30" id="miy-b3-YaH"/>
+                        </constraints>
+                        <state key="normal" image="Symbol-1"/>
+                        <connections>
+                            <action selector="tapDeleteAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pY1-b4-axl"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iK3-wm-PYX">
+                        <rect key="frame" x="236" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Uqi-Gf-u8c"/>
+                            <constraint firstAttribute="height" constant="30" id="a8G-7v-vww"/>
+                        </constraints>
+                        <state key="normal" image="Symbol"/>
+                    </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="iK3-wm-PYX" firstAttribute="leading" secondItem="Y3V-QV-aM4" secondAttribute="trailing" constant="8" id="51i-gi-Ejv"/>
+                    <constraint firstAttribute="trailing" secondItem="BWe-sD-aSr" secondAttribute="trailing" constant="8" id="6rc-LJ-J9C"/>
+                    <constraint firstItem="She-Qy-RKy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="7" id="7rq-Kh-76D"/>
+                    <constraint firstItem="She-Qy-RKy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="DE3-78-KOU"/>
+                    <constraint firstItem="iK3-wm-PYX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Dbj-8Y-h1o"/>
+                    <constraint firstAttribute="bottom" secondItem="BWe-sD-aSr" secondAttribute="bottom" constant="7" id="IoL-AW-4Y9"/>
+                    <constraint firstItem="BWe-sD-aSr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Niw-dl-wit"/>
+                    <constraint firstItem="Y3V-QV-aM4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bAl-p0-N2l"/>
+                    <constraint firstItem="Y3V-QV-aM4" firstAttribute="leading" secondItem="She-Qy-RKy" secondAttribute="trailing" constant="8" id="eBX-yR-YBi"/>
+                    <constraint firstAttribute="bottom" secondItem="iK3-wm-PYX" secondAttribute="bottom" constant="7" id="hWQ-lG-zNx"/>
+                    <constraint firstAttribute="bottom" secondItem="She-Qy-RKy" secondAttribute="bottom" constant="4" id="ofA-CI-7Ir"/>
+                    <constraint firstItem="BWe-sD-aSr" firstAttribute="leading" secondItem="iK3-wm-PYX" secondAttribute="trailing" constant="16" id="s8D-qL-4Fi"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
@@ -37,4 +75,8 @@
             <point key="canvasLocation" x="137.68115942028987" y="84.375"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Symbol" width="11" height="11"/>
+        <image name="Symbol-1" width="13" height="15"/>
+    </resources>
 </document>

@@ -20,6 +20,15 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBOutlet weak var scoringPickerView: UIPickerView!
     
+    //前半
+    @IBOutlet weak var firstText: UITextView!
+    
+    //後半
+    @IBOutlet weak var LatterText: UITextView!
+    
+    //総評
+    @IBOutlet weak var commeText: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
@@ -31,6 +40,39 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         scoringPickerView.dataSource = self
         //選手名を取得
         self.playerInfo.text = dataInfo
+       
+    //前半の枠編集
+        // 枠のカラー
+        firstText.layer.borderColor = UIColor.blue.cgColor
+        
+        // 枠の幅
+        firstText.layer.borderWidth = 2.0
+        
+        // 枠を角丸にする
+        firstText.layer.cornerRadius = 20.0
+        firstText.layer.masksToBounds = true
+        
+    //後半の枠編集
+        // 枠のカラー
+        LatterText.layer.borderColor = UIColor.blue.cgColor
+        
+        // 枠の幅
+        LatterText.layer.borderWidth = 2.0
+        
+        // 枠を角丸にする
+        LatterText.layer.cornerRadius = 20.0
+        LatterText.layer.masksToBounds = true
+        
+    //総評の枠編集
+        // 枠のカラー
+        commeText.layer.borderColor = UIColor.blue.cgColor
+        
+        // 枠の幅
+        commeText.layer.borderWidth = 2.0
+        
+        // 枠を角丸にする
+        commeText.layer.cornerRadius = 20.0
+        commeText.layer.masksToBounds = true
 
     }
     
