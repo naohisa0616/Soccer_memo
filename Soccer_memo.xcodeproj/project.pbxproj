@@ -24,8 +24,6 @@
 		2C789E9825A00114003554AE /* Soccer_memoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C789E9725A00114003554AE /* Soccer_memoUITests.swift */; };
 		2CB4BE0326295B7B00BDDC1B /* MemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */; };
 		2CB4BE0426295B7B00BDDC1B /* MemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */; };
-		2CB4BE0A262D76D100BDDC1B /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4BE08262D76D100BDDC1B /* DetailTableViewCell.swift */; };
-		2CB4BE0B262D76D100BDDC1B /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4BE09262D76D100BDDC1B /* DetailTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +66,6 @@
 		2C789E9925A00114003554AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoTableViewCell.xib; sourceTree = "<group>"; };
-		2CB4BE08262D76D100BDDC1B /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
-		2CB4BE09262D76D100BDDC1B /* DetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,8 +140,6 @@
 				2C789E7225A00111003554AE /* AppDelegate.swift */,
 				2C789E7425A00111003554AE /* SceneDelegate.swift */,
 				2C789E7625A00111003554AE /* ViewController.swift */,
-				2CB4BE08262D76D100BDDC1B /* DetailTableViewCell.swift */,
-				2CB4BE09262D76D100BDDC1B /* DetailTableViewCell.xib */,
 				2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */,
 				2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */,
 				2C789E7825A00111003554AE /* Main.storyboard */,
@@ -286,7 +280,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C789E8225A00114003554AE /* LaunchScreen.storyboard in Resources */,
-				2CB4BE0B262D76D100BDDC1B /* DetailTableViewCell.xib in Resources */,
 				2C789E7F25A00114003554AE /* Assets.xcassets in Resources */,
 				2C789E7A25A00111003554AE /* Main.storyboard in Resources */,
 				2CB4BE0426295B7B00BDDC1B /* MemoTableViewCell.xib in Resources */,
@@ -324,7 +317,6 @@
 				09F03AF82613665200687C0B /* item.swift in Sources */,
 				2C789E7325A00111003554AE /* AppDelegate.swift in Sources */,
 				2C789E7525A00111003554AE /* SceneDelegate.swift in Sources */,
-				2CB4BE0A262D76D100BDDC1B /* DetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

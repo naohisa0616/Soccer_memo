@@ -8,12 +8,20 @@
 import UIKit
 
 class MemoTableViewCell: UITableViewCell {
-
+    
+    //delegateの宣言
+    var tableDelegate: TableDelegate?
+    
     @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var teamImg: UIImageView!
     
     @IBAction func tapDeleteAction(_ sender: Any) {
-        print("ボタン")
+        
+    }
+    @IBAction func tapEditAction(_ sender: Any) {
+        //delegate設置
+        self.tableDelegate?.onTapButton()
+        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,4 +32,9 @@ class MemoTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+}
+
+//プロトコルの宣言
+protocol TableDelegate: class {
+   func onTapButton()
 }

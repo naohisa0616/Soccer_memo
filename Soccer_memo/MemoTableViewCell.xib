@@ -50,6 +50,9 @@
                             <constraint firstAttribute="height" constant="30" id="a8G-7v-vww"/>
                         </constraints>
                         <state key="normal" image="Symbol"/>
+                        <connections>
+                            <action selector="tapEditAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3o6-bD-baD"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

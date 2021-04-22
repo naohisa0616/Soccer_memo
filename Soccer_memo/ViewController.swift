@@ -10,7 +10,7 @@ import RealmSwift
 
 private let unselectedRow = -1
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,TableDelegate {
     
     //確定ボタンがタップされたイベントでは、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     @IBAction func confirmButton(_ sender: Any) {
@@ -81,6 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 宣言したmemoListが保持している行番号に対応したメモを返すように実装。
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
+            cell.tableDelegate = self
         if indexPath.row >= memoList.count {
             return cell
         }
@@ -102,7 +103,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //画面遷移
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
-    
+
+//MemoTableViewCellからのdelegate処理
+func onTapButton() {
+    print("ボタン")
     //セルの削除処理
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
@@ -115,6 +119,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             memoListView.reloadData()
         }
     }
+}
+
     //改行されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         applyMemo()
