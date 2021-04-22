@@ -11,6 +11,7 @@ class MemoTableViewCell: UITableViewCell {
     
     //delegateの宣言
     var tableDelegate: TableDelegate?
+    var row: Int = 0
     
     @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var teamImg: UIImageView!
@@ -20,7 +21,7 @@ class MemoTableViewCell: UITableViewCell {
     }
     @IBAction func tapEditAction(_ sender: Any) {
         //delegate設置
-        self.tableDelegate?.onTapButton()
+        self.tableDelegate?.onTapButton(row: row)
         
     }
     override func awakeFromNib() {
@@ -36,5 +37,5 @@ class MemoTableViewCell: UITableViewCell {
 
 //プロトコルの宣言
 protocol TableDelegate: class {
-   func onTapButton()
+    func onTapButton(row: Int)
 }
