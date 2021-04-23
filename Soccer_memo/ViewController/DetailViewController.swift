@@ -32,7 +32,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     //追加ボタン
     @IBAction func addMatchInfo(_ sender: Any) {
         var textField = UITextField()
-                let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: "試合情報を追加", message: "", preferredStyle: .alert)
                 let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
                     let newItem: Item = Item(title: textField.text!)
                     // モデルクラスをインスタンス化

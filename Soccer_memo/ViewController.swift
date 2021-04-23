@@ -10,7 +10,7 @@ import RealmSwift
 
 private let unselectedRow = -1
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,TableDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,TableDelegate,UpdateDelegate {
     
     //確定ボタンがタップされたイベントでは、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     @IBAction func confirmButton(_ sender: Any) {
@@ -107,7 +107,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     //MemoTableViewCellからのdelegate処理
     func onTapButton(row: Int) {
-        print("ボタン")
         //セルの削除処理
         let realm = try! Realm()
         // データを削除
@@ -148,36 +147,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         memoListView.reloadData()
     }
     
-//    // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
-//    func showAlertController(_ indexPath: IndexPath){
-//        let alertController: UIAlertController = UIAlertController(title: "\(String(indexPath.row))番目の ToDo を編集", message: memoList[indexPath.row].memo, preferredStyle: .alert)
-//        // アラートコントローラにテキストフィールドを表示 テキストフィールドには入力された情報を表示させておく処理
-//        alertController.addTextField(configurationHandler: {(textField: UITextField!) in
-//                                        textField.text = self.memoList[indexPath.row].memo})
-//        // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
-//        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-//            (action) -> Void in self.updateAlertControllerText(alertController,indexPath)
-//        }))
-//        // アラートコントローラに"Cancel"ボタンを表示
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        self.present(alertController, animated: true, completion: nil)
-//    }
-//
-//    // "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新
-//    func updateAlertControllerText(_ alertcontroller:UIAlertController, _ indexPath: IndexPath) {
-//        // guard を利用して、nil チェック
-//        guard let textFields = alertcontroller.textFields else {return}
-//        guard let text = textFields[0].text else {return}
-//
-//        // UIAlertController に入力された文字をコンソールに出力
-//        print(text)
-//
-//        // Realm に保存したデータを UIAlertController に入力されたデータで更新
-//        let realmInstance = try! Realm()
-//        try! realmInstance.write{
-//            memoList[indexPath.row].memo = text
-//        }
-//        self.memoListView.reloadData()
-//    }
+    //編集ボタン
+    func onTapPencil(row: Int) {
+        showAlert(IndexPath)
+        updateAlert(UIAlertController, IndexPath)
+    }
+    
+    // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
+    func showAlert(_ indexPath: IndexPath){
+        let alertController: UIAlertController = UIAlertController(title: "編集", message: "チーム名の変更", preferredStyle: .alert)
+        // アラートコントローラにテキストフィールドを表示 テキストフィールドには入力された情報を表示させておく処理
+        alertController.addTextField(configurationHandler: {(textField: UITextField!) in
+                                        // モデルクラスをインスタンス化
+                                        let tableCell:MemoModel = MemoModel()
+                                        textField.text = tableCell.memo})
+        // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            (action) -> Void in self.updateAlert(alertController,indexPath)
+        }))
+        // アラートコントローラに"Cancel"ボタンを表示
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    // "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新
+    func updateAlert(_ alertcontroller:UIAlertController, _ indexPath: IndexPath) {
+        // guard を利用して、nil チェック
+        guard let textFields = alertcontroller.textFields else {return}
+        guard let text = textFields[0].text else {return}
+
+        // UIAlertController に入力された文字をコンソールに出力
+        print(text)
+
+        // Realm に保存したデータを UIAlertController に入力されたデータで更新
+        let realm = try! Realm()
+        try! realm.write{
+            memoList[indexPath.row].memo = text
+        }
+        self.memoListView.reloadData()
+    }
 }
 

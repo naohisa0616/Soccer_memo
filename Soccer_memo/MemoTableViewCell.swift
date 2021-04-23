@@ -11,18 +11,19 @@ class MemoTableViewCell: UITableViewCell {
     
     //delegateの宣言
     var tableDelegate: TableDelegate?
+    var updateDelegate: UpdateDelegate?
     var row: Int = 0
     
     @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var teamImg: UIImageView!
     
     @IBAction func tapDeleteAction(_ sender: Any) {
-        
+        //delegate設置
+        self.updateDelegate?.onTapPencil(row: row)
     }
     @IBAction func tapEditAction(_ sender: Any) {
         //delegate設置
         self.tableDelegate?.onTapButton(row: row)
-        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +36,12 @@ class MemoTableViewCell: UITableViewCell {
     
 }
 
-//プロトコルの宣言
+//プロトコルの宣言(ゴミ箱)
 protocol TableDelegate: class {
     func onTapButton(row: Int)
+}
+
+//プロトコルの宣言(編集)
+protocol UpdateDelegate: class {
+    func onTapPencil(row: Int)
 }
