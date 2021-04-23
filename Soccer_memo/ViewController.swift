@@ -82,6 +82,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
             cell.tableDelegate = self
+            cell.row = indexPath.row
         if indexPath.row >= memoList.count {
             return cell
         }
@@ -104,22 +105,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 
-//MemoTableViewCellからのdelegate処理
-func onTapButton() {
-    print("ボタン")
-    //セルの削除処理
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            // Realmインスタンス取得
-            let realm = try! Realm()
-            // データを削除
-            try! realm.write {
-                realm.delete(memoList[indexPath.row])
-            }
-            memoListView.reloadData()
+    //MemoTableViewCellからのdelegate処理
+    func onTapButton(row: Int) {
+        print("ボタン")
+        //セルの削除処理
+        let realm = try! Realm()
+        // データを削除
+        try! realm.write {
+            realm.delete(memoList[row])
         }
+        memoListView.reloadData()
     }
-}
 
     //改行されたイベントでは確定ボタンタップイベントと同様に、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
