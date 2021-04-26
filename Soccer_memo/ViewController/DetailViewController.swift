@@ -111,17 +111,17 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         if let data = self.data {
             //ラベルに選手名を表示
             self.playerName.text = data
-        
-        let a = MemoModel.create()
-        a.name = "name"
-        a.image = UIImage(named: "icon1.png")
-        a.save()
+            let a = MemoModel.create()
+           //ba.name = "name"
+            a.image = UIImage(named: "icon1.png")
+            a.save()
 
-        let users = MemoModel.loadAll()
-        for (i, user) in users.enumerate() {
-            let imageView = UIImageView()
-            imageView.image = user.image
-            self.view.addSubview(imageView)
+            let users = MemoModel.loadAll()
+    //        for (i, user) in users.enumerate() {
+    //            let imageView = UIImageView()
+    //            imageView.image = user.image
+    //            self.view.addSubview(imageView)
+    //        }
         }
     }
     
@@ -209,7 +209,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        showAlert(IndexPath)
+        //showAlert(IndexPath)
 //        updateAlert(UIAlertController, IndexPath)
     }
     
@@ -222,8 +222,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                                         let tableCell:MatchModel = MatchModel()
                                         textField.text = tableCell.matchResult})
         // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-            (action) -> Void in self.updateAlert(alertController,indexPath)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            //self.updateAlert(alertController,indexPath)
         }))
         // アラートコントローラに"Cancel"ボタンを表示
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -247,5 +247,4 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         self.detailListView.reloadData()
     }
     
-}
 }
