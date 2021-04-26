@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class DetailViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, TableDelegate, UpdateDelegate {
     
     // アイテムの型
     struct Item {
@@ -25,6 +25,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     //遷移元から名前を取得用の変数を定義
     var data: String?
     // モデルクラスを使用し、取得データを格納する変数を作成
+    var match: Results<MatchModel>!
     var memoList: Results<MemoModel>!
     
     //TableViewの紐付け
@@ -87,7 +88,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     @IBAction func deletePicture(_ sender: UIButton) {
         // アラート表示
-        showAlert()
+//        showAlert()
     }
     
     override func viewDidLoad() {
@@ -110,6 +111,17 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         if let data = self.data {
             //ラベルに選手名を表示
             self.playerName.text = data
+        
+        let a = MemoModel.create()
+        a.name = "name"
+        a.image = UIImage(named: "icon1.png")
+        a.save()
+
+        let users = MemoModel.loadAll()
+        for (i, user) in users.enumerate() {
+            let imageView = UIImageView()
+            imageView.image = user.image
+            self.view.addSubview(imageView)
         }
     }
     
@@ -123,7 +135,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         //「DetailCell」を引っ張ってくる
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
         //Cell番号のitemArrayを変数Itemに代入
-        let item = memoList[indexPath.row].memo
+        let item = match[indexPath.row].matchResult
         //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
         cell.textLabel?.text = item
         return cell
@@ -137,23 +149,32 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         //遷移先ViewControllerのインスタンス取得
         let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
         //TableViewの値を遷移先に値渡し
-        playerViewController.datalist = memoList[indexPath.row].memo
+        playerViewController.datalist = memoList[indexPath.row].memo //チーム名
         //画面遷移
         self.navigationController?.pushViewController(playerViewController, animated: true)
     }
     
     //セルの削除処理
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            //セルの削除
-            let realm = try! Realm()
-            // データを削除
-            try! realm.write {
-                realm.delete(memoList[indexPath.row])
-            }
-            detailListView.reloadData()
+    func onTapButton(row: Int) {
+        //セルの削除処理
+        let realm = try! Realm()
+        // データを削除
+        try! realm.write {
+            realm.delete(match[row])
         }
+        detailListView.reloadData()
     }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == UITableViewCell.EditingStyle.delete {
+//            //セルの削除
+//            let realm = try! Realm()
+//            // データを削除
+//            try! realm.write {
+//                realm.delete(match[indexPath.row])
+//            }
+//            detailListView.reloadData()
+//        }
+//    }
     
     // アラート表示
     func showAlert() {
@@ -185,4 +206,46 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         // 写真を選ぶビューを引っ込める
         self.dismiss(animated: true)
     }
+    
+    //編集ボタン
+    func onTapPencil(row: Int) {
+        showAlert(IndexPath)
+//        updateAlert(UIAlertController, IndexPath)
+    }
+    
+    // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
+    func showAlert(_ indexPath: IndexPath){
+        let alertController: UIAlertController = UIAlertController(title: "編集", message: "試合情報の変更", preferredStyle: .alert)
+        // アラートコントローラにテキストフィールドを表示 テキストフィールドには入力された情報を表示させておく処理
+        alertController.addTextField(configurationHandler: {(textField: UITextField!) in
+                                        // モデルクラスをインスタンス化
+                                        let tableCell:MatchModel = MatchModel()
+                                        textField.text = tableCell.matchResult})
+        // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            (action) -> Void in self.updateAlert(alertController,indexPath)
+        }))
+        // アラートコントローラに"Cancel"ボタンを表示
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    // "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新
+    func updateAlert(_ alertcontroller:UIAlertController, _ indexPath: IndexPath) {
+        // guard を利用して、nil チェック
+        guard let textFields = alertcontroller.textFields else {return}
+        guard let text = textFields[0].text else {return}
+
+        // UIAlertController に入力された文字をコンソールに出力
+        print(text)
+
+        // Realm に保存したデータを UIAlertController に入力されたデータで更新
+        let realm = try! Realm()
+        try! realm.write{
+            match[indexPath.row].matchResult = text
+        }
+        self.detailListView.reloadData()
+    }
+    
+}
 }
