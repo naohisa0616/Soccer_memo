@@ -28,6 +28,14 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     var match: Results<MatchModel>!
     var memoList: Results<MemoModel>!
     
+    // ドキュメントディレクトリの「ファイルURL」（URL型）定義
+    var documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+
+    // ドキュメントディレクトリの「パス」（String型）定義
+    let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+    
+    let realm = try! Realm()
+
     //TableViewの紐付け
     @IBOutlet weak var detailListView: UITableView!
     //追加ボタン
@@ -77,7 +85,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
             // 写真を選ぶビュー
             let pickerView = UIImagePickerController()
             // 写真の選択元をカメラロールにする
-            // 「.camera」にすればカメラを起動できる
             pickerView.sourceType = .photoLibrary
             // デリゲート
             pickerView.delegate = self
@@ -86,9 +93,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         }
     }
     
+    //削除ボタン
     @IBAction func deletePicture(_ sender: UIButton) {
         // アラート表示
-//        showAlert()
+        showAlert()
     }
     
     override func viewDidLoad() {
@@ -111,18 +119,21 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         if let data = self.data {
             //ラベルに選手名を表示
             self.playerName.text = data
-            let a = MemoModel.create()
-           //ba.name = "name"
-            a.image = UIImage(named: "icon1.png")
-            a.save()
-
-            let users = MemoModel.loadAll()
-    //        for (i, user) in users.enumerate() {
-    //            let imageView = UIImageView()
-    //            imageView.image = user.image
-    //            self.view.addSubview(imageView)
-    //        }
         }
+//        //画像の表示
+//        tableData = realm.objects(MemoModel.self)
+//        //URL型にキャスト
+//        let fileURL = URL(string: tableData[0].imageURL)
+//        //パス型に変換
+//        let filePath = fileURL?.path
+//        showImageView.image = UIImage(contentsOfFile: filePath!)
+        
+        let users = MemoModel.loadAll()
+//        for (i, user) in users.enumerate() {
+//            let imageView = UIImageView()
+//            imageView.image = user.image
+//            self.view.addSubview(imageView)
+//        }
     }
     
     // セルの数を指定ーitemArrayの配列の数だけCellを表示します
@@ -164,17 +175,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         }
         detailListView.reloadData()
     }
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == UITableViewCell.EditingStyle.delete {
-//            //セルの削除
-//            let realm = try! Realm()
-//            // データを削除
-//            try! realm.write {
-//                realm.delete(match[indexPath.row])
-//            }
-//            detailListView.reloadData()
-//        }
-//    }
     
     // アラート表示
     func showAlert() {
@@ -201,8 +201,20 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // 選択した写真を取得する
         let image = info[.originalImage] as! UIImage
+        //写真の保存
+//        let photo = MemoModel.create()
+//        photo.image = image
+//        photo.save()
         // ビューに表示する
         imageView.image = image
+        //Realmのテーブルをインスタンス化
+        let photo = MemoModel()
+        do{
+            try photo.imageURL = directory.documentDirectoryFileURL.absoluteString
+        }catch{
+            print("画像の保存に失敗しました")
+        }
+        try! realm.write{realm.add(photo)}
         // 写真を選ぶビューを引っ込める
         self.dismiss(animated: true)
     }
@@ -223,7 +235,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                                         textField.text = tableCell.matchResult})
         // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-            //self.updateAlert(alertController,indexPath)
         }))
         // アラートコントローラに"Cancel"ボタンを表示
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -245,6 +256,32 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
             match[indexPath.row].matchResult = text
         }
         self.detailListView.reloadData()
+    }
+    
+    //保存するためのパスを作成する
+    func createLocalDataFile() {
+        // 作成するテキストファイルの名前
+        let fileName = "\(NSUUID().uuidString).png"
+
+        // DocumentディレクトリのfileURLを取得
+        if documentDirectoryFileURL != nil {
+            // ディレクトリのパスにファイル名をつなげてファイルのフルパスを作る
+            let path = documentDirectoryFileURL.appendingPathComponent(fileName)
+            documentDirectoryFileURL = path
+        }
+    }
+    
+    //画像を保存する関数の部分
+    func saveImage() {
+        createLocalDataFile()
+        //pngで保存する場合
+        let pngImageData = imageView.image?.pngData()
+        do {
+            try pngImageData!.write(to: documentDirectoryFileURL)
+        } catch {
+            //エラー処理
+            print("エラー")
+        }
     }
     
 }

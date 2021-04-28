@@ -97,6 +97,7 @@
 		09F03AF62613663F00687C0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2C59922E260EBF0900F4478A /* MemoModel.swift */,
 				09F03AF72613665200687C0B /* item.swift */,
 			);
 			path = Model;
@@ -105,6 +106,7 @@
 		09F03AFF2613679F00687C0B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2C789E7625A00111003554AE /* ViewController.swift */,
 				2C226646261C87710087A7C8 /* DetailViewController.swift */,
 				2C226644261C87700087A7C8 /* PlayerListViewController.swift */,
 				2C226645261C87710087A7C8 /* ScoringViewController.swift */,
@@ -135,15 +137,12 @@
 		2C789E7125A00111003554AE /* Soccer_memo */ = {
 			isa = PBXGroup;
 			children = (
+				2CB8A72D2636EB52003B932F /* Cell */,
 				09F03AFF2613679F00687C0B /* ViewController */,
 				09F03AF62613663F00687C0B /* Model */,
 				2C789E7225A00111003554AE /* AppDelegate.swift */,
 				2C789E7425A00111003554AE /* SceneDelegate.swift */,
-				2C789E7625A00111003554AE /* ViewController.swift */,
-				2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */,
-				2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */,
 				2C789E7825A00111003554AE /* Main.storyboard */,
-				2C59922E260EBF0900F4478A /* MemoModel.swift */,
 				2C789E7E25A00114003554AE /* Assets.xcassets */,
 				2C789E8025A00114003554AE /* LaunchScreen.storyboard */,
 				2C789E8325A00114003554AE /* Info.plist */,
@@ -168,6 +167,15 @@
 				2C789E9925A00114003554AE /* Info.plist */,
 			);
 			path = Soccer_memoUITests;
+			sourceTree = "<group>";
+		};
+		2CB8A72D2636EB52003B932F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2CB4BE0126295B7B00BDDC1B /* MemoTableViewCell.swift */,
+				2CB4BE0226295B7B00BDDC1B /* MemoTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
