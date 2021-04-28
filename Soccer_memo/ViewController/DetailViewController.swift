@@ -209,6 +209,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         imageView.image = image
         //Realmのテーブルをインスタンス化
         let photo = MemoModel()
+        let directory = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first!
         do{
             try photo.imageURL = directory.documentDirectoryFileURL.absoluteString
         }catch{

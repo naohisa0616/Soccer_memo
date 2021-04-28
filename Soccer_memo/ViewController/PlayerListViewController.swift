@@ -8,7 +8,13 @@
 import UIKit
 import RealmSwift
 
-class PlayerListViewController: UIViewController {
+class PlayerListViewController: UIViewController, TableDelegate, UpdateDelegate {
+    func onTapPencil(row: Int) {
+        //PlayerModel
+    }
+    
+    // モデルクラスを使用し、取得データを格納する変数を作成
+    var player: Results<PlayerModel>!
     
     //遷移元から名前を取得用の変数を定義
     var datalist: String?
@@ -97,12 +103,14 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
     }
     
     //セルの削除処理
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            //セルの削除
-            itemArray.remove(at: indexPath.row)
-            playerListView.reloadData()
+    func onTapButton(row: Int) {
+        //セルの削除処理
+        let realm = try! Realm()
+        // データを削除
+        try! realm.write {
+            realm.delete(player[row])
         }
+        playerListView.reloadData()
     }
     
 }
