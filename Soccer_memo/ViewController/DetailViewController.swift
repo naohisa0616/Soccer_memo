@@ -214,7 +214,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
             in: .userDomainMask
         ).first!
         do{
-            try photo.imageURL = directory.documentDirectoryFileURL.absoluteString
+            try photo.image = directory.absoluteString
         }catch{
             print("画像の保存に失敗しました")
         }
@@ -225,7 +225,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        //showAlert(IndexPath)
+        //showAlert(row)
 //        updateAlert(UIAlertController, IndexPath)
     }
     
@@ -250,9 +250,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         // guard を利用して、nil チェック
         guard let textFields = alertcontroller.textFields else {return}
         guard let text = textFields[0].text else {return}
-
-        // UIAlertController に入力された文字をコンソールに出力
-        print(text)
 
         // Realm に保存したデータを UIAlertController に入力されたデータで更新
         let realm = try! Realm()

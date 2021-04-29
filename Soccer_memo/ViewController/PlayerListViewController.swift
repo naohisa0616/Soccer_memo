@@ -9,9 +9,6 @@ import UIKit
 import RealmSwift
 
 class PlayerListViewController: UIViewController, TableDelegate, UpdateDelegate {
-    func onTapPencil(row: Int) {
-        //PlayerModel
-    }
     
     // モデルクラスを使用し、取得データを格納する変数を作成
     var player: Results<PlayerModel>!
@@ -100,6 +97,11 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         scoringViewController.dataInfo = itemArray[indexPath.row].title
         //画面遷移
         self.navigationController?.pushViewController(scoringViewController, animated: true)
+    }
+    
+    //編集ボタン
+    func onTapPencil(row: Int) {
+        
     }
     
     //セルの削除処理

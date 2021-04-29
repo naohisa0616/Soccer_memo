@@ -10,6 +10,8 @@ import RealmSwift
 
 class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    var player: Results<PlayerModel>!
+    
     //遷移元から名前を取得用の変数を定義
     var dataInfo: String?
     
@@ -89,18 +91,23 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //データを返すメソッド、UIPickerViewに表示する配列
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int,forComponent component: Int, reusing view: UIView?) -> UIView{
-            let label = UILabel()
-            // 中央寄せ
-            label.textAlignment = NSTextAlignment.center
-            label.text = compos[row]
-            return label
+        let label = UILabel()
+        // 中央寄せ
+        label.textAlignment = NSTextAlignment.center
+        label.text = compos[row]
+        return label
     }
     
     // UIPickerViewのRowが選択された時の挙動
-    func pickerView(_ pickerView: UIPickerView,
-                    didSelectRow row: Int,
-                    inComponent component: Int) {
-        // 処理
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let label = UILabel()
+        label.text = compos[row]
+        // Realmにデータを保存
+        let realm = try! Realm()
+        try! realm.write{
+            player.overallScore = label.text
+        }
+        
     }
     
 
