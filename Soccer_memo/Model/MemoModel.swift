@@ -95,8 +95,10 @@ class MatchModel: Object{
 //選手テーブル
 class PlayerModel: Object{
     @objc dynamic var playerId = 0 //選手ID
-    @objc dynamic var overallScore = 0 //総評点
-    @objc dynamic var info: String? = "" //総評情報
+    @objc dynamic var overallScore: String? = "" //総評点
+    @objc dynamic var firstInfo: String? = "" //前半情報
+    @objc dynamic var latterInfo: String? = "" //後半情報
+    @objc dynamic var generalInfo: String? = "" //総評情報
     @objc dynamic var playername: String? = "" //選手名
     
     //PrimaryKeyの設定

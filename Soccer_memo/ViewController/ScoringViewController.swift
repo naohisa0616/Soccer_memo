@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
     
     var player: Results<PlayerModel>!
     
@@ -53,6 +53,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // 枠を角丸にする
         firstText.layer.cornerRadius = 20.0
         firstText.layer.masksToBounds = true
+        firstText.delegate = self
         
     //後半の枠編集
         // 枠のカラー
@@ -64,6 +65,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // 枠を角丸にする
         LatterText.layer.cornerRadius = 20.0
         LatterText.layer.masksToBounds = true
+        LatterText.delegate = self
         
     //総評の枠編集
         // 枠のカラー
@@ -75,6 +77,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // 枠を角丸にする
         commeText.layer.cornerRadius = 20.0
         commeText.layer.masksToBounds = true
+        commeText.delegate = self
 
     }
     
@@ -102,13 +105,49 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let label = UILabel()
         label.text = compos[row]
+        let string = String(label.text!)
         // Realmにデータを保存
         let realm = try! Realm()
         try! realm.write{
-            player.overallScore = label.text
+            player.first?.overallScore = string
         }
-        
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let text = self.firstText.text!
+            // Realmにデータを保存（前半）
+            let realm = try! Realm()
+            try! realm.write{
+                self.player.first?.firstInfo = text
+            }
+            // Realmにデータを保存（後半）
+            try! realm.write{
+                self.player.first?.latterInfo = text
+            }
+            // Realmにデータを保存（後半）
+            try! realm.write{
+                self.player.first?.generalInfo = text
+            }
+         }
+         return true
+     }
+
+    //プレースホルダーの実装
+    //テキストビューの編集が開始されたときにデリゲートに通知
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "テキストの入力" {
+            textView.text = nil
+            textView.textColor = .darkText
+        }
+    }
+    
+    //テキストビューの編集が終了したときにデリゲートに通知
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.textColor = .darkGray
+            textView.text = "テキストの入力"
+        }
+    }
 
 }
