@@ -23,7 +23,14 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var scoringPickerView: UIPickerView!
     
     //前半
-    @IBOutlet weak var firstText: UITextView!
+    @IBOutlet weak var firstText: UITextView! {
+        get {
+            return UITextView()
+        }
+        set {
+            
+        }
+    }
     
     //後半
     @IBOutlet weak var LatterText: UITextView!

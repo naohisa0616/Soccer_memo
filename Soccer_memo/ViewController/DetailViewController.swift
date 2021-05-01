@@ -214,7 +214,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
             in: .userDomainMask
         ).first!
         do{
-            try photo.image = directory.absoluteString
+            try photo.image = UIImage(named: directory.absoluteString)
         }catch{
             print("画像の保存に失敗しました")
         }
