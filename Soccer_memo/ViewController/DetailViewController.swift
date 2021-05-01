@@ -120,13 +120,14 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
             //ラベルに選手名を表示
             self.playerName.text = data
         }
-//        //画像の表示
-//        tableData = realm.objects(MemoModel.self)
-//        //URL型にキャスト
-//        let fileURL = URL(string: tableData[0].imageURL)
-//        //パス型に変換
-//        let filePath = fileURL?.path
-//        showImageView.image = UIImage(contentsOfFile: filePath!)
+        //画像の表示
+        let imageData = realm.objects(MemoModel.self)
+        //let file = String(imageData[0].image)
+        //URL型にキャスト
+        let fileURL = URL(string: imageData[0].image)
+        //パス型に変換
+        let filePath = fileURL?.path
+        imageView.image = UIImage(contentsOfFile: filePath!)
         
         let users = MemoModel.loadAll()
 //        for (i, user) in users.enumerate() {
@@ -184,8 +185,18 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let okButton = UIAlertAction(title: "OK",
                                      style: .default,
                                      handler:{(action: UIAlertAction) -> Void in
-                                        // デフォルトの画像を表示する
-                                        self.imageView.image = UIImage(named: "no_image.png")
+
+//                                        //先程同様にパスを取得
+//                                        let fileURL = URL(string: imageData[0].imageURL)
+//                                        let filePath = fileURL?.path
+//                                        //ファイルの削除
+//                                        if filePath != nil{
+//                                            try? FileManager.default.removeItem(atPath: filePath!)
+//                                        }
+//                                        //画像データの削除
+//                                        try! realm.write{
+//                                            realm.delete(self.imageData[dataNumber])
+//                                        }
                                      })
         let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         
@@ -225,12 +236,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        //showAlert(row)
+        //showTableAlert(IndexPath(row: Int, section: Int))
 //        updateAlert(UIAlertController, IndexPath)
     }
     
     // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
-    func showAlert(_ indexPath: IndexPath){
+    func showTableAlert(_ indexPath: IndexPath){
         let alertController: UIAlertController = UIAlertController(title: "編集", message: "試合情報の変更", preferredStyle: .alert)
         // アラートコントローラにテキストフィールドを表示 テキストフィールドには入力された情報を表示させておく処理
         alertController.addTextField(configurationHandler: {(textField: UITextField!) in
