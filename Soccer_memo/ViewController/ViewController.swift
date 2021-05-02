@@ -149,12 +149,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        //showAlert(row)
-//        updateAlert(UIAlertController, IndexPath)
+        showTableAlert(IndexPath(row: 0, section: 0))
+        updateAlert(UIAlertController, IndexPath(row: 0, section: 0))
     }
     
     // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
-    func showAlert(_ indexPath: IndexPath){
+    func showTableAlert(_ indexPath: IndexPath){
         let alertController: UIAlertController = UIAlertController(title: "編集", message: "チーム名の変更", preferredStyle: .alert)
         // アラートコントローラにテキストフィールドを表示 テキストフィールドには入力された情報を表示させておく処理
         alertController.addTextField(configurationHandler: {(textField: UITextField!) in

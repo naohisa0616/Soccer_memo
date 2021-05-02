@@ -30,6 +30,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     // ドキュメントディレクトリの「ファイルURL」（URL型）定義
     var documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//    let fileURL = URL(string: imageData[0].image.debugDescription)
 
     // ドキュメントディレクトリの「パス」（String型）定義
     let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -124,7 +125,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let imageData = realm.objects(MemoModel.self)
         //let file = String(imageData[0].image)
         //URL型にキャスト
-        let fileURL = URL(string: imageData[0].image)
+        let fileURL = URL(string: imageData[0].image.debugDescription)
+//        let fileURL = URL(string: imageData[0].image)
         //パス型に変換
         let filePath = fileURL?.path
         imageView.image = UIImage(contentsOfFile: filePath!)
@@ -236,7 +238,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        //showTableAlert(IndexPath(row: Int, section: Int))
+        showTableAlert(IndexPath(row: 0, section: 0))
 //        updateAlert(UIAlertController, IndexPath)
     }
     

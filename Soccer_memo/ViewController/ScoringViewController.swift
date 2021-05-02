@@ -61,6 +61,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         firstText.layer.cornerRadius = 20.0
         firstText.layer.masksToBounds = true
         firstText.delegate = self
+        firstText.tag = 1
         
     //後半の枠編集
         // 枠のカラー
@@ -73,6 +74,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         LatterText.layer.cornerRadius = 20.0
         LatterText.layer.masksToBounds = true
         LatterText.delegate = self
+        LatterText.tag = 2
         
     //総評の枠編集
         // 枠のカラー
@@ -85,6 +87,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         commeText.layer.cornerRadius = 20.0
         commeText.layer.masksToBounds = true
         commeText.delegate = self
+        commeText.tag = 3
 
     }
     
@@ -122,19 +125,21 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
          DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            let text = self.firstText.text!
+            // モデルクラスをインスタンス化
+            let text:PlayerModel = PlayerModel()
+            text.firstInfo = self.firstText.text!
             // Realmにデータを保存（前半）
             let realm = try! Realm()
             try! realm.write{
-                self.player.first?.firstInfo = text
+                realm.add(text)
             }
             // Realmにデータを保存（後半）
             try! realm.write{
-                self.player.first?.latterInfo = text
+                realm.add(text)
             }
             // Realmにデータを保存（後半）
             try! realm.write{
-                self.player.first?.generalInfo = text
+                realm.add(text)
             }
          }
          return true
