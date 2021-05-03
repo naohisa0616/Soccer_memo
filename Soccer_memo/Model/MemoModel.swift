@@ -25,6 +25,8 @@ class MemoModel: Object{
                 self._image = newValue
                 if let value = newValue {
                     self.photo = value.pngData() as NSData?
+                } else {
+                    self.photo = nil
                 }
             }
             
