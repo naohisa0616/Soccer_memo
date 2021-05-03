@@ -8,33 +8,22 @@
 import UIKit
 import RealmSwift
 
-class PlayerListViewController: UIViewController, TableDelegate, UpdateDelegate {
+class PlayerListViewController: UIViewController {
     
     // モデルクラスを使用し、取得データを格納する変数を作成
     var player: Results<PlayerModel>!
-    
-    //遷移元から名前を取得用の変数を定義
     var datalist: String?
-    // この配列に作ったアイテムを追加していく
     var itemArray: [Item] = []
-    //メモした内容を保持しておくString配列playerList
     var playerList: [String] = []
     
-   
-    //選手名の表示ラベル
     @IBOutlet weak var playerName: UILabel!
-    
-    //TableViewの紐付け
     @IBOutlet weak var playerListView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        //タイトル名設定
         navigationItem.title = "選手一覧"
-        //テーブルビューのデリゲートを設定する。
         self.playerListView.delegate = self
-        //テーブルビューのデータソースを設定する。
         self.playerListView.dataSource = self
         //self.datalistがnilでなければdataに代入する
         if let data = self.datalist {
@@ -54,9 +43,7 @@ class PlayerListViewController: UIViewController, TableDelegate, UpdateDelegate 
                 }
 
                 alert.addTextField { (alertTextField) in
-                    //プレースホルダーの設定
                     alertTextField.placeholder = "例：G.ドンナルンマ"
-                    //テキストフィールドに設定
                     textField = alertTextField
                 }
 
@@ -64,7 +51,6 @@ class PlayerListViewController: UIViewController, TableDelegate, UpdateDelegate 
                 present(alert, animated: true, completion: nil)
     }
 }
-
 
 // MARK: - Tableview Delegate
 extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  {
@@ -99,22 +85,6 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         self.navigationController?.pushViewController(scoringViewController, animated: true)
     }
     
-    //編集ボタン
-    func onTapPencil(row: Int) {
-        showTableAlert(IndexPath(row: 0, section: 0))
-    }
-    
-    //セルの削除処理
-    func onTapButton(row: Int) {
-        //セルの削除処理
-        let realm = try! Realm()
-        // データを削除
-        try! realm.write {
-            realm.delete(player[row])
-        }
-        playerListView.reloadData()
-    }
-    
     // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
     func showTableAlert(_ indexPath: IndexPath){
         let alertController: UIAlertController = UIAlertController(title: "編集", message: "選手情報の変更", preferredStyle: .alert)
@@ -145,5 +115,27 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         self.playerListView.reloadData()
     }
 
+    
+}
+
+// MARK: MemoTableViewCellDelegate
+extension PlayerListViewController : MemoTableViewCellDelegate {
+    
+    //編集ボタン
+    func onTapPencil(row: Int) {
+        showTableAlert(IndexPath(row: 0, section: 0))
+    }
+    
+    //セルの削除処理
+    func onTapButton(row: Int) {
+        //セルの削除処理
+        let realm = try! Realm()
+        // データを削除
+        try! realm.write {
+            realm.delete(player[row])
+        }
+        playerListView.reloadData()
+    }
+    
     
 }

@@ -14,7 +14,7 @@ class MemoModel: Object{
   static let realm = try! Realm()
     
   let match = List<MatchModel>() //MatchModelと1対多の関係
-  
+  @objc dynamic var id = 0 //チームID
   @objc dynamic var teamId = 0 //チームID
   @objc dynamic var memo: String? = "" //チーム名
   @objc dynamic private var photo: NSData? = nil //チーム画像
@@ -25,6 +25,8 @@ class MemoModel: Object{
                 self._image = newValue
                 if let value = newValue {
                     self.photo = value.pngData() as NSData?
+                } else {
+                    self.photo = nil
                 }
             }
             
@@ -42,7 +44,7 @@ class MemoModel: Object{
     
         //PrimaryKeyの設定
         override static func primaryKey() -> String? {
-            return "teamId"
+            return "id"
         }
 
         override static func ignoredProperties() -> [String] {
@@ -78,18 +80,6 @@ class MemoModel: Object{
             }
         }
 
-}
-
-//試合テーブル
-class MatchModel: Object{
-    @objc dynamic var matchId = 0 //試合ID
-    @objc dynamic var matchResult: String? = "" //試合結果
-    let player = List<PlayerModel>() //PlayerModelと1対多の関係
-    
-    //PrimaryKeyの設定
-    func primaryKey() -> String? {
-        return "matchId"
-    }
 }
 
 //選手テーブル

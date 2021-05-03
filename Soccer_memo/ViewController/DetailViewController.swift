@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class DetailViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, TableDelegate, UpdateDelegate {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, MemoTableViewCellDelegate {
     
     // アイテムの型
     struct Item {
@@ -23,7 +23,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     }
     
     //遷移元から名前を取得用の変数を定義
-    var data: String?
+    var teamName: String = ""
     // モデルクラスを使用し、取得データを格納する変数を作成
     var match: Results<MatchModel>!
     var memoList: Results<MemoModel>!
@@ -37,41 +37,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     let realm = try! Realm()
 
-    //TableViewの紐付け
     @IBOutlet weak var detailListView: UITableView!
-    //追加ボタン
-    @IBAction func addMatchInfo(_ sender: Any) {
-        var textField = UITextField()
-                let alert = UIAlertController(title: "試合情報を追加", message: "", preferredStyle: .alert)
-                let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
-                    let newItem: Item = Item(title: textField.text!)
-                    // モデルクラスをインスタンス化
-                    let tableCell:MemoModel = MemoModel()
-                    // Realmインスタンス取得
-                    let realm = try! Realm()
-                    // テキストフィールドの名前を入れる
-                    tableCell.memo = newItem.title
-                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    // テキストフィールドの情報をデータベースに追加
-                    try! realm.write {
-                        realm.add(tableCell)
-                    }
-                    self.detailListView.reloadData()
-                }
-                
-                alert.addTextField { (alertTextField) in
-                    //プレースホルダーの設定
-                    alertTextField.placeholder = "例：ACミラン vs マンU 2-1"
-                    //テキストフィールドに設定
-                    textField = alertTextField
-                }
-                
-                alert.addAction(action)
-                present(alert, animated: true, completion: nil)
-    }
-    
-    //選手名の表示ラベル
-    @IBOutlet weak var playerName: UILabel!
+    @IBOutlet weak var teamNameLabel: UILabel!
     
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
@@ -80,6 +47,75 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         }
     }
     
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
+        //タイトル名設定
+        navigationItem.title = "試合管理"
+        self.detailListView.delegate = self
+        self.detailListView.dataSource = self
+        let realm = try! Realm()
+        
+        // チーム情報取得
+        let predicate = NSPredicate(format: "memo == %@", teamName)
+        self.memoList = realm.objects(MemoModel.self).filter(predicate)
+        // 試合結果取得
+        self.match = realm.objects(MatchModel.self)
+        detailListView.reloadData()
+        // メモ一覧で表示するセルを識別するIDの登録処理を追加。
+        detailListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        self.teamNameLabel.text = teamName
+
+        //画像の表示
+        let imageData = realm.objects(MemoModel.self)
+        imageView.image = imageData[0].image
+        
+        let users = MemoModel.loadAll()
+        for (i, user) in users.enumerated() {
+            let imageView = UIImageView()
+            imageView.image = user.image
+            self.view.addSubview(imageView)
+        }
+    }
+    
+    // MARK:-  Private
+    private func createMatch(text: String) {
+        let matchItem:MatchModel = MatchModel()
+        matchItem.create(text: text, finish:  { [weak self]  in
+            guard let self = self else {return}
+            self.detailListView.reloadData()
+        })
+        
+    }
+    
+    
+
+    
+    // MARK: - Button Action
+    //追加ボタン
+    @IBAction func addMatchInfo(_ sender: Any) {
+        var textField = UITextField()
+        let alert = UIAlertController(title: "試合情報を追加", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
+            self.createMatch(text: textField.text ?? "")
+        }
+        
+        alert.addTextField { (alertTextField) in
+            //プレースホルダーの設定
+            alertTextField.placeholder = "例：ACミラン vs マンU 2-1"
+            //テキストフィールドに設定
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+
     @IBAction func selectPicture(_ sender: UIButton) {
         // カメラロールが利用可能か？
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -98,72 +134,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     @IBAction func deletePicture(_ sender: UIButton) {
         // アラート表示
         showAlert()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
-        //タイトル名設定
-        navigationItem.title = "試合管理"
-        //テーブルビューのデリゲートを設定する。
-        self.detailListView.delegate = self
-        //テーブルビューのデータソースを設定する。
-        self.detailListView.dataSource = self
-        // 永続化されているデータを取りだす
-        let realm = try! Realm()
-        // データ全件取得
-        self.memoList = realm.objects(MemoModel.self)
-        detailListView.reloadData()
-        // メモ一覧で表示するセルを識別するIDの登録処理を追加。
-        detailListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        //self.dataがnilでなければdataに代入する
-        if let data = self.data {
-            //ラベルに選手名を表示
-            self.playerName.text = data
-        }
-        //画像の表示
-        let imageData = realm.objects(MemoModel.self)
-        //URL型にキャスト
-        let fileURL = URL(string: imageData[0].image.debugDescription)
-        //パス型に変換
-        let filePath = fileURL?.path
-        imageView.image = UIImage(contentsOfFile: filePath!)
-        
-        let users = MemoModel.loadAll()
-//        for (i, user) in users.enumerate() {
-//            let imageView = UIImageView()
-//            imageView.image = user.image
-//            self.view.addSubview(imageView)
-//        }
-    }
-    
-    // セルの数を指定ーitemArrayの配列の数だけCellを表示します
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memoList.count
-    }
-    
-    // Cellの内容を決める
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //「DetailCell」を引っ張ってくる
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
-        //Cell番号のitemArrayを変数Itemに代入
-        let item = match[indexPath.row].matchResult
-        //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
-        cell.textLabel?.text = item
-        return cell
-    }
-    
-    //メモ一覧のセルが選択されたイベント
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row >= memoList.count {
-            return
-        }
-        //遷移先ViewControllerのインスタンス取得
-        let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
-        //TableViewの値を遷移先に値渡し
-        playerViewController.datalist = memoList[indexPath.row].memo //チーム名
-        //画面遷移
-        self.navigationController?.pushViewController(playerViewController, animated: true)
     }
     
     //セルの削除処理
@@ -186,7 +156,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                                      style: .default,
                                      handler:{(action: UIAlertAction) -> Void in
 
-                                        let imageData = self.realm.objects(MemoModel.self)
+                                        let predicate = NSPredicate(format: "memo == %@", self.teamName)
+                                        let imageData = self.realm.objects(MemoModel.self).filter(predicate)
+                                        if imageData.count == 0 { return }
                                         //URL型にキャスト
                                         let fileURL = URL(string: imageData[0].image.debugDescription)
                                         let filePath = fileURL?.path
@@ -195,9 +167,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                                             try? FileManager.default.removeItem(atPath: filePath!)
                                         }
                                         //画像データの削除
-//                                        try! realm.write{
-//                                            realm.delete(self.imageData)
-//                                        }
+                                        try! self.realm.write{
+                                            imageData[0].image = nil
+                                            self.imageView.image = nil
+                                        }
                                      })
         let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         
@@ -213,26 +186,13 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // 選択した写真を取得する
         let image = info[.originalImage] as! UIImage
-        //写真の保存
-//        let photo = MemoModel.create()
-//        photo.image = image
-//        photo.save()
-        // ビューに表示する
+        let predicate = NSPredicate(format: "memo == %@", self.teamName)
+        let imageData = self.realm.objects(MemoModel.self).filter(predicate)
+        if imageData.count == 0 { return }
         imageView.image = image
-        //Realmのテーブルをインスタンス化
-        let photo = MemoModel()
-        let directory = FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask
-        ).first!
-        do{
-            try photo.image = UIImage(named: directory.absoluteString)
-        }catch{
-            print("画像の保存に失敗しました")
+        try! realm.write{
+            imageData[0].image = image
         }
-        //画像の保存
-        try! realm.write{realm.add(photo)}
-        // 写真を選ぶビューを引っ込める
         self.dismiss(animated: true)
     }
     
@@ -295,6 +255,40 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
             //エラー処理
             print("エラー")
         }
+    }
+    
+}
+
+// MARK: - UITableViewDelegate & DataSource
+extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // セルの数を指定ーitemArrayの配列の数だけCellを表示します
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return match.count
+    }
+    
+    // Cellの内容を決める
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //「DetailCell」を引っ張ってくる
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
+        //Cell番号のitemArrayを変数Itemに代入
+        let item = match[indexPath.row].matchResult
+        //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
+        cell.textLabel?.text = item
+        return cell
+    }
+    
+    //メモ一覧のセルが選択されたイベント
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row >= memoList.count {
+            return
+        }
+        //遷移先ViewControllerのインスタンス取得
+        let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
+        //TableViewの値を遷移先に値渡し
+        playerViewController.datalist = memoList[indexPath.row].memo //チーム名
+        //画面遷移
+        self.navigationController?.pushViewController(playerViewController, animated: true)
     }
     
 }

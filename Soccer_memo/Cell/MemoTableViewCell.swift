@@ -7,11 +7,16 @@
 
 import UIKit
 
+//プロトコルの宣言
+protocol MemoTableViewCellDelegate {
+    func onTapButton(row: Int)
+    func onTapPencil(row: Int)
+}
+
 class MemoTableViewCell: UITableViewCell {
     
     //delegateの宣言
-    var tableDelegate: TableDelegate?
-    var updateDelegate: UpdateDelegate?
+    var memoTableViewCellDelegate: MemoTableViewCellDelegate?
     var row: Int = 0
     
     @IBOutlet weak var teamName: UILabel!
@@ -19,11 +24,11 @@ class MemoTableViewCell: UITableViewCell {
     
     @IBAction func tapDeleteAction(_ sender: Any) {
         //delegate設置
-        self.updateDelegate?.onTapPencil(row: row)
+        self.memoTableViewCellDelegate?.onTapPencil(row: row)
     }
     @IBAction func tapEditAction(_ sender: Any) {
         //delegate設置
-        self.tableDelegate?.onTapButton(row: row)
+        self.memoTableViewCellDelegate?.onTapButton(row: row)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,12 +41,4 @@ class MemoTableViewCell: UITableViewCell {
     
 }
 
-//プロトコルの宣言(ゴミ箱)
-protocol TableDelegate: class {
-    func onTapButton(row: Int)
-}
 
-//プロトコルの宣言(編集)
-protocol UpdateDelegate: class {
-    func onTapPencil(row: Int)
-}
