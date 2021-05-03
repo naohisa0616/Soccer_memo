@@ -46,15 +46,13 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                 let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
                     let newItem: Item = Item(title: textField.text!)
                     // モデルクラスをインスタンス化
-                    let tableCell:MemoModel = MemoModel()
+                    let matchItem:MatchModel = MatchModel()
                     // Realmインスタンス取得
                     let realm = try! Realm()
-                    // テキストフィールドの名前を入れる
-                    tableCell.memo = newItem.title
-                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    // テキストフィールドの情報をデータベースに追加
+                    matchItem.id = 0
+                    matchItem.matchResult = newItem.title
                     try! realm.write {
-                        realm.add(tableCell)
+                        realm.add(matchItem)
                     }
                     self.detailListView.reloadData()
                 }
@@ -113,6 +111,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let realm = try! Realm()
         // データ全件取得
         self.memoList = realm.objects(MemoModel.self)
+        // 試合結果取得
+        self.match = realm.objects(MatchModel.self)
         detailListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         detailListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -130,16 +130,16 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         imageView.image = UIImage(contentsOfFile: filePath!)
         
         let users = MemoModel.loadAll()
-//        for (i, user) in users.enumerate() {
-//            let imageView = UIImageView()
-//            imageView.image = user.image
-//            self.view.addSubview(imageView)
-//        }
+        for (i, user) in users.enumerated() {
+            let imageView = UIImageView()
+            imageView.image = user.image
+            self.view.addSubview(imageView)
+        }
     }
     
     // セルの数を指定ーitemArrayの配列の数だけCellを表示します
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memoList.count
+        return match.count
     }
     
     // Cellの内容を決める

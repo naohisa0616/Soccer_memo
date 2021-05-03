@@ -109,9 +109,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yCy-tb-Ddc" secondAttribute="bottom" constant="4" id="s2H-oI-BlG"/>
                             <constraint firstItem="yCy-tb-Ddc" firstAttribute="top" secondItem="X7Z-VX-OuQ" secondAttribute="bottom" constant="8" id="uAv-vm-74g"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="JUT-2N-ZTW" appends="YES" id="mmM-4h-15d"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Gyy-l4-HnL"/>
                     <connections>
@@ -122,11 +119,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="JUT-2N-ZTW">
-                    <connections>
-                        <action selector="tapView:" destination="BYZ-38-t0r" id="mWi-sq-KnW"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1794.2028985507247" y="69.642857142857139"/>
         </scene>

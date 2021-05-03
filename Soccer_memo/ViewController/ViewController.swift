@@ -135,6 +135,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let realm = try! Realm()
         // テキストフィールドの名前を入れる
         tableCell.memo = self.textField.text
+        tableCell.id = memoList.count
         tableCell.teamId = memoList.count
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         // テキストフィールドの情報をデータベースに追加

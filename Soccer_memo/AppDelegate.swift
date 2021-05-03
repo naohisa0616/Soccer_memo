@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
 
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         // マイグレーション処理
         migration()
         let realm = try! Realm()
