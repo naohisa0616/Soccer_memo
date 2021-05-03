@@ -10,7 +10,7 @@ import RealmSwift
 
 private let unselectedRow = -1
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,TableDelegate,UpdateDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,MemoTableViewCellDelegate {
     
     //確定ボタンがタップされたイベントでは、入力されたメモをメモ一覧へ反映するメソッドを呼び出すように実装。
     @IBAction func confirmButton(_ sender: Any) {
@@ -81,7 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 宣言したmemoListが保持している行番号に対応したメモを返すように実装。
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
-            cell.tableDelegate = self
+            cell.memoTableViewCellDelegate = self
             cell.row = indexPath.row
         if indexPath.row >= memoList.count {
             return cell
@@ -100,7 +100,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //遷移先ViewControllerのインスタンス取得
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "playerData") as! DetailViewController
         //TableViewの値を遷移先に値渡し
-        detailViewController.data = memoList[indexPath.row].memo
+        detailViewController.teamName = memoList[indexPath.row].memo ?? ""
         //画面遷移
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }

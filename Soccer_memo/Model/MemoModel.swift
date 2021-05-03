@@ -80,18 +80,6 @@ class MemoModel: Object{
 
 }
 
-//試合テーブル
-class MatchModel: Object{
-    @objc dynamic var id = 0 //試合ID
-    @objc dynamic var matchResult: String? = "" //試合結果
-    let player = List<PlayerModel>() //PlayerModelと1対多の関係
-    
-    //PrimaryKeyの設定
-    func primaryKey() -> String? {
-        return "id"
-    }
-}
-
 //選手テーブル
 class PlayerModel: Object{
     @objc dynamic var playerId = 0 //選手ID

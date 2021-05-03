@@ -205,7 +205,7 @@
                     <connections>
                         <outlet property="detailListView" destination="ThH-A9-FLB" id="SiC-7H-r6i"/>
                         <outlet property="imageView" destination="KNw-AU-El7" id="9Ye-rT-mkx"/>
-                        <outlet property="playerName" destination="ikE-D6-pwD" id="G8Z-P1-SWi"/>
+                        <outlet property="teamNameLabel" destination="ikE-D6-pwD" id="NpS-jX-S0U"/>
                         <segue destination="BZt-jK-sOe" kind="show" identifier="showPlayerSegue" id="dUf-yG-11c"/>
                     </connections>
                 </viewController>
