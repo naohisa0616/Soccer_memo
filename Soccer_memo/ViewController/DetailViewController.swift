@@ -123,10 +123,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         }
         //画像の表示
         let imageData = realm.objects(MemoModel.self)
-        //let file = String(imageData[0].image)
         //URL型にキャスト
         let fileURL = URL(string: imageData[0].image.debugDescription)
-//        let fileURL = URL(string: imageData[0].image)
         //パス型に変換
         let filePath = fileURL?.path
         imageView.image = UIImage(contentsOfFile: filePath!)
@@ -188,16 +186,17 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                                      style: .default,
                                      handler:{(action: UIAlertAction) -> Void in
 
-//                                        //先程同様にパスを取得
-//                                        let fileURL = URL(string: imageData[0].imageURL)
-//                                        let filePath = fileURL?.path
-//                                        //ファイルの削除
-//                                        if filePath != nil{
-//                                            try? FileManager.default.removeItem(atPath: filePath!)
-//                                        }
-//                                        //画像データの削除
+                                        let imageData = self.realm.objects(MemoModel.self)
+                                        //URL型にキャスト
+                                        let fileURL = URL(string: imageData[0].image.debugDescription)
+                                        let filePath = fileURL?.path
+                                        //ファイルの削除
+                                        if filePath != nil{
+                                            try? FileManager.default.removeItem(atPath: filePath!)
+                                        }
+                                        //画像データの削除
 //                                        try! realm.write{
-//                                            realm.delete(self.imageData[dataNumber])
+//                                            realm.delete(self.imageData)
 //                                        }
                                      })
         let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -231,6 +230,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         }catch{
             print("画像の保存に失敗しました")
         }
+        //画像の保存
         try! realm.write{realm.add(photo)}
         // 写真を選ぶビューを引っ込める
         self.dismiss(animated: true)
@@ -239,7 +239,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     //編集ボタン
     func onTapPencil(row: Int) {
         showTableAlert(IndexPath(row: 0, section: 0))
-//        updateAlert(UIAlertController, IndexPath)
     }
     
     // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理

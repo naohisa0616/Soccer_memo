@@ -125,9 +125,23 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
          DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            textView.tag = self.firstText.tag
+            textView.tag = self.LatterText.tag
+            textView.tag = self.commeText.tag
             // モデルクラスをインスタンス化
             let text:PlayerModel = PlayerModel()
             text.firstInfo = self.firstText.text!
+            //text.playerId = self.firstText.text.count
+            switch textView.tag {
+                case (1):
+                    text.playerId = self.firstText.tag //前半
+                case (2):
+                    text.playerId = self.LatterText.tag //後半
+                case (3):
+                    text.playerId = self.commeText.tag //総評
+            default:
+                print("textの保存は失敗")
+            }
             // Realmにデータを保存（前半）
             let realm = try! Realm()
             try! realm.write{

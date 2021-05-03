@@ -102,7 +102,6 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
     //編集ボタン
     func onTapPencil(row: Int) {
         showTableAlert(IndexPath(row: 0, section: 0))
-//        updateAlert(UIAlertController, IndexPath)
     }
     
     //セルの削除処理
