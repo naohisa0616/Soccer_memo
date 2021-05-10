@@ -150,7 +150,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        showTableAlert(IndexPath(row: 0, section: 0))
+        showTableAlert(IndexPath(row: row, section: 0))
     }
     
     // テーブルビューのペンシルボタンをクリックしたら、アラートコントローラを表示する処理

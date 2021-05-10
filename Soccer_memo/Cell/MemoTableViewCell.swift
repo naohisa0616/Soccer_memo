@@ -24,11 +24,12 @@ class MemoTableViewCell: UITableViewCell {
     
     @IBAction func tapDeleteAction(_ sender: Any) {
         //delegate設置
-        self.memoTableViewCellDelegate?.onTapPencil(row: row)
+        self.memoTableViewCellDelegate?.onTapButton(row: row)
     }
     @IBAction func tapEditAction(_ sender: Any) {
         //delegate設置
-        self.memoTableViewCellDelegate?.onTapButton(row: row)
+        self.memoTableViewCellDelegate?.onTapPencil(row: row)
+        print("rowData" ,row)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
