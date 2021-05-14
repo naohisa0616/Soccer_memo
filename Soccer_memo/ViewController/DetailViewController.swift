@@ -65,7 +65,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         self.match = realm.objects(MatchModel.self)
         detailListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
-        detailListView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        detailListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
         self.teamNameLabel.text = teamName
 
@@ -198,7 +198,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        showTableAlert(IndexPath(row: 0, section: 0))
+        showTableAlert(IndexPath(row: row, section: 0))
     }
     
     // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
@@ -270,12 +270,16 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     // Cellの内容を決める
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //「DetailCell」を引っ張ってくる
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
+            cell.memoTableViewCellDelegate = self
+            cell.row = indexPath.row
         //Cell番号のitemArrayを変数Itemに代入
         let item = match[indexPath.row].matchResult
         //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
-        cell.textLabel?.text = item
+        cell.teamName.text = item
         return cell
+        }
+        return UITableViewCell()
     }
     
     //メモ一覧のセルが選択されたイベント
