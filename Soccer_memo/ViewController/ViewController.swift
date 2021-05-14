@@ -176,9 +176,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let textFields = alertcontroller.textFields else {return}
         guard let text = textFields[0].text else {return}
 
-        // UIAlertController に入力された文字をコンソールに出力
-        print(text)
-
         // Realm に保存したデータを UIAlertController に入力されたデータで更新
         let realm = try! Realm()
         try! realm.write{

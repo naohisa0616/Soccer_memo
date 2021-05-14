@@ -210,7 +210,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
                                         let tableCell:MatchModel = MatchModel()
                                         textField.text = tableCell.matchResult})
         // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in self.updateAlert(alertController,indexPath)
         }))
         // アラートコントローラに"Cancel"ボタンを表示
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
