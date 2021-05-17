@@ -25,6 +25,17 @@ class PlayerListViewController: UIViewController {
         navigationItem.title = "選手一覧"
         self.playerListView.delegate = self
         self.playerListView.dataSource = self
+        let realm = try! Realm()
+        
+//        // チーム情報取得
+//        let predicate = NSPredicate(format: "memo == %@", playername)
+//        self.memoList = realm.objects(PlayerModel.self).filter(predicate)
+        // 選手名取得
+        self.player = realm.objects(PlayerModel.self)
+        playerListView.reloadData()
+        // メモ一覧で表示するセルを識別するIDの登録処理を追加。
+        playerListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
+        
         //self.datalistがnilでなければdataに代入する
         if let data = self.datalist {
             //ラベルに選手名を表示
@@ -94,7 +105,7 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
                                         let tableCell:MatchModel = MatchModel()
                                         textField.text = tableCell.matchResult})
         // アラートコントローラに"OK"ボタンを表示 "OK"ボタンをクリックした際に、テキストフィールドに入力した文字で更新する処理を実装
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in self.updateAlert(alertController,indexPath)
         }))
         // アラートコントローラに"Cancel"ボタンを表示
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

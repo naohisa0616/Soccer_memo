@@ -29,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var editRow: Int = unselectedRow
     // モデルクラスを使用し、取得データを格納する変数を作成
     var memoList: Results<MemoModel>!
+    var matchList: Results<MatchModel>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +102,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "playerData") as! DetailViewController
         //TableViewの値を遷移先に値渡し
         detailViewController.teamName = memoList[indexPath.row].memo ?? ""
+        if let matchList = matchList {
+            //試合結果の情報を取得
+            detailViewController.matchResult = matchList[indexPath.row].matchResult ?? ""
+        } 
+
         //画面遷移
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
@@ -137,7 +143,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableCell.memo = self.textField.text
         tableCell.id = memoList.count
         tableCell.teamId = memoList.count
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
         // テキストフィールドの情報をデータベースに追加
         try! realm.write {
             realm.add(tableCell)
