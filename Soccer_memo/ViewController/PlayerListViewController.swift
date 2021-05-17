@@ -13,8 +13,6 @@ class PlayerListViewController: UIViewController {
     // モデルクラスを使用し、取得データを格納する変数を作成
     var player: Results<PlayerModel>!
     var datalist: String?
-    var itemArray: [Item] = []
-    var playerList: [String] = []
     
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerListView: UITableView!
@@ -46,20 +44,23 @@ class PlayerListViewController: UIViewController {
     // MARK: - Action
     @IBAction func playerAdd(_ sender: Any) {
         var textField = UITextField()
-                let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
-                let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
-                    let newItem: Item = Item(title: textField.text!)
-                    self.itemArray.append(newItem)
-                    self.playerListView.reloadData()
-                }
+        
+        let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
+            // Realm に保存したデータを UIAlertController に入力されたデータで更新
+            PlayerModel().createPlayer(name: textField.text!, finish: { [weak self]  in
+                guard let self = self else {return}
+                self.playerListView.reloadData()
+            })
+        }
 
-                alert.addTextField { (alertTextField) in
-                    alertTextField.placeholder = "例：G.ドンナルンマ"
-                    textField = alertTextField
-                }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "例：G.ドンナルンマ"
+            textField = alertTextField
+        }
 
-                alert.addAction(action)
-                present(alert, animated: true, completion: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -67,31 +68,27 @@ class PlayerListViewController: UIViewController {
 extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  {
     // セルの数を指定ーitemArrayの配列の数だけCellを表示します
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
+        return self.player.count
     }
     
     // Cellの内容を決める
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //「PlayerCell」を引っ張ってくる
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
-        //Cell番号のitemArrayを変数Itemに代入
-        let item = itemArray[indexPath.row]
-        //Cell番号のItemArrayの中身を表示させるようにしている
-        cell.textLabel?.text = item.title
-        //チェックマークを表示する処理ーitemのdoneがtrueだったら表示falseだったら非表示
-        cell.accessoryType = item.done ? .checkmark : .none
+        let item = self.player[indexPath.row]
+        cell.textLabel?.text = item.playername
         return cell
     }
     
     //メモ一覧のセルが選択されたイベント
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row >= itemArray.count {
+        if indexPath.row >= self.player.count {
             return
         }
         //遷移先ViewControllerのインスタンス取得
         let scoringViewController = self.storyboard?.instantiateViewController(withIdentifier: "scoring_data_view") as! ScoringViewController
         //TableViewの値を遷移先に値渡し
-        scoringViewController.dataInfo = itemArray[indexPath.row].title
+        scoringViewController.dataInfo = self.player[indexPath.row].playername
+        scoringViewController.player = self.player[indexPath.row]
         //画面遷移
         self.navigationController?.pushViewController(scoringViewController, animated: true)
     }
