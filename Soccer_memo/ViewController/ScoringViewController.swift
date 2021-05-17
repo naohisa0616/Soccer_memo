@@ -10,7 +10,7 @@ import RealmSwift
 
 class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
     
-    var player: Results<PlayerModel>!
+    var player: PlayerModel!
     
     //遷移元から名前を取得用の変数を定義
     var dataInfo: String?
@@ -119,7 +119,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // Realmにデータを保存
         let realm = try! Realm()
         try! realm.write{
-            player.first?.overallScore = string
+            player.overallScore = string
         }
     }
     

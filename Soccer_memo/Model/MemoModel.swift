@@ -95,6 +95,23 @@ class PlayerModel: Object{
     func primaryKey() -> String? {
         return "playerId"
     }
+    
+    func createPlayer(name: String, finish: (()->())?) {
+        // Realmインスタンス取得
+        let realm = try! Realm()
+        self.playerId = 0
+        self.playername = name
+        try! realm.write {
+            realm.add(self)
+            if let finish = finish {
+                finish()
+            }
+        }
+    }
+    
+    func saveScoring(text: String, finish: (()->())?) {
+        // スコアリング画面での更新処理
+    }
 }
 
 
