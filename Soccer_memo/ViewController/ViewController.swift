@@ -103,6 +103,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //TableViewの値を遷移先に値渡し
         detailViewController.teamName = memoList[indexPath.row].memo ?? ""
         if let matchList = matchList {
+            //選択したセルのmemoIdを遷移先に値渡し
+            detailViewController.Id = matchList[indexPath.row].memoId
             //試合結果の情報を取得
             detailViewController.matchResult = matchList[indexPath.row].matchResult ?? ""
         } 

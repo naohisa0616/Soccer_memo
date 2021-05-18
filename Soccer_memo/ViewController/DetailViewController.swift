@@ -25,6 +25,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     //遷移元から名前を取得用の変数を定義
     var teamName: String = ""
     var matchResult:String = ""
+    var Id:Int = 0
     // モデルクラスを使用し、取得データを格納する変数を作成
     var match: Results<MatchModel>!
     var memoList: Results<MemoModel>!
@@ -62,10 +63,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let predicate = NSPredicate(format: "memo == %@", teamName)
         self.memoList = realm.objects(MemoModel.self).filter(predicate)
         
-        let tableCell:MatchModel = MatchModel()
+//        let tableCell:MatchModel = MatchModel()
 //        tableCell.teamId = memoList.count
         //試合結果の取得
-        let matchPredicate = NSPredicate(format: "memoId == %d", tableCell.memoId)
+        let matchPredicate = NSPredicate(format: "memoId == %d", Id)
         self.match = realm.objects(MatchModel.self).filter(matchPredicate)
         // 試合結果取得
 //        self.match = realm.objects(MatchModel.self)
