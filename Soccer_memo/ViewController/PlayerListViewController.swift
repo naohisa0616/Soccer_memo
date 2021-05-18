@@ -73,10 +73,14 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
     
     // Cellの内容を決める
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
+            cell.memoTableViewCellDelegate = self
+            cell.row = indexPath.row
         let item = self.player[indexPath.row]
-        cell.textLabel?.text = item.playername
+        cell.teamName.text = item.playername
         return cell
+        }
+        return UITableViewCell()
     }
     
     //メモ一覧のセルが選択されたイベント
@@ -131,7 +135,7 @@ extension PlayerListViewController : MemoTableViewCellDelegate {
     
     //編集ボタン
     func onTapPencil(row: Int) {
-        showTableAlert(IndexPath(row: 0, section: 0))
+        showTableAlert(IndexPath(row: row, section: 0))
     }
     
     //セルの削除処理

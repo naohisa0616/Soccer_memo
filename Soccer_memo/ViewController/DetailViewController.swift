@@ -31,7 +31,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     
     // ドキュメントディレクトリの「ファイルURL」（URL型）定義
     var documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-//    let fileURL = URL(string: imageData[0].image.debugDescription)
 
     // ドキュメントディレクトリの「パス」（String型）定義
     let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -66,7 +65,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let tableCell:MatchModel = MatchModel()
 //        tableCell.teamId = memoList.count
         //試合結果の取得
-        let matchPredicate = NSPredicate(format: "memoId == %@", tableCell.memoId)
+        let matchPredicate = NSPredicate(format: "memoId == %d", tableCell.memoId)
         self.match = realm.objects(MatchModel.self).filter(matchPredicate)
         // 試合結果取得
 //        self.match = realm.objects(MatchModel.self)
