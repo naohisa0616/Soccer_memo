@@ -84,12 +84,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     }
     
     // MARK:-  Private
-    private func createMatch(text: String) {
+    private func createMatch(text: String, Id: Int) {
         let matchItem:MatchModel = MatchModel()
         matchItem.create(text: text, finish:  { [weak self]  in
             guard let self = self else {return}
             self.detailListView.reloadData()
-        })
+        }, Id: Id)
         
     }
     
@@ -102,7 +102,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         var textField = UITextField()
         let alert = UIAlertController(title: "試合情報を追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
-            self.createMatch(text: textField.text ?? "")
+            self.createMatch(text: textField.text ?? "", Id: Int)
         }
         
         alert.addTextField { (alertTextField) in
@@ -231,7 +231,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let realm = try! Realm()
         try! realm.write{
             matchList[indexPath.row].matchResult = text
-            tableCell.memoId = matchList.count
+            print(Id)
+            tableCell.memoId = Id
         }
         self.detailListView.reloadData()
     }
@@ -283,14 +284,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
         cell.teamName.text = item
         return cell
-        }
-        // モデルクラスをインスタンス化
-        let tableCell:MatchModel = MatchModel()
-
-        // Realmにデータを保存
-        let realm = try! Realm()
-        try! realm.write{
-            tableCell.memoId = matchList.count
         }
         return UITableViewCell()
     }
