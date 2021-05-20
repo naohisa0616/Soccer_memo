@@ -64,12 +64,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         self.memoList = realm.objects(MemoModel.self).filter(predicate)
         
         //試合結果の取得
-        let matchPredicate = NSPredicate(format: "matchList == %d", Id)
+        let matchPredicate = NSPredicate(format: "memoId == %d", Id)
         self.matchList = realm.objects(MatchModel.self).filter(matchPredicate)
-        // 試合結果取得
-//        self.match = realm.objects(MatchModel.self)
         detailListView.reloadData()
-        // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         detailListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
         self.teamNameLabel.text = teamName
@@ -227,11 +224,14 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         // guard を利用して、nil チェック
         guard let textFields = alertcontroller.textFields else {return}
         guard let text = textFields[0].text else {return}
+        // モデルクラスをインスタンス化
+        let tableCell:MatchModel = MatchModel()
 
         // Realm に保存したデータを UIAlertController に入力されたデータで更新
         let realm = try! Realm()
         try! realm.write{
             matchList[indexPath.row].matchResult = text
+            tableCell.memoId = matchList.count
         }
         self.detailListView.reloadData()
     }
@@ -283,6 +283,14 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
         cell.teamName.text = item
         return cell
+        }
+        // モデルクラスをインスタンス化
+        let tableCell:MatchModel = MatchModel()
+
+        // Realmにデータを保存
+        let realm = try! Realm()
+        try! realm.write{
+            tableCell.memoId = matchList.count
         }
         return UITableViewCell()
     }
