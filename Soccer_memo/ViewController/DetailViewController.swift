@@ -27,7 +27,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
     var matchResult:String = ""
     var Id:Int = 0
     // モデルクラスを使用し、取得データを格納する変数を作成
-    var match: Results<MatchModel>!
+    var matchList: Results<MatchModel>!
     var memoList: Results<MemoModel>!
     
     // ドキュメントディレクトリの「ファイルURL」（URL型）定義
@@ -63,11 +63,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let predicate = NSPredicate(format: "memo == %@", teamName)
         self.memoList = realm.objects(MemoModel.self).filter(predicate)
         
-//        let tableCell:MatchModel = MatchModel()
-//        tableCell.teamId = memoList.count
         //試合結果の取得
-        let matchPredicate = NSPredicate(format: "memoId == %d", Id)
-        self.match = realm.objects(MatchModel.self).filter(matchPredicate)
+        let matchPredicate = NSPredicate(format: "matchList == %d", Id)
+        self.matchList = realm.objects(MatchModel.self).filter(matchPredicate)
         // 試合結果取得
 //        self.match = realm.objects(MatchModel.self)
         detailListView.reloadData()
@@ -149,7 +147,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let realm = try! Realm()
         // データを削除
         try! realm.write {
-            realm.delete(match[row])
+            realm.delete(matchList[row])
         }
         detailListView.reloadData()
     }
@@ -233,7 +231,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         // Realm に保存したデータを UIAlertController に入力されたデータで更新
         let realm = try! Realm()
         try! realm.write{
-            match[indexPath.row].matchResult = text
+            matchList[indexPath.row].matchResult = text
         }
         self.detailListView.reloadData()
     }
@@ -271,7 +269,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     // セルの数を指定ーitemArrayの配列の数だけCellを表示します
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return match.count
+        return matchList.count
     }
     
     // Cellの内容を決める
@@ -281,7 +279,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.memoTableViewCellDelegate = self
             cell.row = indexPath.row
         //Cell番号のitemArrayを変数Itemに代入
-        let item = match[indexPath.row].matchResult
+        let item = matchList[indexPath.row].matchResult
         //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
         cell.teamName.text = item
         return cell
