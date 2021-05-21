@@ -23,14 +23,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var scoringPickerView: UIPickerView!
     
     //前半
-    @IBOutlet weak var firstText: UITextView! {
-        get {
-            return UITextView()
-        }
-        set {
-            
-        }
-    }
+    @IBOutlet weak var firstText: UITextView! 
     
     //後半
     @IBOutlet weak var LatterText: UITextView!
@@ -124,38 +117,40 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             textView.tag = self.firstText.tag
             textView.tag = self.LatterText.tag
             textView.tag = self.commeText.tag
             // モデルクラスをインスタンス化
             let text:PlayerModel = PlayerModel()
-            text.firstInfo = self.firstText.text!
-            //text.playerId = self.firstText.text.count
+            let realm = try! Realm()
+        
             switch textView.tag {
                 case (1):
                     text.playerId = self.firstText.tag //前半
+                    text.firstInfo = self.firstText.text!
+                    // Realmにデータを保存（前半）
+                    try! realm.write{
+                        realm.add(text)
+                    }
                 case (2):
                     text.playerId = self.LatterText.tag //後半
+                    text.latterInfo = self.LatterText.text!
+                    // Realmにデータを保存（後半）
+                    try! realm.write{
+                        realm.add(text)
+                    }
                 case (3):
                     text.playerId = self.commeText.tag //総評
+                    text.generalInfo = self.commeText.text!
+                    // Realmにデータを保存（総評）
+                    try! realm.write{
+                        realm.add(text)
+                    }
             default:
                 print("textの保存は失敗")
             }
-            // Realmにデータを保存（前半）
-            let realm = try! Realm()
-            try! realm.write{
-                realm.add(text)
-            }
-            // Realmにデータを保存（後半）
-            try! realm.write{
-                realm.add(text)
-            }
-            // Realmにデータを保存（後半）
-            try! realm.write{
-                realm.add(text)
-            }
-         }
+//         }
          return true
      }
 
