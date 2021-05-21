@@ -102,7 +102,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         var textField = UITextField()
         let alert = UIAlertController(title: "試合情報を追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
-            self.createMatch(text: textField.text ?? "", Id: Int)
+            self.createMatch(text: textField.text ?? "", Id: self.Id)
         }
         
         alert.addTextField { (alertTextField) in
