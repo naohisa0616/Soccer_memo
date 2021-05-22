@@ -96,10 +96,10 @@ class PlayerModel: Object{
         return "playerId"
     }
     
-    func createPlayer(name: String, finish: (()->())?) {
+    func createPlayer(Id: Int, name: String, finish: (()->())?) {
         // Realmインスタンス取得
         let realm = try! Realm()
-        self.playerId = 0
+        self.playerId = Id
         self.playername = name
         try! realm.write {
             realm.add(self)

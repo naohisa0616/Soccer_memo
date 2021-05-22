@@ -13,6 +13,7 @@ class PlayerListViewController: UIViewController {
     // モデルクラスを使用し、取得データを格納する変数を作成
     var player: Results<PlayerModel>!
     var datalist: String?
+    var Id:Int = 0
     
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerListView: UITableView!
@@ -48,8 +49,17 @@ class PlayerListViewController: UIViewController {
         let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             // Realm に保存したデータを UIAlertController に入力されたデータで更新
-            PlayerModel().createPlayer(name: textField.text!, finish: { [weak self]  in
+            PlayerModel().createPlayer(Id: self.Id, name: textField.text!, finish: { [weak self]  in
                 guard let self = self else {return}
+                let tableCell:PlayerModel = PlayerModel()
+                self.Id = self.player.count
+                print(self.Id)
+                tableCell.playerId = self.Id
+                print(tableCell.playerId)
+//                let realm = try! Realm()
+//                try! realm.write {
+//                    realm.add(tableCell)
+//                }
                 self.playerListView.reloadData()
             })
         }

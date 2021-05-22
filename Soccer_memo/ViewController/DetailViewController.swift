@@ -231,7 +231,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let realm = try! Realm()
         try! realm.write{
             matchList[indexPath.row].matchResult = text
-            print(Id)
             tableCell.memoId = Id
         }
         self.detailListView.reloadData()
