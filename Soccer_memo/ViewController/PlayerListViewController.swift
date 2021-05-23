@@ -26,9 +26,6 @@ class PlayerListViewController: UIViewController {
         self.playerListView.dataSource = self
         let realm = try! Realm()
         
-//        // チーム情報取得
-//        let predicate = NSPredicate(format: "memo == %@", playername)
-//        self.memoList = realm.objects(PlayerModel.self).filter(predicate)
         // 選手名取得
         self.player = realm.objects(PlayerModel.self)
         playerListView.reloadData()
@@ -49,17 +46,11 @@ class PlayerListViewController: UIViewController {
         let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             // Realm に保存したデータを UIAlertController に入力されたデータで更新
-            PlayerModel().createPlayer(Id: self.Id, name: textField.text!, finish: { [weak self]  in
+            PlayerModel().createPlayer(Id: self.player.count, name: textField.text!, finish: { [weak self]  in
                 guard let self = self else {return}
                 let tableCell:PlayerModel = PlayerModel()
                 self.Id = self.player.count
-                print(self.Id)
                 tableCell.playerId = self.Id
-                print(tableCell.playerId)
-//                let realm = try! Realm()
-//                try! realm.write {
-//                    realm.add(tableCell)
-//                }
                 self.playerListView.reloadData()
             })
         }
