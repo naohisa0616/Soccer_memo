@@ -136,32 +136,23 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             textView.textColor = .darkGray
             textView.text = "テキストの入力"
         } else {
-            // モデルクラスをインスタンス化
-            let text:PlayerModel = PlayerModel()
             let realm = try! Realm()
         
             switch textView.tag {
                 case (1):
-                    //text.firstInfo = self.firstText.text!
-                    // チーム情報取得
-                    let predicate = NSPredicate(format: "playername == %@", dataInfo!)
-                    self.playModel = realm.objects(PlayerModel.self).filter(predicate)
-//                    text.firstInfo = self.playModel as? String
                     // Realmにデータを保存（前半）
                     try! realm.write{
-                        realm.add(text)
+                        player.firstInfo = self.firstText.text!
                     }
                 case (2):
-                    text.latterInfo = self.LatterText.text!
                     // Realmにデータを保存（後半）
                     try! realm.write{
-                        realm.add(text)
+                        player.latterInfo = self.LatterText.text!
                     }
                 case (3):
-                    text.generalInfo = self.commeText.text!
                     // Realmにデータを保存（総評）
                     try! realm.write{
-                        realm.add(text)
+                        player.generalInfo = self.commeText.text!
                     }
             default:
                 print("textの保存は失敗")
