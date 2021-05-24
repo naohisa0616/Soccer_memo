@@ -82,6 +82,20 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         commeText.layer.masksToBounds = true
         commeText.delegate = self
         commeText.tag = 3
+        
+        //保存したテキストの表示とプレースホルダー
+        if firstText.text.isEmpty || LatterText.text.isEmpty || commeText.text.isEmpty {
+            firstText.textColor = .darkGray
+            firstText.text = "テキストの入力"
+            LatterText.textColor = .darkGray
+            LatterText.text = "テキストの入力"
+            commeText.textColor = .darkGray
+            commeText.text = "テキストの入力"
+        } else {
+            firstText.text = player.firstInfo
+            LatterText.text = player.latterInfo
+            commeText.text = player.generalInfo
+        }
 
     }
     
