@@ -11,6 +11,7 @@ import RealmSwift
 class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
     
     var player: PlayerModel!
+    var playModel: Results<PlayerModel>!
     
     //遷移元から名前を取得用の変数を定義
     var dataInfo: String?
@@ -141,7 +142,11 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
             switch textView.tag {
                 case (1):
-                    text.firstInfo = self.firstText.text!
+                    //text.firstInfo = self.firstText.text!
+                    // チーム情報取得
+                    let predicate = NSPredicate(format: "playername == %@", dataInfo!)
+                    self.playModel = realm.objects(PlayerModel.self).filter(predicate)
+//                    text.firstInfo = self.playModel as? String
                     // Realmにデータを保存（前半）
                     try! realm.write{
                         realm.add(text)

@@ -102,15 +102,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "playerData") as! DetailViewController
         //TableViewの値を遷移先に値渡し
         detailViewController.teamName = memoList[indexPath.row].memo ?? ""
-        //試合結果の情報を取得
-//        detailViewController.matchResult = matchList[indexPath.row].matchResult ?? ""
-//        let realm = try! Realm()
-//        let match = realm.objects(MatchModel.self)
-//        if let memoList = memoList {
-//            //選択したセルのmemoIdを遷移先に値渡し
-//            detailViewController.Id = memoList[indexPath.row].id
         detailViewController.Id = memoList[indexPath.row].id
-//        }
 
         //画面遷移
         self.navigationController?.pushViewController(detailViewController, animated: true)
