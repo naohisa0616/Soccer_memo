@@ -56,6 +56,7 @@ class PlayerListViewController: UIViewController {
                 self.playerListView.reloadData()
             })
         }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
 
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "例：G.ドンナルンマ"
@@ -63,6 +64,7 @@ class PlayerListViewController: UIViewController {
         }
 
         alert.addAction(action)
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
 }
@@ -96,7 +98,6 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         //TableViewの値を遷移先に値渡し
         scoringViewController.dataInfo = self.playerModel[indexPath.row].playername
         scoringViewController.player = self.playerModel[indexPath.row]
-        scoringViewController.Id = self.player.playerId
         //画面遷移
         self.navigationController?.pushViewController(scoringViewController, animated: true)
     }
@@ -113,7 +114,7 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in self.updateAlert(alertController,indexPath)
         }))
         // アラートコントローラに"Cancel"ボタンを表示
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
     

@@ -15,7 +15,6 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //遷移元から名前を取得用の変数を定義
     var dataInfo: String?
-    var Id:Int = 0
     
     //ピッカービューの中身
     let compos = ["1点","2点","3点","4点","5点"] //5段階評価
@@ -84,12 +83,12 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         commeText.delegate = self
         commeText.tag = 3
         
-        let realm = try! Realm()
-        // DBからデータを取得 or PlayerListViewControllerからplayerをもってくる
+//        let realm = try! Realm()
+        //PlayerListViewControllerからplayerをもってくる
         //試合結果の取得
-        let playerPredicate = NSPredicate(format: "playerId == %d", Id)
+//        let playerPredicate = NSPredicate(format: "playerId == %d", player)
         // (入れる)
-        self.player = realm.objects(PlayerModel.self).filter(playerPredicate)
+//        self.player = realm.objects(PlayerModel.self).filter(playerPredicate)
         
         // playerの値を入れてあげる
         firstText.text = player.firstInfo

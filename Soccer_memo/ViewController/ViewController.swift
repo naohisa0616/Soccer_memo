@@ -168,7 +168,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             (action) -> Void in self.updateAlert(alertController,indexPath)
         }))
         // アラートコントローラに"Cancel"ボタンを表示
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
 

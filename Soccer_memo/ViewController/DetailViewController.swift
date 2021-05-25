@@ -104,6 +104,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             self.createMatch(text: textField.text ?? "", Id: self.Id)
         }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
         
         alert.addTextField { (alertTextField) in
             //プレースホルダーの設定
@@ -113,6 +114,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         }
         
         alert.addAction(action)
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
     
@@ -215,7 +217,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in self.updateAlert(alertController,indexPath)
         }))
         // アラートコントローラに"Cancel"ボタンを表示
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
 
