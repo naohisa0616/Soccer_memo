@@ -15,6 +15,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //遷移元から名前を取得用の変数を定義
     var dataInfo: String?
+    var Id:Int = 0
     
     //ピッカービューの中身
     let compos = ["1点","2点","3点","4点","5点"] //5段階評価
@@ -83,8 +84,12 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         commeText.delegate = self
         commeText.tag = 3
         
+        let realm = try! Realm()
         // DBからデータを取得 or PlayerListViewControllerからplayerをもってくる
+        //試合結果の取得
+        let playerPredicate = NSPredicate(format: "playerId == %d", Id)
         // (入れる)
+        self.player = realm.objects(PlayerModel.self).filter(playerPredicate)
         
         // playerの値を入れてあげる
         firstText.text = player.firstInfo
@@ -149,8 +154,28 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //テキストビューの編集が終了したときにデリゲートに通知
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.textColor = .darkGray
-            textView.text = "テキストの入力"
+            //セルの削除処理
+            let realm = try! Realm()
+            
+            switch textView.tag {
+                case (1):
+                    // データを削除（前半）
+                    try! realm.write {
+                        player.firstInfo = ""
+                    }
+                case (2):
+                    // データを削除（後半）
+                    try! realm.write {
+                        player.latterInfo = ""
+                    }
+                case (3):
+                    // データを削除（総評）
+                    try! realm.write {
+                        player.generalInfo = ""
+                    }
+            default:
+                print("textの削除は失敗")
+            }
         } else {
             let realm = try! Realm()
         

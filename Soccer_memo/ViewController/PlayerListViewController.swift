@@ -11,7 +11,9 @@ import RealmSwift
 class PlayerListViewController: UIViewController {
     
     // モデルクラスを使用し、取得データを格納する変数を作成
-    var player: Results<PlayerModel>!
+    var player: PlayerModel!
+    var playerModel: Results<PlayerModel>!
+    
     var datalist: String?
     var Id:Int = 0
     
@@ -27,7 +29,7 @@ class PlayerListViewController: UIViewController {
         let realm = try! Realm()
         
         // 選手名取得
-        self.player = realm.objects(PlayerModel.self)
+        self.playerModel = realm.objects(PlayerModel.self)
         playerListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         playerListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
@@ -46,10 +48,10 @@ class PlayerListViewController: UIViewController {
         let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             // Realm に保存したデータを UIAlertController に入力されたデータで更新
-            PlayerModel().createPlayer(Id: self.player.count, name: textField.text!, finish: { [weak self]  in
+            PlayerModel().createPlayer(Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
                 guard let self = self else {return}
                 let tableCell:PlayerModel = PlayerModel()
-                self.Id = self.player.count
+                self.Id = self.playerModel.count
                 tableCell.playerId = self.Id
                 self.playerListView.reloadData()
             })
@@ -69,7 +71,7 @@ class PlayerListViewController: UIViewController {
 extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  {
     // セルの数を指定ーitemArrayの配列の数だけCellを表示します
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.player.count
+        return self.playerModel.count
     }
     
     // Cellの内容を決める
@@ -77,7 +79,7 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
             cell.memoTableViewCellDelegate = self
             cell.row = indexPath.row
-        let item = self.player[indexPath.row]
+        let item = self.playerModel[indexPath.row]
         cell.teamName.text = item.playername
         return cell
         }
@@ -86,14 +88,15 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
     
     //メモ一覧のセルが選択されたイベント
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row >= self.player.count {
+        if indexPath.row >= self.playerModel.count {
             return
         }
         //遷移先ViewControllerのインスタンス取得
         let scoringViewController = self.storyboard?.instantiateViewController(withIdentifier: "scoring_data_view") as! ScoringViewController
         //TableViewの値を遷移先に値渡し
-        scoringViewController.dataInfo = self.player[indexPath.row].playername
-        scoringViewController.player = self.player[indexPath.row]
+        scoringViewController.dataInfo = self.playerModel[indexPath.row].playername
+        scoringViewController.player = self.playerModel[indexPath.row]
+        scoringViewController.Id = self.player.playerId
         //画面遷移
         self.navigationController?.pushViewController(scoringViewController, animated: true)
     }
@@ -123,7 +126,7 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         // Realm に保存したデータを UIAlertController に入力されたデータで更新
         let realm = try! Realm()
         try! realm.write{
-            player[indexPath.row].playername = text
+            playerModel[indexPath.row].playername = text
         }
         self.playerListView.reloadData()
     }
@@ -145,7 +148,7 @@ extension PlayerListViewController : MemoTableViewCellDelegate {
         let realm = try! Realm()
         // データを削除
         try! realm.write {
-            realm.delete(player[row])
+            realm.delete(playerModel[row])
         }
         playerListView.reloadData()
     }
