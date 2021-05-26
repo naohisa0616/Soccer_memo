@@ -239,6 +239,9 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y2t-3O-RV1">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1000" id="rR9-Bb-oF6"/>
+                                </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ior-Jb-yVc"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Ejf-eT-mxA"/>
                             </scrollView>

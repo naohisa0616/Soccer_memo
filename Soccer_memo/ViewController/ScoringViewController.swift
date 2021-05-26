@@ -54,6 +54,11 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         scoringPickerView.dataSource = self
         //選手名を取得
         self.playerInfo.text = dataInfo
+        
+        //保存した評点を表示
+        self.scoringPickerView = player.overallScore as? UIPickerView
+        print(player.overallScore ?? "")
+        print(self.scoringPickerView ?? "")
        
     //前半の枠編集
         // 枠のカラー
