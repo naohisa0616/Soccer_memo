@@ -19,6 +19,10 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //ピッカービューの中身
     let compos = ["1点","2点","3点","4点","5点"] //5段階評価
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var contentView: UIView!
+    
     @IBOutlet weak var playerInfo: UILabel!
     
     @IBOutlet weak var scoringPickerView: UIPickerView!
@@ -31,6 +35,13 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //総評
     @IBOutlet weak var commeText: UITextView!
+    
+    override func viewDidLayoutSubviews() {
+
+      scrollView.contentSize = contentView.frame.size
+      scrollView.flashScrollIndicators()
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
