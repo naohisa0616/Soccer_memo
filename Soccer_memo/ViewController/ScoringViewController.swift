@@ -15,6 +15,7 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //遷移元から名前を取得用の変数を定義
     var dataInfo: String?
+    var score: String?
     
     //ピッカービューの中身
     let compos = ["1点","2点","3点","4点","5点"] //5段階評価
@@ -55,8 +56,18 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         //選手名を取得
         self.playerInfo.text = dataInfo
         
+        let realm = try! Realm()
+//        ["1点","2点","3点","4点","5点"]の何番目と同じ値かを検索する
+        //試合結果の取得
+        let playerPredicate = NSPredicate(format: "overallScore == %@", score!)
+        let overall:Int = Int(playerPredicate)!
+//        self.player = realm.objects(PlayerModel.self).filter(playerPredicate)
+//        対応する配列の番号をselectRowに入れる
+        // UIPickerViewの初期値を設定
+        scoringPickerView.selectRow(Int(playerPredicate)), inComponent: 0, animated: false)
+        
         //保存した評点を表示
-        self.scoringPickerView = player.overallScore as? UIPickerView
+        scoringPickerView.selectRow = player.overallScore as? UIPickerView
         print(player.overallScore ?? "")
         print(self.scoringPickerView ?? "")
        
@@ -98,13 +109,6 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         commeText.layer.masksToBounds = true
         commeText.delegate = self
         commeText.tag = 3
-        
-//        let realm = try! Realm()
-        //PlayerListViewControllerからplayerをもってくる
-        //試合結果の取得
-//        let playerPredicate = NSPredicate(format: "playerId == %d", player)
-        // (入れる)
-//        self.player = realm.objects(PlayerModel.self).filter(playerPredicate)
         
         // playerの値を入れてあげる
         firstText.text = player.firstInfo

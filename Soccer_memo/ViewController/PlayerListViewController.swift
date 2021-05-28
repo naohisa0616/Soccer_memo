@@ -16,6 +16,7 @@ class PlayerListViewController: UIViewController {
     
     var datalist: String?
     var Id:Int = 0
+    var memoId:Int = 0
     
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerListView: UITableView!
@@ -30,6 +31,9 @@ class PlayerListViewController: UIViewController {
         
         // 選手名取得
         self.playerModel = realm.objects(PlayerModel.self)
+        //試合結果の取得
+        let matchPredicate = NSPredicate(format: "playerId == %d", memoId)
+        self.playerModel = realm.objects(PlayerModel.self).filter(matchPredicate)
         playerListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         playerListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
@@ -98,6 +102,8 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         //TableViewの値を遷移先に値渡し
         scoringViewController.dataInfo = self.playerModel[indexPath.row].playername
         scoringViewController.player = self.playerModel[indexPath.row]
+        scoringViewController.score = self.player.overallScore
+        
         //画面遷移
         self.navigationController?.pushViewController(scoringViewController, animated: true)
     }

@@ -298,6 +298,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
         //TableViewの値を遷移先に値渡し
         playerViewController.datalist = memoList[indexPath.row].memo //チーム名
+        playerViewController.memoId = matchList[indexPath.row].memoId
         //画面遷移
         self.navigationController?.pushViewController(playerViewController, animated: true)
     }
