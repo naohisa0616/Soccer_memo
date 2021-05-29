@@ -84,6 +84,7 @@ class MemoModel: Object{
 
 //選手テーブル
 class PlayerModel: Object{
+    @objc dynamic var id = 0 //選手ID
     @objc dynamic var playerId = 0 //選手ID
     @objc dynamic var overallScore: String? = "" //総評点
     @objc dynamic var firstInfo: String? = "" //前半情報
@@ -93,7 +94,7 @@ class PlayerModel: Object{
     
     //PrimaryKeyの設定
     func primaryKey() -> String? {
-        return "playerId"
+        return "id"
     }
     
     func createPlayer(Id: Int, name: String, finish: (()->())?) {

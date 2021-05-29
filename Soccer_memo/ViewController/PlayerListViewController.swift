@@ -32,7 +32,7 @@ class PlayerListViewController: UIViewController {
         // 選手名取得
         self.playerModel = realm.objects(PlayerModel.self)
         //試合結果の取得
-        let matchPredicate = NSPredicate(format: "playerId == %d", memoId)
+        let matchPredicate = NSPredicate(format: "Id == %d", memoId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchPredicate)
         playerListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
@@ -139,8 +139,6 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         }
         self.playerListView.reloadData()
     }
-
-    
 }
 
 // MARK: MemoTableViewCellDelegate

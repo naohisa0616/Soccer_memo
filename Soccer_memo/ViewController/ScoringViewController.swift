@@ -64,15 +64,14 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
         
 //        ["1点","2点","3点","4点","5点"]の何番目と同じ値かを検索する
-        let index = compos.index(of: score ?? "")
+        let index = compos.index(of: player.overallScore ?? "")
+        print(score ?? "")
         if let index = index {
             // UIPickerViewの初期値を設定
             // 対応する配列の番号をselectRowに入れる
             scoringPickerView.selectRow(index, inComponent: 0, animated: false)
         }
     
-        //保存した評点を表示
-//        scoringPickerView.selectRow = player.overallScore as? UIPickerView
         print(player.overallScore ?? "")
         print(self.scoringPickerView ?? "")
        
