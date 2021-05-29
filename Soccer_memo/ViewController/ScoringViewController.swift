@@ -57,17 +57,22 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.playerInfo.text = dataInfo
         
         let realm = try! Realm()
-//        ["1点","2点","3点","4点","5点"]の何番目と同じ値かを検索する
-        //試合結果の取得
-        let playerPredicate = NSPredicate(format: "overallScore == %@", score!)
-        let overall:Int = Int(playerPredicate)!
-//        self.player = realm.objects(PlayerModel.self).filter(playerPredicate)
-//        対応する配列の番号をselectRowに入れる
-        // UIPickerViewの初期値を設定
-        scoringPickerView.selectRow(Int(playerPredicate)), inComponent: 0, animated: false)
+        //選手ごとの採点結果の取得
+        if let score = score {
+            let playerPredicate = NSPredicate(format: "playerId == %d", score)
+            self.playModel = realm.objects(PlayerModel.self).filter(playerPredicate)
+        }
         
+//        ["1点","2点","3点","4点","5点"]の何番目と同じ値かを検索する
+        let index = compos.index(of: score ?? "")
+        if let index = index {
+            // UIPickerViewの初期値を設定
+            // 対応する配列の番号をselectRowに入れる
+            scoringPickerView.selectRow(index, inComponent: 0, animated: false)
+        }
+    
         //保存した評点を表示
-        scoringPickerView.selectRow = player.overallScore as? UIPickerView
+//        scoringPickerView.selectRow = player.overallScore as? UIPickerView
         print(player.overallScore ?? "")
         print(self.scoringPickerView ?? "")
        

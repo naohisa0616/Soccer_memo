@@ -102,7 +102,9 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
         //TableViewの値を遷移先に値渡し
         scoringViewController.dataInfo = self.playerModel[indexPath.row].playername
         scoringViewController.player = self.playerModel[indexPath.row]
-        scoringViewController.score = self.player.overallScore
+        if player != nil {
+            scoringViewController.score = self.player.overallScore
+        }
         
         //画面遷移
         self.navigationController?.pushViewController(scoringViewController, animated: true)
