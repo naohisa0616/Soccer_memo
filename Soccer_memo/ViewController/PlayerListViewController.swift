@@ -17,6 +17,7 @@ class PlayerListViewController: UIViewController {
     var datalist: String?
     var Id:Int = 0
     var memoId:Int = 0
+    var matchId:Int = 0
     
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerListView: UITableView!
@@ -34,6 +35,9 @@ class PlayerListViewController: UIViewController {
         //試合結果の取得
         let matchPredicate = NSPredicate(format: "playerId == %d", memoId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchPredicate)
+        //試合結果の絞り込み
+        let matchFilter = NSPredicate(format: "id == %d", matchId)
+        self.playerModel = realm.objects(PlayerModel.self).filter(matchFilter)
         playerListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         playerListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
@@ -55,10 +59,14 @@ class PlayerListViewController: UIViewController {
             PlayerModel().createPlayer(Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
                 guard let self = self else {return}
                 let tableCell:PlayerModel = PlayerModel()
-                //self.Id = self.playerModel.count
-                //tableCell.playerId = self.Id
-                print(self.playerModel.count)
-                tableCell.playerId = self.playerModel.count
+                //連番されない、、、playerIdが連番
+                tableCell.matchId = self.playerModel.count
+                print(self.memoId)
+                print(self.matchId)
+                tableCell.id = self.memoId
+                print(tableCell.id)
+                tableCell.playerId = self.matchId
+                print(tableCell.playerId)
                 self.playerListView.reloadData()
             })
         }

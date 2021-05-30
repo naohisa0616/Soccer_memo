@@ -103,6 +103,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let alert = UIAlertController(title: "試合情報を追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             self.createMatch(text: textField.text ?? "", Id: self.Id)
+            let tableCell:MatchModel = MatchModel()
+            print(self.matchList.count)
+            tableCell.memoId = self.matchList.count
+//            tableCell.id = memoList.id
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
         
@@ -299,6 +303,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         //TableViewの値を遷移先に値渡し
         playerViewController.datalist = memoList[indexPath.row].memo //チーム名
         playerViewController.memoId = matchList[indexPath.row].memoId
+        playerViewController.matchId = matchList[indexPath.row].id
         //画面遷移
         self.navigationController?.pushViewController(playerViewController, animated: true)
     }
