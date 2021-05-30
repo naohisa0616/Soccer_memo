@@ -32,7 +32,7 @@ class PlayerListViewController: UIViewController {
         // 選手名取得
         self.playerModel = realm.objects(PlayerModel.self)
         //試合結果の取得
-        let matchPredicate = NSPredicate(format: "Id == %d", memoId)
+        let matchPredicate = NSPredicate(format: "playerId == %d", memoId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchPredicate)
         playerListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
@@ -55,8 +55,10 @@ class PlayerListViewController: UIViewController {
             PlayerModel().createPlayer(Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
                 guard let self = self else {return}
                 let tableCell:PlayerModel = PlayerModel()
-                self.Id = self.playerModel.count
-                tableCell.playerId = self.Id
+                //self.Id = self.playerModel.count
+                //tableCell.playerId = self.Id
+                print(self.playerModel.count)
+                tableCell.playerId = self.playerModel.count
                 self.playerListView.reloadData()
             })
         }
