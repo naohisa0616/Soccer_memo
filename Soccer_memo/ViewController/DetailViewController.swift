@@ -105,8 +105,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
             self.createMatch(text: textField.text ?? "", Id: self.Id)
             let tableCell:MatchModel = MatchModel()
             print(self.matchList.count)
+            //チームごとにmemoIdが連番されるようにしたい
             tableCell.memoId = self.matchList.count
-//            tableCell.id = memoList.id
+            tableCell.id = self.Id
+            print(tableCell.id)
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
         
@@ -295,7 +297,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     //メモ一覧のセルが選択されたイベント
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row >= memoList.count {
+        if indexPath.row >= matchList.count {
             return
         }
         //遷移先ViewControllerのインスタンス取得
