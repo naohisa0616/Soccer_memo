@@ -540,8 +540,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "173"
             endingLineNumber = "173"
-            landmarkName = "textViewDidBeginEditing(_:)"
-            landmarkType = "7">
+            landmarkName = "ScoringViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -556,8 +556,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150"
-            landmarkName = "ScoringViewController"
-            landmarkType = "3">
+            landmarkName = "pickerView(_:didSelectRow:inComponent:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -686,6 +686,54 @@
             endingLineNumber = "89"
             landmarkName = "RLMThrowResultsError(aggregateMethod)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2FEA2953-95CA-449C-91B2-107CBD9D8522"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Soccer_memo/ViewController/PlayerListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "playerAdd(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2FEA2953-95CA-449C-91B2-107CBD9D8522 - 38b99a705451d6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in Soccer_memo.PlayerListViewController.playerAdd(Any) -&gt; ()"
+                  moduleName = "Soccer_memo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/miyazakinaohisa/Desktop/MyProject/Soccer_memo/Soccer_memo/ViewController/PlayerListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "142">
+               </Location>
+               <Location
+                  uuid = "2FEA2953-95CA-449C-91B2-107CBD9D8522 - dedd66e5e87b488d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in Soccer_memo.PlayerListViewController.playerAdd(Any) -&gt; ()"
+                  moduleName = "Soccer_memo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/miyazakinaohisa/Desktop/MyProject/Soccer_memo/Soccer_memo/ViewController/PlayerListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "95">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

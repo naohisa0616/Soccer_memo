@@ -305,7 +305,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         //TableViewの値を遷移先に値渡し
         print(memoList.count)
         print(indexPath.row)
-        playerViewController.datalist = memoList[indexPath.row].memo //チーム名
+        playerViewController.datalist = memoList[0].memo //チーム名
         playerViewController.memoId = matchList[indexPath.row].memoId
         playerViewController.matchId = matchList[indexPath.row].id
         //画面遷移

@@ -57,19 +57,21 @@ class PlayerListViewController: UIViewController {
         let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             // Realm に保存したデータを UIAlertController に入力されたデータで更新
-            PlayerModel().createPlayer(matchId: self.matchList.id, memoId: self.matchList.memoId, Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
-                guard let self = self else {return}
-                let tableCell:PlayerModel = PlayerModel()
-                //連番されない、、、playerIdが連番
-                tableCell.matchId = self.playerModel.count
-                print(self.memoId)
-                print(self.matchId)
-                tableCell.id = self.memoId
-                print(tableCell.id)
-                tableCell.playerId = self.matchId
-                print(tableCell.playerId)
-                self.playerListView.reloadData()
-            })
+            //if self.matchList != nil && self.playerModel != nil {
+                PlayerModel().createPlayer(matchId: self.matchList.first!.id, memoId: self.matchList.first!.memoId, Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
+                    guard let self = self else {return}
+                    let tableCell:PlayerModel = PlayerModel()
+                    //連番されない、、、playerIdが連番
+                    tableCell.matchId = self.playerModel.count
+                    print(self.memoId)
+                    print(self.matchId)
+                    tableCell.id = self.memoId
+                    print(tableCell.id)
+                    tableCell.playerId = self.matchId
+                    print(tableCell.playerId)
+                    self.playerListView.reloadData()
+                })
+            //}
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
 
