@@ -71,9 +71,6 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             // 対応する配列の番号をselectRowに入れる
             scoringPickerView.selectRow(index, inComponent: 0, animated: false)
         }
-    
-        print(player.overallScore ?? "")
-        print(self.scoringPickerView ?? "")
        
     //前半の枠編集
         // 枠のカラー
