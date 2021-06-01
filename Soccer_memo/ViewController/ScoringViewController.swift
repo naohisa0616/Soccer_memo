@@ -65,7 +65,6 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
 //        ["1点","2点","3点","4点","5点"]の何番目と同じ値かを検索する
         let index = compos.index(of: player.overallScore ?? "")
-        print(score ?? "")
         if let index = index {
             // UIPickerViewの初期値を設定
             // 対応する配列の番号をselectRowに入れる
@@ -119,9 +118,9 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // 保存したテキストの表示とプレースホルダー
         // 全部が入力されていない時の対応
         if firstText.text.isEmpty && LatterText.text.isEmpty && commeText.text.isEmpty {
-            firstText.text = "テキストの入力"
-            LatterText.text = "テキストの入力"
-            commeText.text = "テキストの入力"
+            firstText.text = "前半の良かったプレー、悪かったプレーを記入しよう！"
+            LatterText.text = "後半の良かったプレー、悪かったプレーを記入しよう！"
+            commeText.text = "試合を通しての感想や総合的な評価を記入しよう！"
         }
 
     }

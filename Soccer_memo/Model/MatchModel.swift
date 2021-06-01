@@ -20,10 +20,10 @@ class MatchModel: Object{
         return "id"
     }
     
-    func create(text: String, finish: (()->())?, Id: Int) {
+    func create(text: String, finish: (()->())?, Id: Int, matchId: Int) {
         // Realmインスタンス取得
         let realm = try! Realm()
-        self.id = 0
+        self.id = matchId
         self.matchResult = text
         self.memoId = Id
 

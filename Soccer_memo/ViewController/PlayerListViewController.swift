@@ -11,7 +11,6 @@ import RealmSwift
 class PlayerListViewController: UIViewController {
     
     // モデルクラスを使用し、取得データを格納する変数を作成
-    var matchList: Results<MatchModel>!
     var player: PlayerModel!
     var playerModel: Results<PlayerModel>!
     
@@ -34,10 +33,10 @@ class PlayerListViewController: UIViewController {
         // 選手名取得
         self.playerModel = realm.objects(PlayerModel.self)
         //試合結果の取得
-        let matchPredicate = NSPredicate(format: "playerId == %d", memoId)
+        let matchPredicate = NSPredicate(format: "id == %d", memoId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchPredicate)
         //試合結果の絞り込み
-        let matchFilter = NSPredicate(format: "id == %d", matchId)
+        let matchFilter = NSPredicate(format: "matchId == %d", matchId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchFilter)
         playerListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
@@ -57,21 +56,15 @@ class PlayerListViewController: UIViewController {
         let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             // Realm に保存したデータを UIAlertController に入力されたデータで更新
-            //if self.matchList != nil && self.playerModel != nil {
-                PlayerModel().createPlayer(matchId: self.matchList.first!.id, memoId: self.matchList.first!.memoId, Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
+                PlayerModel().createPlayer(matchId: self.matchId, memoId: self.memoId, Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
                     guard let self = self else {return}
                     let tableCell:PlayerModel = PlayerModel()
                     //連番されない、、、playerIdが連番
                     tableCell.matchId = self.playerModel.count
-                    print(self.memoId)
-                    print(self.matchId)
                     tableCell.id = self.memoId
-                    print(tableCell.id)
                     tableCell.playerId = self.matchId
-                    print(tableCell.playerId)
                     self.playerListView.reloadData()
                 })
-            //}
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
 

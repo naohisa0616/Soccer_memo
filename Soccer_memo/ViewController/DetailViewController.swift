@@ -89,7 +89,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         matchItem.create(text: text, finish:  { [weak self]  in
             guard let self = self else {return}
             self.detailListView.reloadData()
-        }, Id: Id)
+        }, Id: Id, matchId: self.matchList.count)
         
     }
     
@@ -104,11 +104,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
             self.createMatch(text: textField.text ?? "", Id: self.Id)
             let tableCell:MatchModel = MatchModel()
-            print(self.matchList.count)
-            //チームごとにmemoIdが連番されるようにしたい
             tableCell.memoId = self.matchList.count
             tableCell.id = self.Id
-            print(tableCell.id)
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
         
@@ -288,7 +285,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.row = indexPath.row
         //Cell番号のitemArrayを変数Itemに代入
         let item = matchList[indexPath.row].matchResult
-        //ToDoCellにCell番号のmemoListの中身を表示させるようにしている
         cell.teamName.text = item
         return cell
         }
