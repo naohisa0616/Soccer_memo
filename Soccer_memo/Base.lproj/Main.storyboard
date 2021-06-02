@@ -131,14 +131,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KNw-AU-El7">
-                                <rect key="frame" x="20" y="260" width="261" height="154"/>
+                                <rect key="frame" x="20" y="169" width="261" height="154"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="154" id="6dA-a6-nbC"/>
                                     <constraint firstAttribute="width" constant="261" id="XI3-r6-6v1"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jj7-au-0hP">
+                                <rect key="frame" x="289" y="166" width="77" height="30"/>
+                                <state key="normal" title="写真を選択"/>
+                                <connections>
+                                    <action selector="selectPicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="ruc-pF-eCe"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikE-D6-pwD">
+                                <rect key="frame" x="20" y="113" width="155" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="155" id="doc-tI-Foi"/>
+                                    <constraint firstAttribute="height" constant="30" id="qyx-dZ-dN4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTY-gX-Ngt">
+                                <rect key="frame" x="289" y="283" width="77" height="40"/>
+                                <state key="normal" title="写真を削除"/>
+                                <connections>
+                                    <action selector="deletePicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="kPb-Qe-UM1"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ThH-A9-FLB">
-                                <rect key="frame" x="32" y="422" width="350" height="440"/>
+                                <rect key="frame" x="32" y="353" width="350" height="440"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="iiM-Nc-RM1"/>
@@ -169,44 +193,26 @@
                                     <outlet property="delegate" destination="oq8-Tc-Riu" id="WGu-Hh-EmN"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jj7-au-0hP">
-                                <rect key="frame" x="289" y="283" width="77" height="30"/>
-                                <state key="normal" title="写真を選択"/>
-                                <connections>
-                                    <action selector="selectPicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="ruc-pF-eCe"/>
-                                </connections>
-                            </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M0L-bl-zqX">
-                                <rect key="frame" x="-3" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikE-D6-pwD">
-                                <rect key="frame" x="20" y="105" width="155" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTY-gX-Ngt">
-                                <rect key="frame" x="289" y="369" width="77" height="30"/>
-                                <state key="normal" title="写真を削除"/>
-                                <connections>
-                                    <action selector="deletePicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="kPb-Qe-UM1"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q1Q-b3-oMb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Jj7-au-0hP" firstAttribute="top" secondItem="q1Q-b3-oMb" secondAttribute="top" constant="78" id="2hK-RY-Klb"/>
                             <constraint firstItem="ThH-A9-FLB" firstAttribute="centerX" secondItem="LOl-0d-Eck" secondAttribute="centerX" id="7aU-mh-Jbk"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="ThH-A9-FLB" secondAttribute="bottom" constant="-49" id="AI4-VT-dyB"/>
                             <constraint firstItem="Jj7-au-0hP" firstAttribute="leading" secondItem="KNw-AU-El7" secondAttribute="trailing" constant="8" symbolic="YES" id="EW1-gL-Ehp"/>
+                            <constraint firstItem="ikE-D6-pwD" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="20" id="FhT-Ca-2va"/>
                             <constraint firstItem="KNw-AU-El7" firstAttribute="leading" secondItem="LOl-0d-Eck" secondAttribute="leadingMargin" id="IWz-mc-gJd"/>
-                            <constraint firstItem="ThH-A9-FLB" firstAttribute="top" secondItem="iTY-gX-Ngt" secondAttribute="bottom" constant="23" id="WaO-b1-PRx"/>
-                            <constraint firstItem="KNw-AU-El7" firstAttribute="top" secondItem="ikE-D6-pwD" secondAttribute="bottom" constant="21" id="ZOG-YE-bV3"/>
+                            <constraint firstItem="q1Q-b3-oMb" firstAttribute="bottom" secondItem="ThH-A9-FLB" secondAttribute="bottom" constant="20" id="Ivg-Wl-bAq"/>
+                            <constraint firstItem="ikE-D6-pwD" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="20" id="QKb-Df-aiL"/>
+                            <constraint firstItem="KNw-AU-El7" firstAttribute="bottom" secondItem="iTY-gX-Ngt" secondAttribute="bottom" id="SzG-m8-hP4"/>
+                            <constraint firstItem="ikE-D6-pwD" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="20" id="X7K-IB-Uae"/>
+                            <constraint firstItem="ThH-A9-FLB" firstAttribute="top" secondItem="KNw-AU-El7" secondAttribute="bottom" constant="30" id="ZEh-bH-0o1"/>
+                            <constraint firstItem="q1Q-b3-oMb" firstAttribute="trailing" secondItem="ThH-A9-FLB" secondAttribute="trailing" constant="32" id="as0-Pq-KE2"/>
                             <constraint firstItem="KNw-AU-El7" firstAttribute="leading" secondItem="ikE-D6-pwD" secondAttribute="leading" id="dIo-NI-NxX"/>
                             <constraint firstItem="iTY-gX-Ngt" firstAttribute="leading" secondItem="KNw-AU-El7" secondAttribute="trailing" constant="8" symbolic="YES" id="eNu-HG-6Rm"/>
-                            <constraint firstItem="ThH-A9-FLB" firstAttribute="top" secondItem="KNw-AU-El7" secondAttribute="bottom" constant="8" id="eWo-n0-OPH"/>
-                            <constraint firstItem="iTY-gX-Ngt" firstAttribute="top" secondItem="Jj7-au-0hP" secondAttribute="bottom" constant="56" id="oOx-g7-ULU"/>
+                            <constraint firstItem="ikE-D6-pwD" firstAttribute="top" secondItem="q1Q-b3-oMb" secondAttribute="top" constant="25" id="kOn-vg-C7y"/>
+                            <constraint firstItem="ThH-A9-FLB" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="32" id="sLB-lr-OlV"/>
+                            <constraint firstItem="iTY-gX-Ngt" firstAttribute="top" secondItem="Jj7-au-0hP" secondAttribute="bottom" constant="87" id="xY0-iy-2Wj"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
