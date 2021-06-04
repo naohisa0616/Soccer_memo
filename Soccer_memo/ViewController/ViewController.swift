@@ -54,6 +54,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         ]
         //placeholderを設定
         textField.attributedPlaceholder = NSAttributedString(string: "チーム名を入力", attributes: attributes)
+        
+        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGR.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGR)
+    }
+    
+    @objc override func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     // 追加 画面が表示される際などにtableViewのデータを再読み込みする
