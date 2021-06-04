@@ -55,6 +55,8 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         scoringPickerView.dataSource = self
         //選手名を取得
         self.playerInfo.text = dataInfo
+        //キーボード下げるメソッド
+        setDismissKeyboard()
         
         let realm = try! Realm()
         //選手ごとの採点結果の取得
@@ -219,5 +221,18 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
     }
+}
 
+// MARK: UIViewController
+extension UIViewController {
+    
+    func setDismissKeyboard() {
+        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGR.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGR)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
 }
