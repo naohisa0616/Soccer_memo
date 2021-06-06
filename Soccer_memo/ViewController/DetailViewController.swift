@@ -55,6 +55,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate & 
         self.navigationController?.isNavigationBarHidden = false
         //タイトル名設定
         navigationItem.title = "試合管理"
+//        self.view.bringSubviewToFront(selectPicture)
         self.detailListView.delegate = self
         self.detailListView.dataSource = self
         let realm = try! Realm()
@@ -286,6 +287,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         //Cell番号のitemArrayを変数Itemに代入
         let item = matchList[indexPath.row].matchResult
         cell.teamName.text = item
+//        let image = memoList[0].image
+//            cell.teamImg.image = image
         return cell
         }
         return UITableViewCell()

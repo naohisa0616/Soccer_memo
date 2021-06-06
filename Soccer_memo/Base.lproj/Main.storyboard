@@ -141,7 +141,7 @@
                                 <rect key="frame" x="289" y="166" width="77" height="30"/>
                                 <state key="normal" title="写真を選択"/>
                                 <connections>
-                                    <action selector="selectPicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="ruc-pF-eCe"/>
+                                    <action selector="selectPicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="pDW-YM-Izc"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikE-D6-pwD">
@@ -158,27 +158,26 @@
                                 <rect key="frame" x="289" y="283" width="77" height="40"/>
                                 <state key="normal" title="写真を削除"/>
                                 <connections>
-                                    <action selector="deletePicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="kPb-Qe-UM1"/>
+                                    <action selector="deletePicture:" destination="oq8-Tc-Riu" eventType="touchUpInside" id="nrg-cr-tBP"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ThH-A9-FLB">
-                                <rect key="frame" x="32" y="353" width="350" height="440"/>
+                                <rect key="frame" x="22" y="353" width="370" height="440"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="iiM-Nc-RM1"/>
                                     <constraint firstAttribute="height" constant="440" id="kDE-xp-ym5"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="450" id="rQp-uU-Os8"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell" textLabel="jpO-Tv-9tu" style="IBUITableViewCellStyleDefault" id="vNb-fO-mFJ">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="370" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vNb-fO-mFJ" id="6Ls-BE-gJl">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jpO-Tv-9tu">
-                                                    <rect key="frame" x="20" y="0.0" width="310" height="43.666667938232422"/>
+                                                    <rect key="frame" x="20" y="0.0" width="330" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -204,14 +203,14 @@
                             <constraint firstItem="KNw-AU-El7" firstAttribute="leading" secondItem="LOl-0d-Eck" secondAttribute="leadingMargin" id="IWz-mc-gJd"/>
                             <constraint firstItem="q1Q-b3-oMb" firstAttribute="bottom" secondItem="ThH-A9-FLB" secondAttribute="bottom" constant="20" id="Ivg-Wl-bAq"/>
                             <constraint firstItem="ikE-D6-pwD" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="20" id="QKb-Df-aiL"/>
+                            <constraint firstItem="q1Q-b3-oMb" firstAttribute="trailing" secondItem="ThH-A9-FLB" secondAttribute="trailing" constant="22" id="R4y-3k-jCi"/>
                             <constraint firstItem="KNw-AU-El7" firstAttribute="bottom" secondItem="iTY-gX-Ngt" secondAttribute="bottom" id="SzG-m8-hP4"/>
                             <constraint firstItem="ikE-D6-pwD" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="20" id="X7K-IB-Uae"/>
                             <constraint firstItem="ThH-A9-FLB" firstAttribute="top" secondItem="KNw-AU-El7" secondAttribute="bottom" constant="30" id="ZEh-bH-0o1"/>
-                            <constraint firstItem="q1Q-b3-oMb" firstAttribute="trailing" secondItem="ThH-A9-FLB" secondAttribute="trailing" constant="32" id="as0-Pq-KE2"/>
+                            <constraint firstItem="ThH-A9-FLB" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="22" id="aOW-cL-f11"/>
                             <constraint firstItem="KNw-AU-El7" firstAttribute="leading" secondItem="ikE-D6-pwD" secondAttribute="leading" id="dIo-NI-NxX"/>
                             <constraint firstItem="iTY-gX-Ngt" firstAttribute="leading" secondItem="KNw-AU-El7" secondAttribute="trailing" constant="8" symbolic="YES" id="eNu-HG-6Rm"/>
                             <constraint firstItem="ikE-D6-pwD" firstAttribute="top" secondItem="q1Q-b3-oMb" secondAttribute="top" constant="25" id="kOn-vg-C7y"/>
-                            <constraint firstItem="ThH-A9-FLB" firstAttribute="leading" secondItem="q1Q-b3-oMb" secondAttribute="leading" constant="32" id="sLB-lr-OlV"/>
                             <constraint firstItem="iTY-gX-Ngt" firstAttribute="top" secondItem="Jj7-au-0hP" secondAttribute="bottom" constant="87" id="xY0-iy-2Wj"/>
                         </constraints>
                     </view>
@@ -274,7 +273,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-80-ovA">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-80-ovA" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
                                                 <rect key="frame" x="20" y="292" width="374" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -292,7 +291,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AQo-4p-cWk">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AQo-4p-cWk" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
                                                 <rect key="frame" x="20" y="433" width="374" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -310,7 +309,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-TQ-hGK">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-TQ-hGK" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
                                                 <rect key="frame" x="20" y="597" width="374" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>

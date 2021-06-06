@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import KMPlaceholderTextView
 
 class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
     
@@ -120,9 +121,12 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // 保存したテキストの表示とプレースホルダー
         // 全部が入力されていない時の対応
         if firstText.text.isEmpty && LatterText.text.isEmpty && commeText.text.isEmpty {
-            firstText.text = "前半の良かったプレー、悪かったプレーを記入しよう！"
-            LatterText.text = "後半の良かったプレー、悪かったプレーを記入しよう！"
-            commeText.text = "試合を通しての感想や総合的な評価を記入しよう！"
+            firstText.placeholder = "前半の良かったプレー、悪かったプレーを記入しよう！"
+            LatterText.placeholder = "後半の良かったプレー、悪かったプレーを記入しよう！"
+            commeText.placeholder = "試合を通しての感想や総合的な評価を記入しよう！"
+//            firstText.text = "前半の良かったプレー、悪かったプレーを記入しよう！"
+//            LatterText.text = "後半の良かったプレー、悪かったプレーを記入しよう！"
+//            commeText.text = "試合を通しての感想や総合的な評価を記入しよう！"
         }
 
     }
