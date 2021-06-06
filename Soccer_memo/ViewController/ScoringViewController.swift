@@ -121,12 +121,12 @@ class ScoringViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // 保存したテキストの表示とプレースホルダー
         // 全部が入力されていない時の対応
         if firstText.text.isEmpty && LatterText.text.isEmpty && commeText.text.isEmpty {
-            firstText.placeholder = "前半の良かったプレー、悪かったプレーを記入しよう！"
-            LatterText.placeholder = "後半の良かったプレー、悪かったプレーを記入しよう！"
-            commeText.placeholder = "試合を通しての感想や総合的な評価を記入しよう！"
-//            firstText.text = "前半の良かったプレー、悪かったプレーを記入しよう！"
-//            LatterText.text = "後半の良かったプレー、悪かったプレーを記入しよう！"
-//            commeText.text = "試合を通しての感想や総合的な評価を記入しよう！"
+            let firstText = KMPlaceholderTextView(frame: view.bounds)
+            firstText.placeholder = "前半の良かったプレー、悪かったプレーなどを記入しよう！"
+            let LatterText = KMPlaceholderTextView(frame: view.bounds)
+            LatterText.placeholder = "後半の良かったプレー、悪かったプレーなどを記入しよう！"
+            let commeText = KMPlaceholderTextView(frame: view.bounds)
+            commeText.placeholder = "試合を通しての感想や総合的な評価などを記入しよう！"
         }
 
     }

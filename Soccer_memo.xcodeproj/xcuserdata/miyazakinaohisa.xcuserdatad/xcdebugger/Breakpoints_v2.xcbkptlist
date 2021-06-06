@@ -820,7 +820,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D98B50B4-5F74-41DA-9CB3-03AEE77E595D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Soccer_memo/ViewController/DetailViewController.swift"
