@@ -51,31 +51,32 @@ class PlayerListViewController: UIViewController {
     
     // MARK: - Action
     @IBAction func playerAdd(_ sender: Any) {
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
-            // Realm に保存したデータを UIAlertController に入力されたデータで更新
-                PlayerModel().createPlayer(matchId: self.matchId, memoId: self.memoId, Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
-                    guard let self = self else {return}
-                    let tableCell:PlayerModel = PlayerModel()
-                    //連番されない、、、playerIdが連番
-                    tableCell.matchId = self.playerModel.count
-                    tableCell.id = self.memoId
-                    tableCell.playerId = self.matchId
-                    self.playerListView.reloadData()
-                })
-        }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
-
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "例：G.ドンナルンマ"
-            textField = alertTextField
-        }
-
-        alert.addAction(action)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+        performSegue(withIdentifier: "SegueName", sender: nil)
+//        var textField = UITextField()
+//
+//        let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
+//        let action = UIAlertAction(title: "リストに追加", style: .default) { (action) in
+//            // Realm に保存したデータを UIAlertController に入力されたデータで更新
+//                PlayerModel().createPlayer(matchId: self.matchId, memoId: self.memoId, Id: self.playerModel.count, name: textField.text!, finish: { [weak self]  in
+//                    guard let self = self else {return}
+//                    let tableCell:PlayerModel = PlayerModel()
+//                    //連番されない、、、playerIdが連番
+//                    tableCell.matchId = self.playerModel.count
+//                    tableCell.id = self.memoId
+//                    tableCell.playerId = self.matchId
+//                    self.playerListView.reloadData()
+//                })
+//        }
+//        let cancelAction = UIAlertAction(title: "キャンセル", style: .default)
+//
+//        alert.addTextField { (alertTextField) in
+//            alertTextField.placeholder = "例：G.ドンナルンマ"
+//            textField = alertTextField
+//        }
+//
+//        alert.addAction(action)
+//        alert.addAction(cancelAction)
+//        present(alert, animated: true, completion: nil)
     }
 }
 
