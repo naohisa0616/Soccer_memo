@@ -7,6 +7,8 @@ target 'Soccer_memo' do
 
   # Pods for Soccer_memo
   pod 'KMPlaceholderTextView', '~> 1.4.0'
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
 
   target 'Soccer_memoTests' do
     inherit! :search_paths

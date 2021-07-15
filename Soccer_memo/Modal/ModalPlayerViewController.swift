@@ -7,6 +7,8 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 class ModalPlayerViewController: UIViewController {
     
@@ -22,6 +24,41 @@ class ModalPlayerViewController: UIViewController {
         super.viewDidLoad()
     
         initView()
+        getArticles()
+        
+    }
+    
+    func getArticles() {
+        let url = "https://api-football-beta.p.rapidapi.com/players?season=2021&team=33&league=39"
+
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+            print(response.result.value!) // responseのresultプロパティのvalueプロパティをコンソールに出力
+
+            switch response.result{
+
+            case .success:
+                let json:JSON = JSON(response.data as Any)
+
+//                for i in 0...json.count{
+//                        let foodImageUrl = json["result"][i]["foodImageUrl"].string
+//
+//                        let recipeTitle = json["result"][i]["recipeTitle"].string
+//
+//
+//                        var contentModel = Contents(foodImageUrl:foodImageUrl , recipeTitle:recipeTitle)
+//
+//                        self.contentArray.append(contentModel)
+//                }
+//
+//                self.tableView.reloadData()
+
+            case .failure(let error):
+
+                print(error)
+
+
+            }
+        }
     }
     
     private func initView() {
