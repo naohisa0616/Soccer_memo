@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (4.9.1)
+  - Alamofire (5.4.3)
   - KMPlaceholderTextView (1.4.0)
-  - SwiftyJSON (5.0.0)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -15,9 +15,9 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
 PODFILE CHECKSUM: ed383b5eb2db3a7b946a0a42c000b8c42fd7ad7a
 

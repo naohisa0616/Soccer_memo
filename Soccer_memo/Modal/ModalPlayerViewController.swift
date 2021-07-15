@@ -13,6 +13,8 @@ import SwiftyJSON
 class ModalPlayerViewController: UIViewController {
     
     var playerModel: Results<PlayerModel>!
+    
+    let headers: HTTPHeaders = [:]
 
     @IBOutlet weak var teamName: UILabel!
 
@@ -29,15 +31,36 @@ class ModalPlayerViewController: UIViewController {
     }
     
     func getArticles() {
-        let url = "https://api-football-beta.p.rapidapi.com/players?season=2021&team=33&league=39"
-
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
-            print(response.result.value!) // responseのresultプロパティのvalueプロパティをコンソールに出力
-
-            switch response.result{
-
-            case .success:
-                let json:JSON = JSON(response.data as Any)
+        
+        let url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&applicationId=1014272479943576132"
+        
+        let api = CommonsApi.init(path:CommonsApiConst.URLGetHistory
+                    , method: "POST"
+                    , parameters: param
+                    , headers:HTTPHeaders(["Content-Type":"0cd2c70ebamsh7896448dc962eeep177866jsn4d5875e442ad"]))
+        
+        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+        
+            switch response.result {
+              case .success(let element): do {
+               /// 成功処理
+               } catch {
+                 /// 失敗処理
+              }
+              case .failure(let error): do {
+               /// 失敗処理
+              }
+            }
+        }
+//        let url = "https://api-football-beta.p.rapidapi.com/players?season=2021&team=33&league=39"
+//
+//        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+//            print(response.result.value!) // responseのresultプロパティのvalueプロパティをコンソールに出力
+//
+//            switch response.result{
+//
+//            case .success:
+//                let json:JSON = JSON(response.data as Any)
 
 //                for i in 0...json.count{
 //                        let foodImageUrl = json["result"][i]["foodImageUrl"].string
@@ -52,23 +75,24 @@ class ModalPlayerViewController: UIViewController {
 //
 //                self.tableView.reloadData()
 
-            case .failure(let error):
-
-                print(error)
-
-
-            }
-        }
+//            case .failure(let error):
+//
+//                print(error)
+//
+//
+//            }
+//        }
     }
     
+
+    
+}
     private func initView() {
 //        playerList.delegate = self
 //        playerList.dataSource = self
 //        // 複数選択可にする
 //        playerList.allowsMultipleSelection = true
     }
-    
-}
 
 // MARK: - Tableview Delegate
 //extension ModalPlayerViewController: UITableViewDelegate,UITableViewDataSource {
