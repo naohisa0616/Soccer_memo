@@ -480,16 +480,16 @@
         <scene sceneID="6aS-iy-PEz">
             <objects>
                 <viewController id="U7Q-Eg-IID" customClass="ModalPlayerViewController" customModule="Soccer_memo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="HJg-gz-l4O">
+                    <view key="view" contentMode="scaleToFill" id="HJg-gz-l4O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSk-Gx-jGq">
-                                <rect key="frame" x="306" y="16" width="92" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSk-Gx-jGq">
+                                <rect key="frame" x="294" y="25" width="92" height="30"/>
                                 <state key="normal" title="選手名の登録"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G51-dz-jnb">
-                                <rect key="frame" x="16" y="78" width="382" height="714"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G51-dz-jnb">
+                                <rect key="frame" x="16" y="78" width="370" height="714"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="600" id="Sg5-Fn-qlO"/>
@@ -497,14 +497,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" textLabel="PXc-UL-VZO" style="IBUITableViewCellStyleDefault" id="sLu-jx-BKP">
-                                        <rect key="frame" x="0.0" y="24.5" width="382" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="370" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sLu-jx-BKP" id="BN8-4I-llC">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PXc-UL-VZO">
-                                                    <rect key="frame" x="20" y="0.0" width="342" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="330" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -530,13 +530,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="G51-dz-jnb" firstAttribute="leading" secondItem="hvq-NM-Lmz" secondAttribute="leading" constant="16" id="0Qf-ra-YfP"/>
-                            <constraint firstItem="hvq-NM-Lmz" firstAttribute="trailing" secondItem="gSk-Gx-jGq" secondAttribute="trailing" constant="16" id="6oK-It-vmG"/>
-                            <constraint firstItem="G51-dz-jnb" firstAttribute="top" secondItem="gSk-Gx-jGq" secondAttribute="bottom" constant="32" id="AKp-8V-by2"/>
+                            <constraint firstItem="G51-dz-jnb" firstAttribute="trailing" secondItem="gSk-Gx-jGq" secondAttribute="trailing" id="445-Bz-FMb"/>
                             <constraint firstItem="1N9-Cu-5Ka" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="8" id="Cyi-di-yVM"/>
                             <constraint firstItem="hvq-NM-Lmz" firstAttribute="bottom" secondItem="G51-dz-jnb" secondAttribute="bottom" constant="16" id="MrB-eM-5Rw"/>
-                            <constraint firstItem="gSk-Gx-jGq" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="16" id="NMc-RP-wh9"/>
+                            <constraint firstItem="G51-dz-jnb" firstAttribute="top" secondItem="gSk-Gx-jGq" secondAttribute="bottom" constant="23" id="agB-q7-FgO"/>
                             <constraint firstItem="1N9-Cu-5Ka" firstAttribute="leading" secondItem="hvq-NM-Lmz" secondAttribute="leading" constant="16" id="bCi-5H-vOj"/>
-                            <constraint firstItem="hvq-NM-Lmz" firstAttribute="trailing" secondItem="G51-dz-jnb" secondAttribute="trailing" constant="16" id="rr3-r6-FhS"/>
+                            <constraint firstItem="gSk-Gx-jGq" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="25" id="bht-bj-RSn"/>
+                            <constraint firstItem="hvq-NM-Lmz" firstAttribute="trailing" secondItem="gSk-Gx-jGq" secondAttribute="trailing" constant="28" id="etV-vR-yta"/>
                         </constraints>
                     </view>
                     <connections>
@@ -547,7 +547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okk-U8-JHA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3668" y="777"/>
+            <point key="canvasLocation" x="3666.666666666667" y="776.78571428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FS1-dZ-1o3">

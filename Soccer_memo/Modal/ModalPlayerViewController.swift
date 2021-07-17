@@ -14,7 +14,9 @@ class ModalPlayerViewController: UIViewController {
     
     var playerModel: Results<PlayerModel>!
     
-    let headers: HTTPHeaders = [:]
+//    var contentArray = []
+    
+    let data = ["test1","test2","test3","test4","test5","test6","test7","test8","test9","test10","test11","test12","test13","test14","test15","test16","test17","test18","test19","test20","test21"]
 
     @IBOutlet weak var teamName: UILabel!
 
@@ -32,92 +34,79 @@ class ModalPlayerViewController: UIViewController {
     
     func getArticles() {
         
-        let url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&applicationId=1014272479943576132"
+        let url = "https://api-football-beta.p.rapidapi.com/players?season=2021&team=33&league=39"
         
-        let api = CommonsApi.init(path:CommonsApiConst.URLGetHistory
-                    , method: "POST"
-                    , parameters: param
-                    , headers:HTTPHeaders(["Content-Type":"0cd2c70ebamsh7896448dc962eeep177866jsn4d5875e442ad"]))
+        let headers: HTTPHeaders = ["Content-Type":"0cd2c70ebamsh7896448dc962eeep177866jsn4d5875e442ad"]
         
-        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
         
-            switch response.result {
-              case .success(let element): do {
-               /// 成功処理
-               } catch {
-                 /// 失敗処理
-              }
-              case .failure(let error): do {
-               /// 失敗処理
-              }
-            }
+                guard let data = response.data else {
+                    let json:JSON = JSON(response.data as Any)
+                    print(response.data!)
+                    for i in 0...json.count{
+                            let playerName = json["result"][i]["name"].string
+                            var contentModel = playerName
+//                            self.contentArray.append(contentModel)
+                            print(json["name"].string!) // 選手名を表示
+                    }
+                    self.playerList.reloadData()
+                    return
+                }
+                do {
+//                    self.addresses = try JSONDecoder().decode(from: data)
+                } catch let error {
+                    print("Error: \(error)")
+                }
         }
-//        let url = "https://api-football-beta.p.rapidapi.com/players?season=2021&team=33&league=39"
-//
-//        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
-//            print(response.result.value!) // responseのresultプロパティのvalueプロパティをコンソールに出力
-//
-//            switch response.result{
-//
-//            case .success:
-//                let json:JSON = JSON(response.data as Any)
-
-//                for i in 0...json.count{
-//                        let foodImageUrl = json["result"][i]["foodImageUrl"].string
-//
-//                        let recipeTitle = json["result"][i]["recipeTitle"].string
-//
-//
-//                        var contentModel = Contents(foodImageUrl:foodImageUrl , recipeTitle:recipeTitle)
-//
-//                        self.contentArray.append(contentModel)
-//                }
-//
-//                self.tableView.reloadData()
-
-//            case .failure(let error):
-//
-//                print(error)
-//
-//
-//            }
-//        }
     }
     
 
     
 }
+extension ModalPlayerViewController {
     private func initView() {
-//        playerList.delegate = self
-//        playerList.dataSource = self
-//        // 複数選択可にする
-//        playerList.allowsMultipleSelection = true
+        playerList.delegate = self
+        playerList.dataSource = self
+        // 複数選択可にする
+        playerList.allowsMultipleSelection = true
     }
+}
 
 // MARK: - Tableview Delegate
-//extension ModalPlayerViewController: UITableViewDelegate,UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath)
-//        cell?.accessoryType = .checkmark
-//        cell?.accessoryType = .none
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return playerModel.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
-//            cell.memoTableViewCellDelegate = self
-//            cell.row = indexPath.row
-//        let item = self.playerModel[indexPath.row]
-//        cell.teamName.text = item.playername
-//        return cell
-//        }
-//        return UITableViewCell()
-//    }
-//
+extension ModalPlayerViewController: UITableViewDelegate,UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") {
+            cell.textLabel?.text = data[indexPath.row]
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor.clear
+            print(cell)
+            return cell
+        } else {
+            print("値が代入されていません")
+        }
+        return UITableViewCell()
+    }
+    
+    //selectはずれたとき
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        //checkmarkはずす
+        cell?.accessoryType = .none
+//        selectCell.remove(at: 0)
+        tableView.deselectRow(at: indexPath, animated: true)
+        }
+}
+
 //    // テーブルビューのセルをクリックしたら、アラートコントローラを表示する処理
 //    func showTableAlert(_ indexPath: IndexPath){
 //        let alertController: UIAlertController = UIAlertController(title: "編集", message: "選手情報の変更", preferredStyle: .alert)
@@ -147,8 +136,8 @@ class ModalPlayerViewController: UIViewController {
 //        }
 //        //self.playerList.reloadData()
 //    }
-//}
-//
+
+
 //// MARK: MemoTableViewCellDelegate
 //extension ModalPlayerViewController : MemoTableViewCellDelegate {
 //
