@@ -487,6 +487,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSk-Gx-jGq">
                                 <rect key="frame" x="294" y="25" width="92" height="30"/>
                                 <state key="normal" title="選手名の登録"/>
+                                <connections>
+                                    <action selector="playerRegist:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="s6H-fA-rmA"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G51-dz-jnb">
                                 <rect key="frame" x="16" y="78" width="370" height="714"/>
@@ -541,7 +544,6 @@
                     </view>
                     <connections>
                         <outlet property="playerList" destination="G51-dz-jnb" id="Scf-ry-BGu"/>
-                        <outlet property="playerRegist" destination="gSk-Gx-jGq" id="WBq-VG-pR7"/>
                         <outlet property="teamName" destination="1N9-Cu-5Ka" id="6Uh-9h-P4d"/>
                     </connections>
                 </viewController>

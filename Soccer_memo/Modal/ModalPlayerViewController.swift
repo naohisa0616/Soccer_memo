@@ -20,7 +20,10 @@ class ModalPlayerViewController: UIViewController {
 
     @IBOutlet weak var teamName: UILabel!
 
-    @IBOutlet weak var playerRegist: UIButton!
+    @IBAction func playerRegist(segue: UIStoryboardSegue) {
+//        let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
+//        self.timerName = from.textField.text ?? ""      // 遷移先の値を取得して遷移元の変数に格納する
+    }
 
     @IBOutlet weak var playerList: UITableView!
     
