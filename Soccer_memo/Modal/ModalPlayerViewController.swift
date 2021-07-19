@@ -39,9 +39,9 @@ class ModalPlayerViewController: UIViewController {
         
         let url = "https://api-football-beta.p.rapidapi.com/players?season=2021&team=33&league=39"
         
-        let headers: HTTPHeaders = ["Content-Type":"0cd2c70ebamsh7896448dc962eeep177866jsn4d5875e442ad"]
+        let headers: HTTPHeaders = ["x-rapidapi-key":"0cd2c70ebamsh7896448dc962eeep177866jsn4d5875e442ad", "x-rapidapi-host":"api-football-beta.p.rapidapi.com"]
         
-        AF.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
         
                 guard let data = response.data else {
                     let json:JSON = JSON(response.data as Any)
@@ -85,6 +85,7 @@ extension ModalPlayerViewController: UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
+//        return playerModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
