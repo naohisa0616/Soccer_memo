@@ -490,8 +490,8 @@
             filePath = "Soccer_memo/ViewController/PlayerListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "playerAdd(_:)"
             landmarkType = "7">
             <Locations>
@@ -698,8 +698,8 @@
             filePath = "Soccer_memo/ViewController/PlayerListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "playerAdd(_:)"
             landmarkType = "7">
             <Locations>

@@ -479,7 +479,7 @@
         <!--Modal Player View Controller-->
         <scene sceneID="6aS-iy-PEz">
             <objects>
-                <viewController id="U7Q-Eg-IID" customClass="ModalPlayerViewController" customModule="Soccer_memo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="modal_list_view" id="U7Q-Eg-IID" customClass="ModalPlayerViewController" customModule="Soccer_memo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HJg-gz-l4O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

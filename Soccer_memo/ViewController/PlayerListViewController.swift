@@ -13,6 +13,7 @@ class PlayerListViewController: UIViewController {
     // モデルクラスを使用し、取得データを格納する変数を作成
     var player: PlayerModel!
     var playerModel: Results<PlayerModel>!
+    var memoList: Results<MemoModel>!
     
     var datalist: String?
     var Id:Int = 0
@@ -52,6 +53,9 @@ class PlayerListViewController: UIViewController {
     // MARK: - Action
     @IBAction func playerAdd(_ sender: Any) {
         performSegue(withIdentifier: "SegueName", sender: nil)
+        //遷移先ModalPlayerのインスタンス取得
+        let modalPlayerViewController = self.storyboard?.instantiateViewController(withIdentifier: "modal_list_view") as! ModalPlayerViewController
+        modalPlayerViewController.datalist = memoList[0].memo
 //        var textField = UITextField()
 //
 //        let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)

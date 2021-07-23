@@ -14,9 +14,9 @@ class ModalPlayerViewController: UIViewController {
     
     var playerModel: Results<PlayerModel>!
     
-//    var contentArray = []
+    var datalist: String?
     
-    let data = ["test1","test2","test3","test4","test5","test6","test7","test8","test9","test10","test11","test12","test13","test14","test15","test16","test17","test18","test19","test20","test21"]
+    var data = ["test1","test2","test3","test4","test5","test6","test7","test8","test9","test10","test11","test12","test13","test14","test15","test16","test17","test18","test19","test20","test21"]
 
     @IBOutlet weak var teamName: UILabel!
 
@@ -33,6 +33,11 @@ class ModalPlayerViewController: UIViewController {
         initView()
         getArticles()
         
+        if let data = self.datalist {
+            //ラベルにチーム名を表示
+            self.teamName.text = data
+        }
+        
     }
     
     func getArticles() {
@@ -43,23 +48,15 @@ class ModalPlayerViewController: UIViewController {
         
         AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
         
-                guard let data = response.data else {
-                    let json:JSON = JSON(response.data as Any)
-                    print(response.data!)
-                    for i in 0...json.count{
-                            let playerName = json["result"][i]["name"].string
-                            var contentModel = playerName
-//                            self.contentArray.append(contentModel)
-                            print(json["name"].string!) // 選手名を表示
-                    }
-                    self.playerList.reloadData()
-                    return
-                }
-                do {
-//                    self.addresses = try JSONDecoder().decode(from: data)
-                } catch let error {
-                    print("Error: \(error)")
-                }
+            guard let data = response.data else { return }
+            let json:JSON = JSON(data as Any)
+            print(data)
+            self.data = []
+            for i in 0..<json.count{
+                print(json["response"][i]["player"]["name"].string) // 選手名を表示
+                self.data.append(json["response"][i]["player"]["name"].string ?? "")
+            }
+            self.playerList.reloadData()
         }
     }
     
