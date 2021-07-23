@@ -462,6 +462,7 @@
                     <navigationItem key="navigationItem" id="BGh-rp-W5Y">
                         <barButtonItem key="rightBarButtonItem" title="追加" id="M1T-kL-CYv">
                             <connections>
+                                <action selector="playerAdd:" destination="BZt-jK-sOe" id="SRt-ru-1Sj"/>
                                 <segue destination="U7Q-Eg-IID" kind="presentation" id="s6v-KU-DmA"/>
                             </connections>
                         </barButtonItem>
@@ -488,7 +489,7 @@
                                 <rect key="frame" x="294" y="25" width="92" height="30"/>
                                 <state key="normal" title="選手名の登録"/>
                                 <connections>
-                                    <action selector="playerRegist:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="s6H-fA-rmA"/>
+                                    <action selector="playerRegistWithSegue:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="Wta-6v-Xva"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G51-dz-jnb">

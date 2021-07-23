@@ -55,7 +55,9 @@ class PlayerListViewController: UIViewController {
         performSegue(withIdentifier: "SegueName", sender: nil)
         //遷移先ModalPlayerのインスタンス取得
         let modalPlayerViewController = self.storyboard?.instantiateViewController(withIdentifier: "modal_list_view") as! ModalPlayerViewController
+        print(memoList[0].memo)
         modalPlayerViewController.datalist = memoList[0].memo
+        print(modalPlayerViewController.datalist)
 //        var textField = UITextField()
 //
 //        let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
