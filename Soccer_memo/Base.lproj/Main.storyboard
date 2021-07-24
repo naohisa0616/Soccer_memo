@@ -462,8 +462,7 @@
                     <navigationItem key="navigationItem" id="BGh-rp-W5Y">
                         <barButtonItem key="rightBarButtonItem" title="追加" id="M1T-kL-CYv">
                             <connections>
-                                <action selector="playerAdd:" destination="BZt-jK-sOe" id="SRt-ru-1Sj"/>
-                                <segue destination="U7Q-Eg-IID" kind="presentation" id="s6v-KU-DmA"/>
+                                <action selector="playerAdd:" destination="BZt-jK-sOe" id="g99-xP-xmr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -482,18 +481,18 @@
             <objects>
                 <viewController storyboardIdentifier="modal_list_view" id="U7Q-Eg-IID" customClass="ModalPlayerViewController" customModule="Soccer_memo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HJg-gz-l4O">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSk-Gx-jGq">
-                                <rect key="frame" x="294" y="25" width="92" height="30"/>
+                                <rect key="frame" x="294" y="69" width="92" height="30"/>
                                 <state key="normal" title="選手名の登録"/>
                                 <connections>
                                     <action selector="playerRegistWithSegue:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="Wta-6v-Xva"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G51-dz-jnb">
-                                <rect key="frame" x="16" y="78" width="370" height="714"/>
+                                <rect key="frame" x="16" y="122" width="370" height="724"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="600" id="Sg5-Fn-qlO"/>
@@ -520,7 +519,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1N9-Cu-5Ka">
-                                <rect key="frame" x="16" y="8" width="135" height="50"/>
+                                <rect key="frame" x="16" y="52" width="135" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="IZM-5r-BHm"/>
                                     <constraint firstAttribute="width" constant="135" id="kSA-ao-tJh"/>

@@ -12,9 +12,13 @@ import SwiftyJSON
 
 class ModalPlayerViewController: UIViewController {
     
+    var player: PlayerModel!
     var playerModel: Results<PlayerModel>!
+    var memoList: Results<MemoModel>!
     
     var datalist: String?
+    var memoId:Int = 0
+    var matchId:Int = 0
     
     var data = ["test1","test2","test3","test4","test5","test6","test7","test8","test9","test10","test11","test12","test13","test14","test15","test16","test17","test18","test19","test20","test21"]
 
@@ -32,6 +36,14 @@ class ModalPlayerViewController: UIViewController {
     
         initView()
         getArticles()
+        
+        let realm = try! Realm()
+        //試合結果の取得
+        let matchPredicate = NSPredicate(format: "id == %d", memoId)
+        self.playerModel = realm.objects(PlayerModel.self).filter(matchPredicate)
+        //試合結果の絞り込み
+        let matchFilter = NSPredicate(format: "matchId == %d", matchId)
+        self.playerModel = realm.objects(PlayerModel.self).filter(matchFilter)
         
         if let data = self.datalist {
             //ラベルにチーム名を表示

@@ -15,6 +15,8 @@ class PlayerListViewController: UIViewController {
     var playerModel: Results<PlayerModel>!
     var memoList: Results<MemoModel>!
     
+    //遷移元から名前を取得用の変数を定義
+    var teamName: String = ""
     var datalist: String?
     var Id:Int = 0
     var memoId:Int = 0
@@ -39,6 +41,9 @@ class PlayerListViewController: UIViewController {
         //試合結果の絞り込み
         let matchFilter = NSPredicate(format: "matchId == %d", matchId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchFilter)
+        // チーム情報取得
+        let predicate = NSPredicate(format: "memo == %@", teamName)
+        self.memoList = realm.objects(MemoModel.self).filter(predicate)
         playerListView.reloadData()
         // メモ一覧で表示するセルを識別するIDの登録処理を追加。
         playerListView.register(UINib(nibName: "MemoTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
@@ -52,12 +57,16 @@ class PlayerListViewController: UIViewController {
     
     // MARK: - Action
     @IBAction func playerAdd(_ sender: Any) {
-        performSegue(withIdentifier: "SegueName", sender: nil)
+//        performSegue(withIdentifier: "ModalSegue", sender: nil)
         //遷移先ModalPlayerのインスタンス取得
         let modalPlayerViewController = self.storyboard?.instantiateViewController(withIdentifier: "modal_list_view") as! ModalPlayerViewController
-        print(memoList[0].memo)
+//        if memoList[0].memo != nil {
+//            print(memoList[0].memo ?? "")
+//        }
         modalPlayerViewController.datalist = memoList[0].memo
-        print(modalPlayerViewController.datalist)
+//        print(modalPlayerViewController.datalist)
+        //画面遷移
+        self.navigationController?.pushViewController(modalPlayerViewController, animated: true)
 //        var textField = UITextField()
 //
 //        let alert = UIAlertController(title: "アイテムを追加", message: "", preferredStyle: .alert)
