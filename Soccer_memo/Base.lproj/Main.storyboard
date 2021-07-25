@@ -534,6 +534,7 @@
                         <constraints>
                             <constraint firstItem="G51-dz-jnb" firstAttribute="leading" secondItem="hvq-NM-Lmz" secondAttribute="leading" constant="16" id="0Qf-ra-YfP"/>
                             <constraint firstItem="G51-dz-jnb" firstAttribute="trailing" secondItem="gSk-Gx-jGq" secondAttribute="trailing" id="445-Bz-FMb"/>
+                            <constraint firstItem="1N9-Cu-5Ka" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="8" id="4mu-Tf-tzd"/>
                             <constraint firstItem="1N9-Cu-5Ka" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="8" id="Cyi-di-yVM"/>
                             <constraint firstItem="hvq-NM-Lmz" firstAttribute="bottom" secondItem="G51-dz-jnb" secondAttribute="bottom" constant="16" id="MrB-eM-5Rw"/>
                             <constraint firstItem="G51-dz-jnb" firstAttribute="top" secondItem="gSk-Gx-jGq" secondAttribute="bottom" constant="23" id="agB-q7-FgO"/>

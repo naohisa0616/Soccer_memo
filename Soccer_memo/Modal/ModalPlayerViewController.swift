@@ -25,8 +25,17 @@ class ModalPlayerViewController: UIViewController {
     @IBOutlet weak var teamName: UILabel!
 
     @IBAction func playerRegist(segue: UIStoryboardSegue) {
-//        let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
+        let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
 //        self.timerName = from.textField.text ?? ""      // 遷移先の値を取得して遷移元の変数に格納する
+        // Realmにしたデータを保存
+//        PlayerModel().createPlayer(matchId: self.matchId, memoId: self.memoId, Id: self.playerModel.count, name: String, finish: { [weak self]  in
+//        guard let self = self else {return}
+//        let tableCell:PlayerModel = PlayerModel()
+//            tableCell.matchId = self.playerModel.count
+//            tableCell.id = self.memoId
+//            tableCell.playerId = self.matchId
+//            self.playerListView.reloadData()
+//        })
     }
 
     @IBOutlet weak var playerList: UITableView!
@@ -45,9 +54,11 @@ class ModalPlayerViewController: UIViewController {
         let matchFilter = NSPredicate(format: "matchId == %d", matchId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchFilter)
         
+        print(self.datalist)
         if let data = self.datalist {
             //ラベルにチーム名を表示
             self.teamName.text = data
+            print(self.teamName.text)
         }
         
     }
