@@ -63,8 +63,7 @@ class PlayerListViewController: UIViewController {
 //        if memoList[0].memo != nil {
 //            print(memoList[0].memo ?? "")
 //        }
-        modalPlayerViewController.datalist = teamName
-        print(datalist ?? "")
+        modalPlayerViewController.datalist = datalist
         //画面遷移
         self.navigationController?.pushViewController(modalPlayerViewController, animated: true)
 //        var textField = UITextField()

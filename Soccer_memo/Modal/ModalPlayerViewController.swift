@@ -26,7 +26,13 @@ class ModalPlayerViewController: UIViewController {
 
     @IBAction func playerRegist(segue: UIStoryboardSegue) {
         let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
+        //Int型からIndexPath型にキャスト
+//        let indexPath = IndexPath(row: sender.tag, section: 0)
+//           //indexPathでセルを指定可能
+//        let cell = self.checkSheetTableView.cellForRow(at: indexPath)
 //        self.timerName = from.textField.text ?? ""      // 遷移先の値を取得して遷移元の変数に格納する
+//        let cell = tableView.cellForRow(at: indexPath)
+//        cell?.accessoryType = .checkmark
         // Realmにしたデータを保存
 //        PlayerModel().createPlayer(matchId: self.matchId, memoId: self.memoId, Id: self.playerModel.count, name: String, finish: { [weak self]  in
 //        guard let self = self else {return}
