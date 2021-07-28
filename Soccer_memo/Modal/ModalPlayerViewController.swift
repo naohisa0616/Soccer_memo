@@ -22,10 +22,24 @@ class ModalPlayerViewController: UIViewController {
     
     var data = ["test1","test2","test3","test4","test5","test6","test7","test8","test9","test10","test11","test12","test13","test14","test15","test16","test17","test18","test19","test20","test21"]
 
-    @IBOutlet weak var teamName: UILabel!
+    @IBOutlet weak var teamNameLabel: UILabel!
 
-    @IBAction func playerRegist(segue: UIStoryboardSegue) {
-        let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
+    @IBAction func playerRegistButoom(segue: UIStoryboardSegue) {
+//        let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
+        
+        for row in 0..<data.count {
+            let indexPath = IndexPath(row: row, section: 0)
+            let cell: UITableViewCell =  self.playerList.cellForRow(at: indexPath) ?? UITableViewCell()
+            print(row, cell.accessoryType)
+            //遷移先ViewControllerのインスタンス取得
+            let playerListViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
+            //TableViewの値を遷移先に値渡し
+            playerListViewController.playerName = cell.textLabel?.text ?? ""
+            //画面遷移
+            self.navigationController?.pushViewController(playerListViewController, animated: true)
+        }
+
+
         //Int型からIndexPath型にキャスト
 //        let indexPath = IndexPath(row: sender.tag, section: 0)
 //           //indexPathでセルを指定可能
@@ -59,12 +73,10 @@ class ModalPlayerViewController: UIViewController {
         //試合結果の絞り込み
         let matchFilter = NSPredicate(format: "matchId == %d", matchId)
         self.playerModel = realm.objects(PlayerModel.self).filter(matchFilter)
-        
-        print(self.datalist)
+    
         if let data = self.datalist {
             //ラベルにチーム名を表示
-            self.teamName.text = data
-            print(self.teamName.text)
+            self.teamNameLabel.text = data
         }
         
     }

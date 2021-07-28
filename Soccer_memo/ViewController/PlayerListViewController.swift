@@ -17,12 +17,14 @@ class PlayerListViewController: UIViewController {
     
     //遷移元から名前を取得用の変数を定義
     var teamName: String = ""
+    var playerName: String = ""
     var datalist: String?
     var Id:Int = 0
     var memoId:Int = 0
     var matchId:Int = 0
     
-    @IBOutlet weak var playerName: UILabel!
+
+    @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var playerListView: UITableView!
     
     override func viewDidLoad() {
@@ -51,7 +53,7 @@ class PlayerListViewController: UIViewController {
         //self.datalistがnilでなければdataに代入する
         if let data = self.datalist {
             //ラベルに選手名を表示
-            self.playerName.text = data
+            self.playerNameLabel.text = data
         }
     }
     
@@ -103,14 +105,19 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
     
     // Cellの内容を決める
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
-            cell.memoTableViewCellDelegate = self
-            cell.row = indexPath.row
-        let item = self.playerModel[indexPath.row]
-        cell.teamName.text = item.playername
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
+        
+        cell.textLabel?.text = playerName
         return cell
-        }
-        return UITableViewCell()
+        
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath as IndexPath) as? MemoTableViewCell {
+//            cell.memoTableViewCellDelegate = self
+//            cell.row = indexPath.row
+//        let item = self.playerModel[indexPath.row]
+//        cell.teamName.text = item.playername
+//        return cell
+//        }
+//        return UITableViewCell()
     }
     
     //メモ一覧のセルが選択されたイベント

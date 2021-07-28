@@ -468,7 +468,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="playerListView" destination="y02-7S-YY6" id="7Zh-r0-INL"/>
-                        <outlet property="playerName" destination="sED-YV-Oi5" id="bib-FK-nYw"/>
+                        <outlet property="playerNameLabel" destination="sED-YV-Oi5" id="UDm-GE-9Qy"/>
                         <segue destination="MTD-oU-ggj" kind="show" id="ZaC-aU-RNS"/>
                     </connections>
                 </viewController>
@@ -484,13 +484,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSk-Gx-jGq">
-                                <rect key="frame" x="294" y="69" width="92" height="30"/>
-                                <state key="normal" title="選手名の登録"/>
-                                <connections>
-                                    <action selector="playerRegistWithSegue:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="Wta-6v-Xva"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G51-dz-jnb">
                                 <rect key="frame" x="16" y="122" width="370" height="724"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -519,33 +512,43 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1N9-Cu-5Ka">
-                                <rect key="frame" x="16" y="52" width="135" height="50"/>
+                                <rect key="frame" x="16" y="52" width="214" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="IZM-5r-BHm"/>
-                                    <constraint firstAttribute="width" constant="135" id="kSA-ao-tJh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylZ-lw-8re" userLabel="選手名の登録">
+                                <rect key="frame" x="294" y="69" width="92" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92" id="bbw-bL-9Md"/>
+                                    <constraint firstAttribute="height" constant="30" id="uYA-In-JNw"/>
+                                </constraints>
+                                <state key="normal" title="選手名の登録"/>
+                                <connections>
+                                    <action selector="playerRegistButoomWithSegue:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="Eij-Ff-oeD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hvq-NM-Lmz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="G51-dz-jnb" firstAttribute="leading" secondItem="hvq-NM-Lmz" secondAttribute="leading" constant="16" id="0Qf-ra-YfP"/>
-                            <constraint firstItem="G51-dz-jnb" firstAttribute="trailing" secondItem="gSk-Gx-jGq" secondAttribute="trailing" id="445-Bz-FMb"/>
+                            <constraint firstItem="hvq-NM-Lmz" firstAttribute="trailing" secondItem="ylZ-lw-8re" secondAttribute="trailing" constant="28" id="3H2-bX-KRH"/>
                             <constraint firstItem="1N9-Cu-5Ka" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="8" id="4mu-Tf-tzd"/>
+                            <constraint firstItem="ylZ-lw-8re" firstAttribute="leading" secondItem="1N9-Cu-5Ka" secondAttribute="trailing" constant="64" id="96E-7b-OeU"/>
                             <constraint firstItem="1N9-Cu-5Ka" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="8" id="Cyi-di-yVM"/>
                             <constraint firstItem="hvq-NM-Lmz" firstAttribute="bottom" secondItem="G51-dz-jnb" secondAttribute="bottom" constant="16" id="MrB-eM-5Rw"/>
-                            <constraint firstItem="G51-dz-jnb" firstAttribute="top" secondItem="gSk-Gx-jGq" secondAttribute="bottom" constant="23" id="agB-q7-FgO"/>
+                            <constraint firstItem="ylZ-lw-8re" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="25" id="R2d-j6-HGQ"/>
+                            <constraint firstItem="G51-dz-jnb" firstAttribute="top" secondItem="ylZ-lw-8re" secondAttribute="bottom" constant="23" id="UdD-Yq-U9u"/>
                             <constraint firstItem="1N9-Cu-5Ka" firstAttribute="leading" secondItem="hvq-NM-Lmz" secondAttribute="leading" constant="16" id="bCi-5H-vOj"/>
-                            <constraint firstItem="gSk-Gx-jGq" firstAttribute="top" secondItem="hvq-NM-Lmz" secondAttribute="top" constant="25" id="bht-bj-RSn"/>
-                            <constraint firstItem="hvq-NM-Lmz" firstAttribute="trailing" secondItem="gSk-Gx-jGq" secondAttribute="trailing" constant="28" id="etV-vR-yta"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="playerList" destination="G51-dz-jnb" id="Scf-ry-BGu"/>
-                        <outlet property="teamName" destination="1N9-Cu-5Ka" id="6Uh-9h-P4d"/>
+                        <outlet property="teamNameLabel" destination="1N9-Cu-5Ka" id="TmP-A5-EEb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okk-U8-JHA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
