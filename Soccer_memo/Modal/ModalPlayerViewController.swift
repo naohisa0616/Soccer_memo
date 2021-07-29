@@ -30,14 +30,18 @@ class ModalPlayerViewController: UIViewController {
         for row in 0..<data.count {
             let indexPath = IndexPath(row: row, section: 0)
             let cell: UITableViewCell =  self.playerList.cellForRow(at: indexPath) ?? UITableViewCell()
-            print(row, cell.accessoryType)
-            //遷移先ViewControllerのインスタンス取得
-            let playerListViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
-            //TableViewの値を遷移先に値渡し
-            playerListViewController.playerName = cell.textLabel?.text ?? ""
-            //画面遷移
-            self.navigationController?.pushViewController(playerListViewController, animated: true)
+            if cell.accessoryType != nil {
+                print(row, cell.accessoryType)
+            }
         }
+        //遷移先ViewControllerのインスタンス取得
+        let playerListViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
+        //TableViewの値を遷移先に値渡し
+        playerListViewController.playerName = cell.textLabel?.text ?? ""
+        //画面遷移
+        self.navigationController?.pushViewController(playerListViewController, animated: true)
+        //モーダル閉じる
+        self.dismiss(animated: true, completion: nil)
 
 
         //Int型からIndexPath型にキャスト
