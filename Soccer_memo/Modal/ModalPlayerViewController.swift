@@ -39,11 +39,8 @@ class ModalPlayerViewController: UIViewController {
         let playerListViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
         //TableViewの値を遷移先に値渡し
         playerListViewController.playerName = cell.textLabel?.text ?? ""
-        //画面遷移
-        self.navigationController?.pushViewController(playerListViewController, animated: true)
-        //モーダル閉じる
-        self.dismiss(animated: true, completion: nil)
-
+        //1つ前の画面に戻る
+        self.navigationController?.popViewController(animated: true)
 
         //Int型からIndexPath型にキャスト
 //        let indexPath = IndexPath(row: sender.tag, section: 0)
