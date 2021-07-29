@@ -27,10 +27,11 @@ class ModalPlayerViewController: UIViewController {
     @IBAction func playerRegistButoom(segue: UIStoryboardSegue) {
 //        let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
         
+        var cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "PlayerCell")
         for row in 0..<data.count {
             let indexPath = IndexPath(row: row, section: 0)
-            let cell: UITableViewCell =  self.playerList.cellForRow(at: indexPath) ?? UITableViewCell()
-            if cell.accessoryType != nil {
+            cell =  self.playerList.cellForRow(at: indexPath) ?? UITableViewCell()
+            if cell.accessoryType == .checkmark {
                 print(row, cell.accessoryType)
             }
         }
@@ -95,7 +96,6 @@ class ModalPlayerViewController: UIViewController {
         
             guard let data = response.data else { return }
             let json:JSON = JSON(data as Any)
-            print(data)
             self.data = []
             for i in 0..<json.count{
                 print(json["response"][i]["player"]["name"].string) // 選手名を表示
@@ -135,7 +135,6 @@ extension ModalPlayerViewController: UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.text = data[indexPath.row]
             cell.selectionStyle = .none
             cell.backgroundColor = UIColor.clear
-            print(cell)
             return cell
         } else {
             print("値が代入されていません")
