@@ -55,6 +55,11 @@ class PlayerListViewController: UIViewController {
             //ラベルに選手名を表示
             self.playerNameLabel.text = data
         }
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "PlayerCell")
+        print(playerName)
+        cell.textLabel?.text = playerName
     }
     
     // MARK: - Action
@@ -107,6 +112,7 @@ extension PlayerListViewController: UITableViewDelegate, UITableViewDataSource  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
         
+        print(playerName)
         cell.textLabel?.text = playerName
         return cell
         
