@@ -17,7 +17,7 @@ class PlayerListViewController: UIViewController {
     
     //遷移元から名前を取得用の変数を定義
     var teamName: String = ""
-    var playerName: String = ""
+    var playerName: String?
     var datalist: String?
     var Id:Int = 0
     var memoId:Int = 0
@@ -55,11 +55,18 @@ class PlayerListViewController: UIViewController {
             //ラベルに選手名を表示
             self.playerNameLabel.text = data
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 画面表示前の処理を書く
+        print("画面表示直前")
         
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "PlayerCell")
-        print(playerName)
+        print(playerName ?? "")
         cell.textLabel?.text = playerName
+        print(cell.textLabel?.text ?? "")
+        playerListView.reloadData()
     }
     
     // MARK: - Action

@@ -23,10 +23,10 @@ class ModalPlayerViewController: UIViewController {
     var data = ["test1","test2","test3","test4","test5","test6","test7","test8","test9","test10","test11","test12","test13","test14","test15","test16","test17","test18","test19","test20","test21"]
 
     @IBOutlet weak var teamNameLabel: UILabel!
-
-    @IBAction func playerRegistButoom(segue: UIStoryboardSegue) {
-//        let from = segue.source as! PlayerListViewController  // <- 遷移先を取得する
         
+    @IBAction func playerRegistButoom(_ sender: Any) {
+        
+        //選択したセル情報の取得
         var cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "PlayerCell")
         for row in 0..<data.count {
             let indexPath = IndexPath(row: row, section: 0)
@@ -37,30 +37,31 @@ class ModalPlayerViewController: UIViewController {
         }
         //遷移先ViewControllerのインスタンス取得
         let playerListViewController = self.storyboard?.instantiateViewController(withIdentifier: "player_list_view") as! PlayerListViewController
-        print(cell.textLabel?.text ?? "")
-        //TableViewの値を遷移先に値渡し
-        playerListViewController.playerName = cell.textLabel?.text ?? ""
-        print(playerListViewController.playerName)
-        //1つ前の画面に戻る
-        self.navigationController?.popViewController(animated: true)
+            print(cell.textLabel?.text ?? "")
+            //TableViewの値を遷移先に値渡し
+            playerListViewController.playerName = cell.textLabel?.text ?? ""
+            print(playerListViewController.playerName)
+            //1つ前の画面に戻る
+            self.navigationController?.popViewController(animated: true)
 
-        //Int型からIndexPath型にキャスト
-//        let indexPath = IndexPath(row: sender.tag, section: 0)
-//           //indexPathでセルを指定可能
-//        let cell = self.checkSheetTableView.cellForRow(at: indexPath)
-//        self.timerName = from.textField.text ?? ""      // 遷移先の値を取得して遷移元の変数に格納する
-//        let cell = tableView.cellForRow(at: indexPath)
-//        cell?.accessoryType = .checkmark
-        // Realmにしたデータを保存
-//        PlayerModel().createPlayer(matchId: self.matchId, memoId: self.memoId, Id: self.playerModel.count, name: String, finish: { [weak self]  in
-//        guard let self = self else {return}
-//        let tableCell:PlayerModel = PlayerModel()
-//            tableCell.matchId = self.playerModel.count
-//            tableCell.id = self.memoId
-//            tableCell.playerId = self.matchId
-//            self.playerListView.reloadData()
-//        })
+            //Int型からIndexPath型にキャスト
+    //        let indexPath = IndexPath(row: sender.tag, section: 0)
+    //           //indexPathでセルを指定可能
+    //        let cell = self.checkSheetTableView.cellForRow(at: indexPath)
+    //        self.timerName = from.textField.text ?? ""      // 遷移先の値を取得して遷移元の変数に格納する
+    //        let cell = tableView.cellForRow(at: indexPath)
+    //        cell?.accessoryType = .checkmark
+            // Realmにしたデータを保存
+    //        PlayerModel().createPlayer(matchId: self.matchId, memoId: self.memoId, Id: self.playerModel.count, name: String, finish: { [weak self]  in
+    //        guard let self = self else {return}
+    //        let tableCell:PlayerModel = PlayerModel()
+    //            tableCell.matchId = self.playerModel.count
+    //            tableCell.id = self.memoId
+    //            tableCell.playerId = self.matchId
+    //            self.playerListView.reloadData()
+    //        })
     }
+
 
     @IBOutlet weak var playerList: UITableView!
     

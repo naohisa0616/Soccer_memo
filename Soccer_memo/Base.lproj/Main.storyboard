@@ -528,7 +528,7 @@
                                 </constraints>
                                 <state key="normal" title="選手名の登録"/>
                                 <connections>
-                                    <action selector="playerRegistButoomWithSegue:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="Eij-Ff-oeD"/>
+                                    <action selector="playerRegistButoom:" destination="U7Q-Eg-IID" eventType="touchUpInside" id="nth-md-TGd"/>
                                 </connections>
                             </button>
                         </subviews>
