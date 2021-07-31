@@ -74,9 +74,6 @@ class PlayerListViewController: UIViewController {
 //        performSegue(withIdentifier: "ModalSegue", sender: nil)
         //遷移先ModalPlayerのインスタンス取得
         let modalPlayerViewController = self.storyboard?.instantiateViewController(withIdentifier: "modal_list_view") as! ModalPlayerViewController
-//        if memoList[0].memo != nil {
-//            print(memoList[0].memo ?? "")
-//        }
         modalPlayerViewController.datalist = datalist
         //画面遷移
         self.navigationController?.pushViewController(modalPlayerViewController, animated: true)
