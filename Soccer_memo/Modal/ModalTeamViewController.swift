@@ -21,7 +21,7 @@ class ModalTeamViewController: UIViewController {
     
     var data = ["test1","test2","test3","test4","test5","test6","test7","test8","test9","test10","test11","test12","test13","test14","test15","test16","test17","test18","test19","test20","test21"]
         
-        
+    
     @IBAction func teamRegistButoom(_ sender: Any) {
         //選択したセル情報の取得
             var cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "PlayerCell")
@@ -41,7 +41,6 @@ class ModalTeamViewController: UIViewController {
                 //1つ前の画面に戻る
                 self.navigationController?.popViewController(animated: true)
             
-            var playerName = PlayerModel()
     //            //Int型からIndexPath型にキャスト
     //            let indexPath = IndexPath(row: sender.tag, section: 0)
     //               //indexPathでセルを指定可能
@@ -63,7 +62,6 @@ class ModalTeamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         initView()
         getArticles()
         
@@ -99,7 +97,7 @@ class ModalTeamViewController: UIViewController {
 
     
 }
-extension ModalPlayerViewController {
+extension ModalTeamViewController {
     private func initView() {
         playerList.delegate = self
         playerList.dataSource = self
@@ -109,7 +107,7 @@ extension ModalPlayerViewController {
 }
 
 // MARK: - Tableview Delegate
-extension ModalPlayerViewController: UITableViewDelegate,UITableViewDataSource {
+extension ModalTeamViewController: UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)

@@ -156,6 +156,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="xJd-QJ-qfk" id="Zbt-C4-Qxo"/>
+                                    <outlet property="delegate" destination="xJd-QJ-qfk" id="WR7-zP-34e"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mS7-A7-T8V" userLabel="チーム名の登録">
                                 <rect key="frame" x="266" y="69" width="120" height="30"/>
